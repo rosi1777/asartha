@@ -6,14 +6,15 @@ Color white = const Color(0xffffffff);
 Color grey = const Color(0xff6B7280);
 Color primary = const Color(0xff246ee9);
 Color secondary = const Color(0xff40c4ff);
+Color hintText = const Color(0xaaaaaaaa);
 
 var input = GoogleFonts.poppins(
   color: black,
   fontWeight: FontWeight.w400,
 );
 
-var textHint =
-    GoogleFonts.poppins(color: grey, fontSize: 12, fontWeight: FontWeight.w500);
+var textHint = GoogleFonts.poppins(
+    color: hintText, fontSize: 14, fontWeight: FontWeight.w500);
 
 final TextTheme myTextTheme = TextTheme(
   headline1: GoogleFonts.poppins(
