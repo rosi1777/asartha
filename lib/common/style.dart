@@ -8,6 +8,7 @@ Color primary = const Color(0xff246ee9);
 Color secondary = const Color(0xff40c4ff);
 Color hintText = const Color(0xaaaaaaaa);
 Color snow = const Color(0xfff5f5f5);
+Color red = const Color(0xffFF2400);
 
 var email = GoogleFonts.poppins(
   fontSize: 12,
