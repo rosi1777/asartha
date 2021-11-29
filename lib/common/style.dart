@@ -9,6 +9,11 @@ Color secondary = const Color(0xff40c4ff);
 Color hintText = const Color(0xaaaaaaaa);
 Color snow = const Color(0xfff5f5f5);
 
+var email = GoogleFonts.poppins(
+  fontSize: 12,
+  color: grey,
+);
+
 var input = GoogleFonts.poppins(
   color: black,
   fontWeight: FontWeight.w400,
