@@ -3,6 +3,7 @@ import 'package:asartha/ui/forgot_password_page.dart';
 import 'package:asartha/ui/home_page.dart';
 import 'package:asartha/ui/sign_in_page.dart';
 import 'package:asartha/ui/sign_up_page.dart';
+import 'package:asartha/widget/floating_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
@@ -44,7 +45,9 @@ class MyApp extends StatelessWidget {
         SignInPage.routeName: (context) => const SignInPage(),
         SignUpPage.routeName: (context) => const SignUpPage(),
         ForgotPasswordPage.routeName: (context) => const ForgotPasswordPage(),
-        HomePage.routeName: (context) => const HomePage()
+        HomePage.routeName: (context) => const HomePage(),
+        FloatingNavigationBar.routeName: (context) =>
+            const FloatingNavigationBar()
       },
     );
   }

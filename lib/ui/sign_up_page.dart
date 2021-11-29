@@ -1,5 +1,5 @@
 import 'package:asartha/common/style.dart';
-import 'package:asartha/ui/home_page.dart';
+import 'package:asartha/widget/floating_nav_bar.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -172,7 +172,8 @@ class SignUpPage extends StatelessWidget {
                               style: Theme.of(context).textTheme.button,
                             ),
                             onPressed: () {
-                              Navigator.pushNamed(context, HomePage.routeName);
+                              Navigator.pushNamed(
+                                  context, FloatingNavigationBar.routeName);
                             },
                             style: ElevatedButton.styleFrom(
                                 primary: secondary,

@@ -1,7 +1,7 @@
 import 'package:asartha/common/style.dart';
 import 'package:asartha/ui/forgot_password_page.dart';
-import 'package:asartha/ui/home_page.dart';
 import 'package:asartha/ui/sign_up_page.dart';
+import 'package:asartha/widget/floating_nav_bar.dart';
 import 'package:flutter/material.dart';
 
 class SignInPage extends StatelessWidget {
@@ -120,12 +120,12 @@ class SignInPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(29),
                         child: ElevatedButton(
                           child: Text(
-                            'Sign Up',
+                            'Sign In',
                             style: Theme.of(context).textTheme.button,
                           ),
                           onPressed: () {
                             Navigator.pushReplacementNamed(
-                                context, HomePage.routeName);
+                                context, FloatingNavigationBar.routeName);
                           },
                           style: ElevatedButton.styleFrom(
                             primary: secondary,
