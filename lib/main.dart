@@ -1,4 +1,5 @@
 import 'package:asartha/common/style.dart';
+import 'package:asartha/ui/edit_profile_page.dart';
 import 'package:asartha/ui/forgot_password_page.dart';
 import 'package:asartha/ui/home_page.dart';
 import 'package:asartha/ui/sign_in_page.dart';
@@ -47,7 +48,8 @@ class MyApp extends StatelessWidget {
         ForgotPasswordPage.routeName: (context) => const ForgotPasswordPage(),
         HomePage.routeName: (context) => const HomePage(),
         FloatingNavigationBar.routeName: (context) =>
-            const FloatingNavigationBar()
+            const FloatingNavigationBar(),
+        EditProfilePage.routeName: (context) => const EditProfilePage()
       },
     );
   }

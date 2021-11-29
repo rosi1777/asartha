@@ -1,4 +1,5 @@
 import 'package:asartha/common/style.dart';
+import 'package:asartha/ui/edit_profile_page.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -35,7 +36,9 @@ class ProfilePage extends StatelessWidget {
                     style: TextStyle(
                         color: secondary, fontWeight: FontWeight.bold),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, EditProfilePage.routeName);
+                  },
                   style: OutlinedButton.styleFrom(
                     side: BorderSide(
                       color: secondary,
@@ -59,11 +62,12 @@ class ProfilePage extends StatelessWidget {
                   child: Container(
                     width: 350,
                     height: 132,
-                    color: Colors.white,
+                    color: white,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Material(
+                          color: white,
                           child: InkWell(
                             onTap: () {},
                             child: Padding(
@@ -98,6 +102,7 @@ class ProfilePage extends StatelessWidget {
                           height: 10,
                         ),
                         Material(
+                          color: white,
                           child: InkWell(
                             onTap: () {},
                             child: Padding(
