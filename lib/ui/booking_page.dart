@@ -11,7 +11,7 @@ class BookingPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: snow,
       body: SafeArea(
-          child: DefaultTabController(
+        child: DefaultTabController(
           length: 2,
           child: Scaffold(
               appBar: AppBar(

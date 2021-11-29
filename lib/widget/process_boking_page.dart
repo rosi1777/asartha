@@ -127,13 +127,11 @@ class ProcessBookingPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.green[100]),
                         child: Center(
-                          child: Text(
-                            'Dikirim',
-                            style: GoogleFonts.poppins(
+                          child: Text('Dikirim',
+                              style: GoogleFonts.poppins(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.green)
-                          ),
+                                  color: Colors.green)),
                         ),
                       )
                     ],
