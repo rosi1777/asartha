@@ -7,6 +7,8 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: snow,
       body: SafeArea(
@@ -60,7 +62,7 @@ class ProfilePage extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: Container(
-                    width: 350,
+                    width: width,
                     height: 132,
                     color: white,
                     child: Column(

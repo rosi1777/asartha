@@ -7,6 +7,7 @@ class EditProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: snow,
       appBar: AppBar(
@@ -44,7 +45,7 @@ class EditProfilePage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
                 child: Container(
                   height: 309,
-                  width: 350,
+                  width: width - 32,
                   color: white,
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
