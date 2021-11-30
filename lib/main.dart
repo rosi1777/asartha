@@ -2,6 +2,7 @@ import 'package:asartha/common/style.dart';
 import 'package:asartha/ui/edit_profile_page.dart';
 import 'package:asartha/ui/forgot_password_page.dart';
 import 'package:asartha/ui/home_page.dart';
+import 'package:asartha/ui/payment_page.dart';
 import 'package:asartha/ui/sign_in_page.dart';
 import 'package:asartha/ui/sign_up_page.dart';
 import 'package:asartha/widget/floating_nav_bar.dart';
@@ -49,7 +50,8 @@ class MyApp extends StatelessWidget {
         HomePage.routeName: (context) => const HomePage(),
         FloatingNavigationBar.routeName: (context) =>
             const FloatingNavigationBar(),
-        EditProfilePage.routeName: (context) => const EditProfilePage()
+        EditProfilePage.routeName: (context) => const EditProfilePage(),
+        PaymentPage.routeName: (context) => const PaymentPage()
       },
     );
   }

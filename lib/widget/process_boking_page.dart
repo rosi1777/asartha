@@ -27,8 +27,7 @@ class ProcessBookingPage extends StatelessWidget {
                         style: Theme.of(context).textTheme.headline5,
                       ),
                       Container(
-                        width: 83,
-                        height: 27,
+                        padding: const EdgeInsets.all(7),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.blue[100]),
@@ -121,8 +120,7 @@ class ProcessBookingPage extends StatelessWidget {
                         style: Theme.of(context).textTheme.headline5,
                       ),
                       Container(
-                        width: 83,
-                        height: 27,
+                        padding: const EdgeInsets.all(7),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: Colors.green[100]),

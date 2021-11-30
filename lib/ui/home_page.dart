@@ -1,4 +1,5 @@
 import 'package:asartha/common/style.dart';
+import 'package:asartha/ui/payment_page.dart';
 import 'package:asartha/widget/done_booking_card.dart';
 import 'package:flutter/material.dart';
 
@@ -71,7 +72,9 @@ class HomePage extends StatelessWidget {
                   height: 25,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, PaymentPage.routeName);
+                  },
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     padding: const EdgeInsets.only(top: 25, bottom: 25),
