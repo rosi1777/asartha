@@ -7,7 +7,6 @@ class EditProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: snow,
       appBar: AppBar(
@@ -32,7 +31,7 @@ class EditProfilePage extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(26),
         child: Center(
           child: Column(
             children: [
@@ -44,87 +43,85 @@ class EditProfilePage extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: Container(
-                  height: 309,
-                  width: width - 32,
+                  padding: const EdgeInsets.all(26),
                   color: white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Nama',
-                              style: TextStyle(color: grey),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              'Someone Here',
-                              style: TextStyle(
-                                color: black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Nama',
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        height: 40.0,
+                        child: TextField(
+                          keyboardType: TextInputType.text,
+                          style: input,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Fathorrosi',
+                              hintStyle: Theme.of(context).textTheme.headline2),
                         ),
-                        const SizedBox(height: 15),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Alamat Email',
-                              style: TextStyle(color: grey),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              'SomeoneHere@gmail.com',
-                              style: TextStyle(
-                                color: black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Alamat Email',
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        height: 40.0,
+                        child: TextField(
+                          keyboardType: TextInputType.text,
+                          style: input,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'fathorrosi1777@gmail.com',
+                              hintStyle: Theme.of(context).textTheme.headline2),
                         ),
-                        const SizedBox(height: 15),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Nomor Telepon',
-                              style: TextStyle(color: grey),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              '081909090909',
-                              style: TextStyle(
-                                color: black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'No Telepon',
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        height: 40.0,
+                        child: TextField(
+                          keyboardType: TextInputType.text,
+                          style: input,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: '081238657974',
+                              hintStyle: Theme.of(context).textTheme.headline2),
                         ),
-                        const SizedBox(height: 15),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Password',
-                              style: TextStyle(color: grey),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              'SomeoneHere123',
-                              style: TextStyle(
-                                color: black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Password',
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                      Container(
+                        alignment: Alignment.centerLeft,
+                        height: 40.0,
+                        child: TextField(
+                          keyboardType: TextInputType.text,
+                          style: input,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: '******',
+                              hintStyle: Theme.of(context).textTheme.headline2),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),

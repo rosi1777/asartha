@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:asartha/common/style.dart';
+import 'package:asartha/ui/success_payment_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -197,7 +198,10 @@ class _PaymentPageState extends State<PaymentPage> {
                             'Bayar Sekarang',
                             style: Theme.of(context).textTheme.button,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, SuccessPaymentPage.routeName);
+                          },
                           style: ElevatedButton.styleFrom(
                               primary: secondary,
                               padding: const EdgeInsets.symmetric(

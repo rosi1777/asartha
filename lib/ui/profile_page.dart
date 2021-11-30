@@ -1,4 +1,5 @@
 import 'package:asartha/common/style.dart';
+import 'package:asartha/ui/address_page.dart';
 import 'package:asartha/ui/edit_profile_page.dart';
 import 'package:flutter/material.dart';
 
@@ -71,7 +72,10 @@ class ProfilePage extends StatelessWidget {
                         Material(
                           color: white,
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, AddressPage.routeName);
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
                               child: Row(
