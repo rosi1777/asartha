@@ -25,7 +25,7 @@ var textHint = GoogleFonts.poppins(
 
 final TextTheme myTextTheme = TextTheme(
   headline1: GoogleFonts.poppins(
-      fontSize: 93, fontWeight: FontWeight.w300, letterSpacing: -1.5),
+      fontSize: 14, fontWeight: FontWeight.w400, color: black),
   headline2: GoogleFonts.poppins(
       fontSize: 14, fontWeight: FontWeight.w500, color: black),
   headline3: GoogleFonts.poppins(
@@ -48,8 +48,8 @@ final TextTheme myTextTheme = TextTheme(
       fontSize: 16, fontWeight: FontWeight.w400, color: grey),
   bodyText1: GoogleFonts.inter(
       fontSize: 16, fontWeight: FontWeight.w400, letterSpacing: 0.5),
-  bodyText2: GoogleFonts.inter(
-      fontSize: 14, fontWeight: FontWeight.w400, letterSpacing: 0.25),
+  bodyText2:
+      GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w400, color: grey),
   button: GoogleFonts.inter(
       fontSize: 14,
       fontWeight: FontWeight.w500,

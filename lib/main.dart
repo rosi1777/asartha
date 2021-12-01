@@ -1,11 +1,15 @@
 import 'package:asartha/common/style.dart';
 import 'package:asartha/ui/date_picker_page.dart';
+import 'package:asartha/ui/address_page.dart';
+import 'package:asartha/ui/detail_address_page.dart';
 import 'package:asartha/ui/edit_profile_page.dart';
+import 'package:asartha/ui/error_payment_page.dart';
 import 'package:asartha/ui/forgot_password_page.dart';
 import 'package:asartha/ui/home_page.dart';
 import 'package:asartha/ui/payment_page.dart';
 import 'package:asartha/ui/sign_in_page.dart';
 import 'package:asartha/ui/sign_up_page.dart';
+import 'package:asartha/ui/success_payment_page.dart';
 import 'package:asartha/widget/floating_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -54,6 +58,10 @@ class MyApp extends StatelessWidget {
         EditProfilePage.routeName: (context) => const EditProfilePage(),
         PaymentPage.routeName: (context) => const PaymentPage(),
         DatePickerPage.routeName: (contex) => const DatePickerPage(),
+        AddressPage.routeName: (context) => const AddressPage(),
+        DetailAddressPage.routeName: (context) => const DetailAddressPage(),
+        SuccessPaymentPage.routeName: (context) => const SuccessPaymentPage(),
+        ErrorPaymentPage.routeName: (context) => const ErrorPaymentPage()
       },
     );
   }

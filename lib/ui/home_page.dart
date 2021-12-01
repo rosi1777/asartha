@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Racent',
+                      'Recent',
                       style: Theme.of(context).textTheme.headline4,
                     ),
                     TextButton(

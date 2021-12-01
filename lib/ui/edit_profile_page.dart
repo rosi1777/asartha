@@ -7,7 +7,6 @@ class EditProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: snow,
       appBar: AppBar(
@@ -19,117 +18,118 @@ class EditProfilePage extends StatelessWidget {
           style: TextStyle(
               fontSize: 16, fontWeight: FontWeight.bold, color: black),
         ),
-        actions: [
-          Align(
-            alignment: Alignment.center,
-            child: TextButton(
-                child: const Text(
-                  'Edit',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                onPressed: () {}),
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
-        child: Center(
-          child: Column(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: Image.asset('assets/images/user.jpg'),
-              ),
-              const SizedBox(height: 24),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: Container(
-                  height: 309,
-                  width: width - 32,
-                  color: white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Nama',
-                              style: TextStyle(color: grey),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              'Someone Here',
-                              style: TextStyle(
-                                color: black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 15),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Alamat Email',
-                              style: TextStyle(color: grey),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              'SomeoneHere@gmail.com',
-                              style: TextStyle(
-                                color: black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 15),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Nomor Telepon',
-                              style: TextStyle(color: grey),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              '081909090909',
-                              style: TextStyle(
-                                color: black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 15),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Password',
-                              style: TextStyle(color: grey),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              'SomeoneHere123',
-                              style: TextStyle(
-                                color: black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(21),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10), color: white),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Nama',
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(color: secondary, width: 2),
+                      ),
                     ),
+                    height: 40.0,
+                    child: TextField(
+                      keyboardType: TextInputType.text,
+                      style: input,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Nama Lengkap',
+                        hintStyle: TextStyle(color: hintText),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Email',
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(color: secondary, width: 2),
+                      ),
+                    ),
+                    height: 40.0,
+                    child: TextField(
+                      keyboardType: TextInputType.text,
+                      style: input,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'contoh.email@gmail.com',
+                        hintStyle: TextStyle(color: hintText),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Nomor Telepon',
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(color: secondary, width: 2),
+                      ),
+                    ),
+                    height: 40.0,
+                    child: TextField(
+                      keyboardType: TextInputType.text,
+                      style: input,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: '081999888777',
+                        hintStyle: TextStyle(color: hintText),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(29),
+                child: ElevatedButton(
+                  child: Text(
+                    'Simpan',
+                    style: Theme.of(context).textTheme.button,
+                  ),
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    primary: secondary,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 40, vertical: 20),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
