@@ -1,4 +1,5 @@
 import 'package:asartha/common/style.dart';
+import 'package:asartha/ui/date_picker_page.dart';
 import 'package:asartha/ui/edit_profile_page.dart';
 import 'package:asartha/ui/forgot_password_page.dart';
 import 'package:asartha/ui/home_page.dart';
@@ -51,7 +52,8 @@ class MyApp extends StatelessWidget {
         FloatingNavigationBar.routeName: (context) =>
             const FloatingNavigationBar(),
         EditProfilePage.routeName: (context) => const EditProfilePage(),
-        PaymentPage.routeName: (context) => const PaymentPage()
+        PaymentPage.routeName: (context) => const PaymentPage(),
+        DatePickerPage.routeName: (contex) => const DatePickerPage(),
       },
     );
   }

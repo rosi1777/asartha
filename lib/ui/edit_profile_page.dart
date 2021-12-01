@@ -21,7 +21,7 @@ class EditProfilePage extends StatelessWidget {
         ),
         actions: [
           Align(
-            alignment: Alignment.topCenter,
+            alignment: Alignment.center,
             child: TextButton(
                 child: const Text(
                   'Edit',
