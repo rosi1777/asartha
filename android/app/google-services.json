@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "309210646594",
+    "project_id": "asartha-285a1",
+    "storage_bucket": "asartha-285a1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309210646594:android:feeb343a064cfdef4b45db",
+        "android_client_info": {
+          "package_name": "com.example.asartha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "309210646594-3qrpilsv8d77smlsjvikd51ghfb6vjpg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbS27T-SDvuzPeKrKfvMlYYvVSfkk6ouI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "309210646594-3qrpilsv8d77smlsjvikd51ghfb6vjpg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

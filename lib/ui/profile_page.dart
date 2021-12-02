@@ -24,15 +24,6 @@ class ProfilePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(100),
                     child: Image.asset('assets/images/user.jpg'),
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Fathorrosi',
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  Text(
-                    'Something@gmail.com',
-                    style: email,
-                  ),
                   const SizedBox(height: 12),
                   OutlinedButton(
                     child: Text(
