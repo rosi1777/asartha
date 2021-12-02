@@ -1,6 +1,8 @@
 import 'package:asartha/common/style.dart';
 import 'package:asartha/ui/address_page.dart';
 import 'package:asartha/ui/edit_profile_page.dart';
+import 'package:asartha/ui/sign_in_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -8,6 +10,8 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _auth = FirebaseAuth.instance;
+
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -193,7 +197,11 @@ class ProfilePage extends StatelessWidget {
                           Material(
                             color: white,
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () async {
+                                await _auth.signOut();
+                                Navigator.pushReplacementNamed(
+                                    context, SignInPage.routeName);
+                              },
                               child: Padding(
                                 padding: const EdgeInsets.all(16.0),
                                 child: Row(

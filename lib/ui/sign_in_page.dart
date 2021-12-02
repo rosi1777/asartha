@@ -2,11 +2,24 @@ import 'package:asartha/common/style.dart';
 import 'package:asartha/ui/forgot_password_page.dart';
 import 'package:asartha/ui/sign_up_page.dart';
 import 'package:asartha/widget/floating_nav_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
   static const routeName = '/sign_in_page';
+
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  final _auth = FirebaseAuth.instance;
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +76,7 @@ class SignInPage extends StatelessWidget {
                           hintText: 'Alamat Email',
                           hintStyle: textHint,
                         ),
+                        controller: _emailController,
                       ),
                     ),
                     const SizedBox(
@@ -76,7 +90,7 @@ class SignInPage extends StatelessWidget {
                       height: 60.0,
                       child: TextField(
                         keyboardType: TextInputType.visiblePassword,
-                        obscureText: true,
+                        obscureText: _obscureText,
                         style: input,
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -86,10 +100,18 @@ class SignInPage extends StatelessWidget {
                             color: grey,
                             size: 30,
                           ),
-                          suffix: const Icon(Icons.remove_red_eye_outlined),
+                          suffix: IconButton(
+                            icon: const Icon(Icons.remove_red_eye_outlined),
+                            onPressed: () {
+                              setState(() {
+                                _obscureText = !_obscureText;
+                              });
+                            },
+                          ),
                           hintText: 'Password',
                           hintStyle: textHint,
                         ),
+                        controller: _passwordController,
                       ),
                     ),
                     const SizedBox(
@@ -123,9 +145,21 @@ class SignInPage extends StatelessWidget {
                             'Sign In',
                             style: Theme.of(context).textTheme.button,
                           ),
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, FloatingNavigationBar.routeName);
+                          onPressed: () async {
+                            try {
+                              final email = _emailController.text;
+                              final password = _passwordController.text;
+                              await _auth.signInWithEmailAndPassword(
+                                  email: email, password: password);
+                              Navigator.pushReplacementNamed(
+                                  context, FloatingNavigationBar.routeName);
+                            } catch (e) {
+                              final snackBar = SnackBar(
+                                content: Text(e.toString()),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             primary: secondary,
@@ -166,5 +200,12 @@ class SignInPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 }

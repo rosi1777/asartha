@@ -1,15 +1,27 @@
 import 'package:asartha/common/style.dart';
-import 'package:asartha/widget/floating_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
   static const routeName = '/sign_up_page';
 
   @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  final _auth = FirebaseAuth.instance;
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  bool _isLoading = false;
+  // bool _obscureText = true;
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -131,6 +143,7 @@ class SignUpPage extends StatelessWidget {
                           hintText: 'Alamat Email',
                           hintStyle: textHint,
                         ),
+                        controller: _emailController,
                       ),
                     ),
                     const SizedBox(
@@ -157,6 +170,7 @@ class SignUpPage extends StatelessWidget {
                           hintText: 'Password',
                           hintStyle: textHint,
                         ),
+                        controller: _passwordController,
                       ),
                     ),
                     const SizedBox(
@@ -165,21 +179,48 @@ class SignUpPage extends StatelessWidget {
                     SizedBox(
                       width: size.width,
                       child: ClipRRect(
-                          borderRadius: BorderRadius.circular(29),
-                          child: ElevatedButton(
-                            child: Text(
-                              'Sign Up',
-                              style: Theme.of(context).textTheme.button,
+                        borderRadius: BorderRadius.circular(29),
+                        child: ElevatedButton(
+                          child: Text(
+                            'Sign Up',
+                            style: Theme.of(context).textTheme.button,
+                          ),
+                          onPressed: () async {
+                            setState(() {
+                              _isLoading = true;
+                            });
+
+                            try {
+                              final email = _emailController.text;
+                              final password = _passwordController.text;
+
+                              await _auth.createUserWithEmailAndPassword(
+                                  email: email, password: password);
+
+                              Navigator.pop(context);
+                            } catch (e) {
+                              final snackBar = SnackBar(
+                                content: Text(e.toString()),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            } finally {
+                              setState(() {
+                                _isLoading = false;
+                              });
+                            }
+                            // Navigator.pushNamed(
+                            //     context, FloatingNavigationBar.routeName);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            primary: secondary,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 40,
+                              vertical: 20,
                             ),
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                  context, FloatingNavigationBar.routeName);
-                            },
-                            style: ElevatedButton.styleFrom(
-                                primary: secondary,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 40, vertical: 20)),
-                          )),
+                          ),
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       height: 21,
@@ -212,5 +253,12 @@ class SignUpPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 }
