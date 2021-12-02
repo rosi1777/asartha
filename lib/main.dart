@@ -1,3 +1,4 @@
+import 'package:asartha/common/navigation.dart';
 import 'package:asartha/common/style.dart';
 import 'package:asartha/ui/date_picker_page.dart';
 import 'package:asartha/ui/address_page.dart';
@@ -6,6 +7,8 @@ import 'package:asartha/ui/edit_profile_page.dart';
 import 'package:asartha/ui/error_payment_page.dart';
 import 'package:asartha/ui/forgot_password_page.dart';
 import 'package:asartha/ui/home_page.dart';
+import 'package:asartha/ui/partner_sign_in_page.dart';
+import 'package:asartha/ui/partner_sign_up_page.dart';
 import 'package:asartha/ui/payment_page.dart';
 import 'package:asartha/ui/sign_in_page.dart';
 import 'package:asartha/ui/sign_up_page.dart';
@@ -51,20 +54,24 @@ class MyApp extends StatelessWidget {
             elevation: 0),
       ),
       initialRoute: SignInPage.routeName,
+      navigatorKey: navigatorKey,
       routes: {
         SignInPage.routeName: (context) => const SignInPage(),
         SignUpPage.routeName: (context) => const SignUpPage(),
         ForgotPasswordPage.routeName: (context) => const ForgotPasswordPage(),
-        HomePage.routeName: (context) => const HomePage(),
-        FloatingNavigationBar.routeName: (context) =>
-            const FloatingNavigationBar(),
+        HomePage.routeName: (context) => HomePage(
+            partner: (ModalRoute.of(context)?.settings.arguments as bool)),
+        FloatingNavigationBar.routeName: (context) => FloatingNavigationBar(
+            partner: (ModalRoute.of(context)?.settings.arguments as bool)),
         EditProfilePage.routeName: (context) => const EditProfilePage(),
         PaymentPage.routeName: (context) => const PaymentPage(),
         DatePickerPage.routeName: (contex) => const DatePickerPage(),
         AddressPage.routeName: (context) => const AddressPage(),
         DetailAddressPage.routeName: (context) => const DetailAddressPage(),
         SuccessPaymentPage.routeName: (context) => const SuccessPaymentPage(),
-        ErrorPaymentPage.routeName: (context) => const ErrorPaymentPage()
+        ErrorPaymentPage.routeName: (context) => const ErrorPaymentPage(),
+        PartnerSignInPage.routeName: (context) => const PartnerSignInPage(),
+        PartnerSignUpPage.routeName: (context) => const PartnerSignUpPage()
       },
     );
   }

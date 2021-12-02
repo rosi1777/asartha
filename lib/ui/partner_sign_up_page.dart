@@ -2,13 +2,13 @@ import 'package:asartha/common/style.dart';
 import 'package:asartha/widget/floating_nav_bar.dart';
 import 'package:flutter/material.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({Key? key}) : super(key: key);
-  static const routeName = '/sign_up_page';
+class PartnerSignUpPage extends StatelessWidget {
+  const PartnerSignUpPage({Key? key}) : super(key: key);
+  static const routeName = '/partner_sign_up_page';
 
   @override
   Widget build(BuildContext context) {
-    bool partner = false;
+    bool partner = true;
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -46,7 +46,7 @@ class SignUpPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Sign up',
+                      'Sign up sebagai Partner',
                       style: Theme.of(context).textTheme.headline6,
                     ),
                     const SizedBox(
@@ -57,7 +57,7 @@ class SignUpPage extends StatelessWidget {
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
                     const SizedBox(
-                      height: 46,
+                      height: 26,
                     ),
                     Container(
                       alignment: Alignment.centerLeft,
@@ -156,6 +156,33 @@ class SignUpPage extends StatelessWidget {
                             color: grey,
                           ),
                           hintText: 'Password',
+                          hintStyle: textHint,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 36,
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: secondary, width: 2),
+                        ),
+                      ),
+                      height: 60.0,
+                      child: TextField(
+                        keyboardType: TextInputType.visiblePassword,
+                        style: input,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.only(top: 14.0),
+                          prefixIcon: Icon(
+                            Icons.work,
+                            color: grey,
+                          ),
+                          hintText:
+                              'Pekerjaan (Babysitter atau Asisten Rumah Tangga)',
                           hintStyle: textHint,
                         ),
                       ),

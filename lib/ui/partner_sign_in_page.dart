@@ -1,17 +1,16 @@
 import 'package:asartha/common/style.dart';
 import 'package:asartha/ui/forgot_password_page.dart';
-import 'package:asartha/ui/partner_sign_in_page.dart';
-import 'package:asartha/ui/sign_up_page.dart';
+import 'package:asartha/ui/partner_sign_up_page.dart';
 import 'package:asartha/widget/floating_nav_bar.dart';
 import 'package:flutter/material.dart';
 
-class SignInPage extends StatelessWidget {
-  const SignInPage({Key? key}) : super(key: key);
-  static const routeName = '/sign_in_page';
+class PartnerSignInPage extends StatelessWidget {
+  const PartnerSignInPage({Key? key}) : super(key: key);
+  static const routeName = '/partner_sign_in_page';
 
   @override
   Widget build(BuildContext context) {
-    bool partner = false;
+    bool partner = true;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
@@ -20,8 +19,22 @@ class SignInPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Padding(padding: EdgeInsets.only(top: 30)),
+              Row(
+                children: [
+                  const SizedBox(
+                    width: 24,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    color: black,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
+              ),
               const SizedBox(
-                height: 36,
+                height: 16,
               ),
               Padding(
                 padding: const EdgeInsets.only(
@@ -32,7 +45,7 @@ class SignInPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Sign in',
+                      'Sign in sebagai Partner',
                       style: Theme.of(context).textTheme.headline6,
                     ),
                     const SizedBox(
@@ -149,7 +162,8 @@ class SignInPage extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, SignUpPage.routeName);
+                            Navigator.pushNamed(
+                                context, PartnerSignUpPage.routeName);
                           },
                           child: Text(
                             'Sign Up',
@@ -161,27 +175,6 @@ class SignInPage extends StatelessWidget {
                         )
                       ],
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          'atau',
-                          style: Theme.of(context).textTheme.subtitle1,
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, PartnerSignInPage.routeName);
-                          },
-                          child: Text(
-                            'Sign In sebagai Partner',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              color: primary,
-                            ),
-                          ),
-                        )
-                      ],
-                    )
                   ],
                 ),
               )
