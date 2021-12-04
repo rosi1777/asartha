@@ -2,14 +2,21 @@ import 'package:asartha/common/style.dart';
 import 'package:asartha/widget/floating_nav_bar.dart';
 import 'package:flutter/material.dart';
 
-class PartnerSignUpPage extends StatelessWidget {
+class PartnerSignUpPage extends StatefulWidget {
   const PartnerSignUpPage({Key? key}) : super(key: key);
   static const routeName = '/partner_sign_up_page';
 
   @override
+  State<PartnerSignUpPage> createState() => _PartnerSignUpPageState();
+}
+
+class _PartnerSignUpPageState extends State<PartnerSignUpPage> {
+  @override
   Widget build(BuildContext context) {
     bool partner = true;
     Size size = MediaQuery.of(context).size;
+    final List<String> role = ['Asisten Rumah Tangga', 'Babysitter'];
+    String _currentRole = 'Asisten Rumah Tangga';
 
     return Scaffold(
       body: SafeArea(
@@ -57,7 +64,7 @@ class PartnerSignUpPage extends StatelessWidget {
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
                     const SizedBox(
-                      height: 26,
+                      height: 10,
                     ),
                     Container(
                       alignment: Alignment.centerLeft,
@@ -83,7 +90,7 @@ class PartnerSignUpPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 36,
+                      height: 10,
                     ),
                     Container(
                       alignment: Alignment.centerLeft,
@@ -109,7 +116,7 @@ class PartnerSignUpPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 36,
+                      height: 10,
                     ),
                     Container(
                       alignment: Alignment.centerLeft,
@@ -135,7 +142,7 @@ class PartnerSignUpPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 36,
+                      height: 10,
                     ),
                     Container(
                       alignment: Alignment.centerLeft,
@@ -161,32 +168,34 @@ class PartnerSignUpPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 36,
+                      height: 26,
+                    ),
+                    Text(
+                      'Role',
+                      style: Theme.of(context).textTheme.headline3,
                     ),
                     Container(
-                      alignment: Alignment.centerLeft,
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(color: secondary, width: 2),
-                        ),
-                      ),
-                      height: 60.0,
-                      child: TextField(
-                        keyboardType: TextInputType.visiblePassword,
-                        style: input,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          contentPadding: const EdgeInsets.only(top: 14.0),
-                          prefixIcon: Icon(
-                            Icons.work,
-                            color: grey,
+                        alignment: Alignment.centerLeft,
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(color: secondary, width: 2),
                           ),
-                          hintText:
-                              'Pekerjaan (Babysitter atau Asisten Rumah Tangga)',
-                          hintStyle: textHint,
                         ),
-                      ),
-                    ),
+                        height: 60.0,
+                        child: DropdownButtonFormField(
+                          decoration: const InputDecoration(
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white))),
+                          value: _currentRole,
+                          items: role.map((role) {
+                            return DropdownMenuItem(
+                              value: role,
+                              child: Text(role),
+                            );
+                          }).toList(),
+                          onChanged: (val) =>
+                              setState(() => _currentRole = val as String),
+                        )),
                     const SizedBox(
                       height: 43,
                     ),

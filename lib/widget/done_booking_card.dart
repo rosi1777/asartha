@@ -1,5 +1,7 @@
 import 'package:asartha/common/style.dart';
+import 'package:asartha/widget/detail_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class DoneBookingCard extends StatelessWidget {
   const DoneBookingCard({Key? key}) : super(key: key);
@@ -104,7 +106,11 @@ class DoneBookingCard extends StatelessWidget {
                   'Detail',
                   style: Theme.of(context).textTheme.button,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  showMaterialModalBottomSheet(
+                      context: context,
+                      builder: (context) => const DetailBottomSheet());
+                },
                 style: ElevatedButton.styleFrom(
                   primary: secondary,
                   padding:
