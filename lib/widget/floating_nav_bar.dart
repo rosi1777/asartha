@@ -8,7 +8,10 @@ import 'package:floating_navbar/floating_navbar_item.dart';
 import 'package:flutter/material.dart';
 
 class FloatingNavigationBar extends StatelessWidget {
-  const FloatingNavigationBar({Key? key}) : super(key: key);
+  final bool partner;
+
+  const FloatingNavigationBar({Key? key, required this.partner})
+      : super(key: key);
   static const routeName = "/nav_bar";
 
   @override
@@ -20,12 +23,14 @@ class FloatingNavigationBar extends StatelessWidget {
           FloatingNavBarItem(
             iconData: Icons.home,
             title: 'Home',
-            page: const HomePage(),
+            page: HomePage(
+              partner: partner,
+            ),
           ),
           FloatingNavBarItem(
             iconData: Icons.shopping_cart,
             title: 'Booking',
-            page: const BookingPage(),
+            page: BookingPage(partner: partner),
           ),
           FloatingNavBarItem(
             iconData: Icons.message,

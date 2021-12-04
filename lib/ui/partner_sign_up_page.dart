@@ -1,28 +1,16 @@
 import 'package:asartha/common/style.dart';
+import 'package:asartha/widget/floating_nav_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({Key? key}) : super(key: key);
-  static const routeName = '/sign_up_page';
-
-  @override
-  State<SignUpPage> createState() => _SignUpPageState();
-}
-
-class _SignUpPageState extends State<SignUpPage> {
-  final _auth = FirebaseAuth.instance;
-
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  bool _isLoading = false;
-  // bool _obscureText = true;
+class PartnerSignUpPage extends StatelessWidget {
+  const PartnerSignUpPage({Key? key}) : super(key: key);
+  static const routeName = '/partner_sign_up_page';
 
   @override
   Widget build(BuildContext context) {
-    bool partner = false;
+    bool partner = true;
     Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -58,7 +46,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Sign up',
+                      'Sign up sebagai Partner',
                       style: Theme.of(context).textTheme.headline6,
                     ),
                     const SizedBox(
@@ -69,7 +57,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
                     const SizedBox(
-                      height: 46,
+                      height: 26,
                     ),
                     Container(
                       alignment: Alignment.centerLeft,
@@ -144,7 +132,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           hintText: 'Alamat Email',
                           hintStyle: textHint,
                         ),
-                        controller: _emailController,
                       ),
                     ),
                     const SizedBox(
@@ -171,7 +158,33 @@ class _SignUpPageState extends State<SignUpPage> {
                           hintText: 'Password',
                           hintStyle: textHint,
                         ),
-                        controller: _passwordController,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 36,
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: secondary, width: 2),
+                        ),
+                      ),
+                      height: 60.0,
+                      child: TextField(
+                        keyboardType: TextInputType.visiblePassword,
+                        style: input,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.only(top: 14.0),
+                          prefixIcon: Icon(
+                            Icons.work,
+                            color: grey,
+                          ),
+                          hintText:
+                              'Pekerjaan (Babysitter atau Asisten Rumah Tangga)',
+                          hintStyle: textHint,
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -180,46 +193,22 @@ class _SignUpPageState extends State<SignUpPage> {
                     SizedBox(
                       width: size.width,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(29),
-                        child: ElevatedButton(
-                          child: Text(
-                            'Sign Up',
-                            style: Theme.of(context).textTheme.button,
-                          ),
-                          onPressed: () async {
-                            setState(() {
-                              _isLoading = true;
-                            });
-
-                            try {
-                              final email = _emailController.text;
-                              final password = _passwordController.text;
-
-                              await _auth.createUserWithEmailAndPassword(
-                                  email: email, password: password);
-
-                              Navigator.pop(context);
-                            } catch (e) {
-                              final snackBar = SnackBar(
-                                content: Text(e.toString()),
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            } finally {
-                              setState(() {
-                                _isLoading = false;
-                              });
-                            }
-                            // Navigator.pushNamed(
-                            //     context, FloatingNavigationBar.routeName);
-                          },
-                          style: ElevatedButton.styleFrom(
-                            primary: secondary,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 40, vertical: 20),
-                          ),
-                        ),
-                      ),
+                          borderRadius: BorderRadius.circular(29),
+                          child: ElevatedButton(
+                            child: Text(
+                              'Sign Up',
+                              style: Theme.of(context).textTheme.button,
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                  context, FloatingNavigationBar.routeName,
+                                  arguments: partner);
+                            },
+                            style: ElevatedButton.styleFrom(
+                                primary: secondary,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 40, vertical: 20)),
+                          )),
                     ),
                     const SizedBox(
                       height: 21,
@@ -252,12 +241,5 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
   }
 }

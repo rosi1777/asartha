@@ -1,10 +1,12 @@
 import 'package:asartha/common/style.dart';
 import 'package:asartha/widget/done_booking_page.dart';
 import 'package:asartha/widget/process_boking_page.dart';
+import 'package:asartha/widget/process_job_page.dart';
 import 'package:flutter/material.dart';
 
 class BookingPage extends StatelessWidget {
-  const BookingPage({Key? key}) : super(key: key);
+  final bool partner;
+  const BookingPage({Key? key, required this.partner}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +17,15 @@ class BookingPage extends StatelessWidget {
           length: 2,
           child: Scaffold(
             appBar: AppBar(
-              title: Text(
-                "Pemesanan",
-                style: Theme.of(context).textTheme.headline6,
-              ),
+              title: partner
+                  ? Text(
+                      "Pekerjaan",
+                      style: Theme.of(context).textTheme.headline6,
+                    )
+                  : Text(
+                      "Pemesanan",
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
               centerTitle: true,
               elevation: 0.0,
               backgroundColor: snow,
@@ -49,10 +56,12 @@ class BookingPage extends StatelessWidget {
             ),
             body: LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
-                return const TabBarView(
+                return TabBarView(
                   children: <Widget>[
-                    ProcessBookingPage(),
-                    DoneBookingPage(),
+                    partner
+                        ? const ProcessJobPage()
+                        : const ProcessBookingPage(),
+                    const DoneBookingPage(),
                   ],
                 );
               },

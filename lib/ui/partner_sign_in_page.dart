@@ -1,30 +1,16 @@
 import 'package:asartha/common/style.dart';
 import 'package:asartha/ui/forgot_password_page.dart';
-import 'package:asartha/ui/partner_sign_in_page.dart';
-import 'package:asartha/ui/sign_up_page.dart';
+import 'package:asartha/ui/partner_sign_up_page.dart';
 import 'package:asartha/widget/floating_nav_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({Key? key}) : super(key: key);
-  static const routeName = '/sign_in_page';
-
-  @override
-  State<SignInPage> createState() => _SignInPageState();
-}
-
-class _SignInPageState extends State<SignInPage> {
-  final _auth = FirebaseAuth.instance;
-
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  bool _obscureText = true;
+class PartnerSignInPage extends StatelessWidget {
+  const PartnerSignInPage({Key? key}) : super(key: key);
+  static const routeName = '/partner_sign_in_page';
 
   @override
   Widget build(BuildContext context) {
-    bool partner = false;
+    bool partner = true;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
@@ -33,8 +19,22 @@ class _SignInPageState extends State<SignInPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Padding(padding: EdgeInsets.only(top: 30)),
+              Row(
+                children: [
+                  const SizedBox(
+                    width: 24,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    color: black,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
+              ),
               const SizedBox(
-                height: 36,
+                height: 16,
               ),
               Padding(
                 padding: const EdgeInsets.only(
@@ -45,7 +45,7 @@ class _SignInPageState extends State<SignInPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Sign in',
+                      'Sign in sebagai Partner',
                       style: Theme.of(context).textTheme.headline6,
                     ),
                     const SizedBox(
@@ -78,7 +78,6 @@ class _SignInPageState extends State<SignInPage> {
                           hintText: 'Alamat Email',
                           hintStyle: textHint,
                         ),
-                        controller: _emailController,
                       ),
                     ),
                     const SizedBox(
@@ -92,7 +91,7 @@ class _SignInPageState extends State<SignInPage> {
                       height: 60.0,
                       child: TextField(
                         keyboardType: TextInputType.visiblePassword,
-                        obscureText: _obscureText,
+                        obscureText: true,
                         style: input,
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -102,18 +101,10 @@ class _SignInPageState extends State<SignInPage> {
                             color: grey,
                             size: 30,
                           ),
-                          suffix: IconButton(
-                            icon: const Icon(Icons.remove_red_eye_outlined),
-                            onPressed: () {
-                              setState(() {
-                                _obscureText = !_obscureText;
-                              });
-                            },
-                          ),
+                          suffix: const Icon(Icons.remove_red_eye_outlined),
                           hintText: 'Password',
                           hintStyle: textHint,
                         ),
-                        controller: _passwordController,
                       ),
                     ),
                     const SizedBox(
@@ -147,22 +138,10 @@ class _SignInPageState extends State<SignInPage> {
                             'Sign In',
                             style: Theme.of(context).textTheme.button,
                           ),
-                          onPressed: () async {
-                            try {
-                              final email = _emailController.text;
-                              final password = _passwordController.text;
-                              await _auth.signInWithEmailAndPassword(
-                                  email: email, password: password);
-                              Navigator.pushReplacementNamed(
-                                  context, FloatingNavigationBar.routeName,
-                                  arguments: partner);
-                            } catch (e) {
-                              final snackBar = SnackBar(
-                                content: Text(e.toString()),
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            }
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, FloatingNavigationBar.routeName,
+                                arguments: partner);
                           },
                           style: ElevatedButton.styleFrom(
                             primary: secondary,
@@ -183,7 +162,8 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, SignUpPage.routeName);
+                            Navigator.pushNamed(
+                                context, PartnerSignUpPage.routeName);
                           },
                           child: Text(
                             'Sign Up',
@@ -195,27 +175,6 @@ class _SignInPageState extends State<SignInPage> {
                         )
                       ],
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          'atau',
-                          style: Theme.of(context).textTheme.subtitle1,
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, PartnerSignInPage.routeName);
-                          },
-                          child: Text(
-                            'Sign In sebagai Partner',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              color: primary,
-                            ),
-                          ),
-                        )
-                      ],
-                    )
                   ],
                 ),
               )
@@ -224,12 +183,5 @@ class _SignInPageState extends State<SignInPage> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
   }
 }
