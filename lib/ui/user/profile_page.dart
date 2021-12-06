@@ -1,8 +1,8 @@
 import 'package:asartha/common/style.dart';
 import 'package:asartha/provider/user_provider.dart';
 import 'package:asartha/ui/address_page.dart';
-import 'package:asartha/ui/edit_profile_page.dart';
-import 'package:asartha/ui/sign_in_page.dart';
+import 'package:asartha/ui/user//edit_profile_page.dart';
+import 'package:asartha/ui/user/sign_in_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

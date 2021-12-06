@@ -1,4 +1,5 @@
 import 'package:asartha/common/style.dart';
+import 'package:asartha/data/database/auth_helper.dart';
 import 'package:asartha/widget/floating_nav_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,13 @@ class PartnerSignUpPage extends StatefulWidget {
 }
 
 class _PartnerSignUpPageState extends State<PartnerSignUpPage> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
+
+  bool _isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     bool partner = true;
@@ -87,6 +95,7 @@ class _PartnerSignUpPageState extends State<PartnerSignUpPage> {
                           hintText: 'Nama',
                           hintStyle: textHint,
                         ),
+                        controller: _nameController,
                       ),
                     ),
                     const SizedBox(
@@ -113,6 +122,7 @@ class _PartnerSignUpPageState extends State<PartnerSignUpPage> {
                           hintText: 'Nomer Telepon',
                           hintStyle: textHint,
                         ),
+                        controller: _phoneNumberController,
                       ),
                     ),
                     const SizedBox(
@@ -127,19 +137,19 @@ class _PartnerSignUpPageState extends State<PartnerSignUpPage> {
                       ),
                       height: 60.0,
                       child: TextField(
-                        keyboardType: TextInputType.emailAddress,
-                        style: input,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          contentPadding: const EdgeInsets.only(top: 14.0),
-                          prefixIcon: Icon(
-                            Icons.email,
-                            color: grey,
+                          keyboardType: TextInputType.emailAddress,
+                          style: input,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            contentPadding: const EdgeInsets.only(top: 14.0),
+                            prefixIcon: Icon(
+                              Icons.email,
+                              color: grey,
+                            ),
+                            hintText: 'Alamat Email',
+                            hintStyle: textHint,
                           ),
-                          hintText: 'Alamat Email',
-                          hintStyle: textHint,
-                        ),
-                      ),
+                          controller: _emailController),
                     ),
                     const SizedBox(
                       height: 10,
@@ -165,6 +175,7 @@ class _PartnerSignUpPageState extends State<PartnerSignUpPage> {
                           hintText: 'Password',
                           hintStyle: textHint,
                         ),
+                        controller: _passwordController,
                       ),
                     ),
                     const SizedBox(
@@ -208,10 +219,33 @@ class _PartnerSignUpPageState extends State<PartnerSignUpPage> {
                               'Sign Up',
                               style: Theme.of(context).textTheme.button,
                             ),
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                  context, FloatingNavigationBar.routeName,
-                                  arguments: partner);
+                            onPressed: () async {
+                              setState(() {
+                                _isLoading = true;
+                              });
+                              try {
+                                final email = _emailController.text;
+                                final password = _passwordController.text;
+                                final name = _nameController.text;
+                                final phoneNumber = _phoneNumberController.text;
+                                final role = _currentRole;
+                                AuthHelper().partnerRegister(email, password,
+                                    name, int.parse(phoneNumber), role);
+                                Navigator.pop(context);
+                              } catch (e) {
+                                final snackBar = SnackBar(
+                                  content: Text(e.toString()),
+                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
+                              } finally {
+                                setState(() {
+                                  _isLoading = false;
+                                });
+                              }
+                              // Navigator.pushNamed(
+                              //     context, FloatingNavigationBar.routeName,
+                              //     arguments: partner);
                             },
                             style: ElevatedButton.styleFrom(
                                 primary: secondary,
@@ -250,5 +284,12 @@ class _PartnerSignUpPageState extends State<PartnerSignUpPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 }

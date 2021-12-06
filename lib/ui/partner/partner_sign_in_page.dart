@@ -1,12 +1,25 @@
 import 'package:asartha/common/style.dart';
 import 'package:asartha/ui/forgot_password_page.dart';
-import 'package:asartha/ui/partner_sign_up_page.dart';
+import 'package:asartha/ui/partner/partner_sign_up_page.dart';
 import 'package:asartha/widget/floating_nav_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class PartnerSignInPage extends StatelessWidget {
+class PartnerSignInPage extends StatefulWidget {
   const PartnerSignInPage({Key? key}) : super(key: key);
   static const routeName = '/partner_sign_in_page';
+
+  @override
+  State<PartnerSignInPage> createState() => _PartnerSignInPageState();
+}
+
+class _PartnerSignInPageState extends State<PartnerSignInPage> {
+  final _auth = FirebaseAuth.instance;
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +91,7 @@ class PartnerSignInPage extends StatelessWidget {
                           hintText: 'Alamat Email',
                           hintStyle: textHint,
                         ),
+                        controller: _emailController,
                       ),
                     ),
                     const SizedBox(
@@ -101,10 +115,18 @@ class PartnerSignInPage extends StatelessWidget {
                             color: grey,
                             size: 30,
                           ),
-                          suffix: const Icon(Icons.remove_red_eye_outlined),
+                          suffix: IconButton(
+                            icon: const Icon(Icons.remove_red_eye_outlined),
+                            onPressed: () {
+                              setState(() {
+                                _obscureText = !_obscureText;
+                              });
+                            },
+                          ),
                           hintText: 'Password',
                           hintStyle: textHint,
                         ),
+                        controller: _passwordController,
                       ),
                     ),
                     const SizedBox(
@@ -138,10 +160,24 @@ class PartnerSignInPage extends StatelessWidget {
                             'Sign In',
                             style: Theme.of(context).textTheme.button,
                           ),
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, FloatingNavigationBar.routeName,
-                                arguments: partner);
+                          onPressed: () async {
+                            try {
+                              final email = _emailController.text;
+                              final password = _passwordController.text;
+                              await _auth.signInWithEmailAndPassword(
+                                email: email,
+                                password: password,
+                              );
+                              Navigator.pushReplacementNamed(
+                                  context, FloatingNavigationBar.routeName,
+                                  arguments: partner);
+                            } catch (e) {
+                              final snackBar = SnackBar(
+                                content: Text(e.toString()),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             primary: secondary,
