@@ -1,6 +1,6 @@
 import 'package:asartha/common/style.dart';
+import 'package:asartha/data/database/auth_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -11,10 +11,11 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final _auth = FirebaseAuth.instance;
 
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
 
   bool _isLoading = false;
   // bool _obscureText = true;
@@ -92,6 +93,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           hintText: 'Nama',
                           hintStyle: textHint,
                         ),
+                        controller: _nameController,
                       ),
                     ),
                     const SizedBox(
@@ -118,6 +120,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           hintText: 'Nomer Telepon',
                           hintStyle: textHint,
                         ),
+                        controller: _phoneNumberController,
                       ),
                     ),
                     const SizedBox(
@@ -190,14 +193,13 @@ class _SignUpPageState extends State<SignUpPage> {
                             setState(() {
                               _isLoading = true;
                             });
-
                             try {
                               final email = _emailController.text;
                               final password = _passwordController.text;
-
-                              await _auth.createUserWithEmailAndPassword(
-                                  email: email, password: password);
-
+                              final name = _nameController.text;
+                              final phoneNumber = _phoneNumberController.text;
+                              AuthHelper().userRegister(email, password, name,
+                                  int.parse(phoneNumber));
                               Navigator.pop(context);
                             } catch (e) {
                               final snackBar = SnackBar(

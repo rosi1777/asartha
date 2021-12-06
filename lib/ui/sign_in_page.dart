@@ -152,7 +152,9 @@ class _SignInPageState extends State<SignInPage> {
                               final email = _emailController.text;
                               final password = _passwordController.text;
                               await _auth.signInWithEmailAndPassword(
-                                  email: email, password: password);
+                                email: email,
+                                password: password,
+                              );
                               Navigator.pushReplacementNamed(
                                   context, FloatingNavigationBar.routeName,
                                   arguments: partner);
