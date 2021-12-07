@@ -152,7 +152,7 @@ class ProfilePage extends StatelessWidget {
                                     decoration: InputDecoration(
                                         border: InputBorder.none,
                                         hintText:
-                                            provider.userProfile.phoneNumber,
+                                            ('0${provider.userProfile.phoneNumber}'),
                                         hintStyle: Theme.of(context)
                                             .textTheme
                                             .headline2),
@@ -169,6 +169,7 @@ class ProfilePage extends StatelessWidget {
                                   alignment: Alignment.centerLeft,
                                   height: 40.0,
                                   child: TextField(
+                                    enabled: false,
                                     keyboardType: TextInputType.text,
                                     style: input,
                                     decoration: InputDecoration(

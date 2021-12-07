@@ -6,13 +6,14 @@ class DetailBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.only(left: 26, right: 26, top: 35),
-        height: 562,
-        width: MediaQuery.of(context).size.width,
-        color: white,
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+    return Container(
+      padding: const EdgeInsets.only(left: 26, right: 26, top: 35),
+      height: 562,
+      width: MediaQuery.of(context).size.width,
+      color: white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Text(
             'Detail',
             style: Theme.of(context).textTheme.headline6,
@@ -102,7 +103,7 @@ class DetailBottomSheet extends StatelessWidget {
                           horizontal: 40, vertical: 20)),
                 )),
           ),
-        ]),
+        ]
       ),
     );
   }
