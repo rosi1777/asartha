@@ -1,5 +1,5 @@
-import 'package:asartha/data/database/firestore_helper.dart';
-import 'package:asartha/data/model/profile.dart';
+import 'package:asartha/data/database/user_firestore_helper.dart';
+import 'package:asartha/data/model/user_profile.dart';
 import 'package:flutter/foundation.dart';
 
 enum ResultState { loading, noData, hasData, error }
@@ -9,7 +9,7 @@ class UserProfileProvider extends ChangeNotifier {
     _getUserProfile(id);
   }
 
-  final FireStoreHelper fireStoreHelper = FireStoreHelper();
+  final UserFirestoreHelper fireStoreHelper = UserFirestoreHelper();
 
   late UserProfile _userProfile;
   late ResultState _state;

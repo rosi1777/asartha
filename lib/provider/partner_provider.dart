@@ -1,4 +1,5 @@
-import 'package:asartha/data/database/firestore_helper.dart';
+import 'package:asartha/data/database/partner_firestroe_helper.dart';
+import 'package:asartha/data/database/user_firestore_helper.dart';
 import 'package:asartha/data/model/partner_profile.dart';
 import 'package:flutter/foundation.dart';
 
@@ -9,7 +10,7 @@ class PartnerProfileProvider extends ChangeNotifier {
     _getPartnerProfile(id);
   }
 
-  final FireStoreHelper fireStoreHelper = FireStoreHelper();
+  final PartnerFirestoreHelper fireStoreHelper = PartnerFirestoreHelper();
 
   late PartnerProfile _partnerProfile;
   late ResultState _state;
@@ -30,6 +31,7 @@ class PartnerProfileProvider extends ChangeNotifier {
     } catch (e) {
       _state = ResultState.error;
       notifyListeners();
+      print(e);
     }
   }
 }

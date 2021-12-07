@@ -1,4 +1,5 @@
 import 'package:asartha/common/style.dart';
+import 'package:asartha/data/database/auth_helper.dart';
 import 'package:asartha/ui/forgot_password_page.dart';
 import 'package:asartha/ui/partner/partner_sign_up_page.dart';
 import 'package:asartha/widget/floating_nav_bar.dart';
@@ -160,24 +161,11 @@ class _PartnerSignInPageState extends State<PartnerSignInPage> {
                             'Sign In',
                             style: Theme.of(context).textTheme.button,
                           ),
-                          onPressed: () async {
-                            try {
-                              final email = _emailController.text;
-                              final password = _passwordController.text;
-                              await _auth.signInWithEmailAndPassword(
-                                email: email,
-                                password: password,
-                              );
-                              Navigator.pushReplacementNamed(
-                                  context, FloatingNavigationBar.routeName,
-                                  arguments: partner);
-                            } catch (e) {
-                              final snackBar = SnackBar(
-                                content: Text(e.toString()),
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            }
+                          onPressed: () {
+                            final email = _emailController.text;
+                            final password = _passwordController.text;
+                            AuthHelper().partnerLogin(
+                                email, password, context, partner);
                           },
                           style: ElevatedButton.styleFrom(
                             primary: secondary,
