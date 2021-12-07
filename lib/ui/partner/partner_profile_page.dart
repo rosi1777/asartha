@@ -1,14 +1,14 @@
 import 'package:asartha/common/style.dart';
-import 'package:asartha/provider/user_provider.dart';
+import 'package:asartha/provider/partner_provider.dart';
 import 'package:asartha/ui/address_page.dart';
-import 'package:asartha/ui/edit_profile_page.dart';
-import 'package:asartha/ui/sign_in_page.dart';
+import 'package:asartha/ui/partner/partner_sign_in_page.dart';
+import 'package:asartha/ui/user/edit_profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+class PartnerProfilePage extends StatelessWidget {
+  const PartnerProfilePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class ProfilePage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
             child: Center(
-              child: Consumer<UserProfileProvider>(
+              child: Consumer<PartnerProfileProvider>(
                 builder: (context, provider, _) {
                   if (provider.state == ResultState.loading) {
                     return Column(
@@ -107,7 +107,7 @@ class ProfilePage extends StatelessWidget {
                                     style: input,
                                     decoration: InputDecoration(
                                         border: InputBorder.none,
-                                        hintText: provider.userProfile.name,
+                                        hintText: provider.partnerProfile.name,
                                         hintStyle: Theme.of(context)
                                             .textTheme
                                             .headline2),
@@ -129,7 +129,7 @@ class ProfilePage extends StatelessWidget {
                                     style: input,
                                     decoration: InputDecoration(
                                         border: InputBorder.none,
-                                        hintText: provider.userProfile.email,
+                                        hintText: provider.partnerProfile.email,
                                         hintStyle: Theme.of(context)
                                             .textTheme
                                             .headline2),
@@ -152,7 +152,29 @@ class ProfilePage extends StatelessWidget {
                                     decoration: InputDecoration(
                                         border: InputBorder.none,
                                         hintText:
-                                            ('0${provider.userProfile.phoneNumber}'),
+                                            provider.partnerProfile.phoneNumber,
+                                        hintStyle: Theme.of(context)
+                                            .textTheme
+                                            .headline2),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  'Role',
+                                  style: Theme.of(context).textTheme.bodyText2,
+                                ),
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  height: 40.0,
+                                  child: TextField(
+                                    enabled: false,
+                                    keyboardType: TextInputType.text,
+                                    style: input,
+                                    decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        hintText: provider.partnerProfile.role,
                                         hintStyle: Theme.of(context)
                                             .textTheme
                                             .headline2),
@@ -169,7 +191,6 @@ class ProfilePage extends StatelessWidget {
                                   alignment: Alignment.centerLeft,
                                   height: 40.0,
                                   child: TextField(
-                                    enabled: false,
                                     keyboardType: TextInputType.text,
                                     style: input,
                                     decoration: InputDecoration(
@@ -240,7 +261,7 @@ class ProfilePage extends StatelessWidget {
                                     onTap: () async {
                                       await _auth.signOut();
                                       Navigator.pushReplacementNamed(
-                                          context, SignInPage.routeName);
+                                          context, PartnerSignInPage.routeName);
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(16.0),

@@ -1,9 +1,11 @@
 import 'package:asartha/common/style.dart';
+import 'package:asartha/provider/partner_provider.dart';
 import 'package:asartha/provider/user_provider.dart';
 import 'package:asartha/ui/booking_page.dart';
 import 'package:asartha/ui/chat_page.dart';
 import 'package:asartha/ui/home_page.dart';
-import 'package:asartha/ui/profile_page.dart';
+import 'package:asartha/ui/partner/partner_profile_page.dart';
+import 'package:asartha/ui/user/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:floating_navbar/floating_navbar.dart';
 import 'package:floating_navbar/floating_navbar_item.dart';
@@ -70,10 +72,15 @@ class _FloatingNavigationBarState extends State<FloatingNavigationBar> {
           FloatingNavBarItem(
             iconData: Icons.person,
             title: 'Profile',
-            page: ChangeNotifierProvider(
-              create: (_) => UserProfileProvider(_id),
-              child: const ProfilePage(),
-            ),
+            page: widget.partner
+                ? ChangeNotifierProvider(
+                    create: (_) => PartnerProfileProvider(_id),
+                    child: const PartnerProfilePage(),
+                  )
+                : ChangeNotifierProvider(
+                    create: (_) => UserProfileProvider(_id),
+                    child: const ProfilePage(),
+                  ),
           )
         ],
         selectedIconColor: primary,

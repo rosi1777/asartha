@@ -1,26 +1,23 @@
 import 'package:asartha/common/style.dart';
-import 'package:asartha/ui/forgot_password_page.dart';
-import 'package:asartha/ui/partner_sign_in_page.dart';
-import 'package:asartha/ui/sign_up_page.dart';
-import 'package:asartha/widget/floating_nav_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:asartha/data/database/auth_helper.dart';
 import 'package:flutter/material.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({Key? key}) : super(key: key);
-  static const routeName = '/sign_in_page';
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
+  static const routeName = '/sign_up_page';
 
   @override
-  State<SignInPage> createState() => _SignInPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
-  final _auth = FirebaseAuth.instance;
-
+class _SignUpPageState extends State<SignUpPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
 
-  bool _obscureText = true;
+  bool _isLoading = false;
+  // bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +27,27 @@ class _SignInPageState extends State<SignInPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Padding(padding: EdgeInsets.only(top: 30)),
+              const Padding(
+                padding: EdgeInsets.only(top: 30),
+              ),
+              Row(
+                children: [
+                  const SizedBox(
+                    width: 24,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    color: black,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
+              ),
               const SizedBox(
-                height: 36,
+                height: 16,
               ),
               Padding(
                 padding: const EdgeInsets.only(
@@ -45,14 +58,14 @@ class _SignInPageState extends State<SignInPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Sign in',
+                      'Sign up',
                       style: Theme.of(context).textTheme.headline6,
                     ),
                     const SizedBox(
                       height: 24,
                     ),
                     Text(
-                      'Selamat datang kembali',
+                      'Buat akun disini',
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
                     const SizedBox(
@@ -61,8 +74,64 @@ class _SignInPageState extends State<SignInPage> {
                     Container(
                       alignment: Alignment.centerLeft,
                       decoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(color: secondary, width: 2))),
+                        border: Border(
+                          bottom: BorderSide(color: secondary, width: 2),
+                        ),
+                      ),
+                      height: 60.0,
+                      child: TextField(
+                        keyboardType: TextInputType.name,
+                        style: input,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.only(top: 14.0),
+                          prefixIcon: Icon(
+                            Icons.person,
+                            color: grey,
+                          ),
+                          hintText: 'Nama',
+                          hintStyle: textHint,
+                        ),
+                        controller: _nameController,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 36,
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: secondary, width: 2),
+                        ),
+                      ),
+                      height: 60.0,
+                      child: TextField(
+                        keyboardType: TextInputType.name,
+                        style: input,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.only(top: 14.0),
+                          prefixIcon: Icon(
+                            Icons.phone,
+                            color: grey,
+                          ),
+                          hintText: 'Nomer Telepon',
+                          hintStyle: textHint,
+                        ),
+                        controller: _phoneNumberController,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 36,
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(color: secondary, width: 2),
+                        ),
+                      ),
                       height: 60.0,
                       child: TextField(
                         keyboardType: TextInputType.emailAddress,
@@ -71,9 +140,8 @@ class _SignInPageState extends State<SignInPage> {
                           border: InputBorder.none,
                           contentPadding: const EdgeInsets.only(top: 14.0),
                           prefixIcon: Icon(
-                            Icons.email_outlined,
+                            Icons.email,
                             color: grey,
-                            size: 27,
                           ),
                           hintText: 'Alamat Email',
                           hintStyle: textHint,
@@ -87,28 +155,20 @@ class _SignInPageState extends State<SignInPage> {
                     Container(
                       alignment: Alignment.centerLeft,
                       decoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(color: secondary, width: 2))),
+                        border: Border(
+                          bottom: BorderSide(color: secondary, width: 2),
+                        ),
+                      ),
                       height: 60.0,
                       child: TextField(
                         keyboardType: TextInputType.visiblePassword,
-                        obscureText: _obscureText,
                         style: input,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           contentPadding: const EdgeInsets.only(top: 14.0),
                           prefixIcon: Icon(
-                            Icons.lock_outline,
+                            Icons.lock,
                             color: grey,
-                            size: 30,
-                          ),
-                          suffix: IconButton(
-                            icon: const Icon(Icons.remove_red_eye_outlined),
-                            onPressed: () {
-                              setState(() {
-                                _obscureText = !_obscureText;
-                              });
-                            },
                           ),
                           hintText: 'Password',
                           hintStyle: textHint,
@@ -117,26 +177,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
-                    ),
-                    Center(
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                              context, ForgotPasswordPage.routeName);
-                        },
-                        child: Text(
-                          'Lupa Password?',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: black,
-                            decoration: TextDecoration.underline,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
+                      height: 43,
                     ),
                     SizedBox(
                       width: size.width,
@@ -144,27 +185,34 @@ class _SignInPageState extends State<SignInPage> {
                         borderRadius: BorderRadius.circular(29),
                         child: ElevatedButton(
                           child: Text(
-                            'Sign In',
+                            'Sign Up',
                             style: Theme.of(context).textTheme.button,
                           ),
                           onPressed: () async {
+                            setState(() {
+                              _isLoading = true;
+                            });
                             try {
                               final email = _emailController.text;
                               final password = _passwordController.text;
-                              await _auth.signInWithEmailAndPassword(
-                                email: email,
-                                password: password,
-                              );
-                              Navigator.pushReplacementNamed(
-                                  context, FloatingNavigationBar.routeName,
-                                  arguments: partner);
+                              final name = _nameController.text;
+                              final phoneNumber = _phoneNumberController.text;
+                              AuthHelper().userRegister(email, password, name,
+                                  int.parse(phoneNumber));
+                              Navigator.pop(context);
                             } catch (e) {
                               final snackBar = SnackBar(
                                 content: Text(e.toString()),
                               );
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar);
+                            } finally {
+                              setState(() {
+                                _isLoading = false;
+                              });
                             }
+                            // Navigator.pushNamed(
+                            //     context, FloatingNavigationBar.routeName);
                           },
                           style: ElevatedButton.styleFrom(
                             primary: secondary,
@@ -180,39 +228,18 @@ class _SignInPageState extends State<SignInPage> {
                     Row(
                       children: [
                         Text(
-                          'Belum punya akun?',
+                          'Sudah punya akun?',
                           style: Theme.of(context).textTheme.subtitle1,
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, SignUpPage.routeName);
+                            Navigator.pop(context);
                           },
                           child: Text(
-                            'Sign Up',
+                            'Sign In',
                             style: TextStyle(
                               fontWeight: FontWeight.w700,
                               color: black,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          'atau',
-                          style: Theme.of(context).textTheme.subtitle1,
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, PartnerSignInPage.routeName);
-                          },
-                          child: Text(
-                            'Sign In sebagai Partner',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              color: primary,
                             ),
                           ),
                         )
