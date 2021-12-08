@@ -1,6 +1,5 @@
 import 'package:asartha/common/style.dart';
 import 'package:asartha/data/database/auth_helper.dart';
-import 'package:asartha/widget/floating_nav_bar.dart';
 import 'package:flutter/material.dart';
 
 class PartnerSignUpPage extends StatefulWidget {

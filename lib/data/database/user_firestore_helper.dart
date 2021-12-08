@@ -1,4 +1,3 @@
-import 'package:asartha/data/model/partner_profile.dart';
 import 'package:asartha/data/model/user_profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -42,5 +41,4 @@ class UserFirestoreHelper {
       print(e);
     }
   }
-
 }

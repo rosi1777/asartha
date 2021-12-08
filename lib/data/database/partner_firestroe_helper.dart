@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class PartnerFirestoreHelper {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-
   Future<PartnerProfile> getPartnerProfileData(String id) async {
     var partnerProfile = await _firestore
         .collection('partners')
