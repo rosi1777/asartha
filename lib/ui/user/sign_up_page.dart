@@ -198,8 +198,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               final name = _nameController.text;
                               final phoneNumber = _phoneNumberController.text;
                               AuthHelper().userRegister(email, password, name,
-                                  int.parse(phoneNumber));
-                              Navigator.pop(context);
+                                  int.parse(phoneNumber), context);
                             } catch (e) {
                               final snackBar = SnackBar(
                                 content: Text(e.toString()),
@@ -211,6 +210,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 _isLoading = false;
                               });
                             }
+
                             // Navigator.pushNamed(
                             //     context, FloatingNavigationBar.routeName);
                           },

@@ -229,8 +229,7 @@ class _PartnerSignUpPageState extends State<PartnerSignUpPage> {
                                 final phoneNumber = _phoneNumberController.text;
                                 final role = _currentRole;
                                 AuthHelper().partnerRegister(email, password,
-                                    name, int.parse(phoneNumber), role);
-                                Navigator.pop(context);
+                                    name, int.parse(phoneNumber), role, context);
                               } catch (e) {
                                 final snackBar = SnackBar(
                                   content: Text(e.toString()),
