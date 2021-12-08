@@ -1,5 +1,6 @@
 import 'package:asartha/data/model/user_profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class UserFirestoreHelper {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -36,6 +37,38 @@ class UserFirestoreHelper {
         'email': email,
         'phone_number': number,
         'role': 'User'
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> updateUserData(
+      String id, String name, String email, int number) async {
+    var _auth = FirebaseAuth.instance;
+    var user = _auth.currentUser;
+    try {
+      await _firestore
+          .collection('users')
+          .doc(id)
+          .collection('profile')
+          .where('id', isEqualTo: id)
+          .get()
+          .then((value) async {
+        var docs = value.docs[0].id;
+        print(docs);
+        try {
+          await _firestore
+              .collection('users')
+              .doc(id)
+              .collection('profile')
+              .doc(docs)
+              .update({'name': name, 'email': email, 'phone_number': number});
+
+          await user?.updateEmail(email);
+        } catch (e) {
+          print(e);
+        }
       });
     } catch (e) {
       print(e);

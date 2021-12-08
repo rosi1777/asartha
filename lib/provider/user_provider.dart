@@ -1,12 +1,11 @@
 import 'package:asartha/data/database/user_firestore_helper.dart';
 import 'package:asartha/data/model/user_profile.dart';
+import 'package:asartha/utils/result_state.dart';
 import 'package:flutter/foundation.dart';
-
-enum ResultState { loading, noData, hasData, error }
 
 class UserProfileProvider extends ChangeNotifier {
   UserProfileProvider(String id) {
-    _getUserProfile(id);
+    getUserProfile(id);
   }
 
   final UserFirestoreHelper fireStoreHelper = UserFirestoreHelper();
@@ -18,7 +17,7 @@ class UserProfileProvider extends ChangeNotifier {
   UserProfile get userProfile => _userProfile;
   ResultState get state => _state;
 
-  Future<dynamic> _getUserProfile(String id) async {
+  Future<dynamic> getUserProfile(String id) async {
     try {
       _state = ResultState.loading;
       notifyListeners();
@@ -30,6 +29,21 @@ class UserProfileProvider extends ChangeNotifier {
     } catch (e) {
       _state = ResultState.error;
       notifyListeners();
+    }
+  }
+
+  Future<void> updateUserdata(
+      String id, String name, String email, int number) async {
+    try {
+      _state = ResultState.loading;
+
+      notifyListeners();
+
+      await fireStoreHelper.updateUserData(id, name, email, number);
+      _state = ResultState.done;
+      notifyListeners();
+    } catch (e) {
+      _state = ResultState.error;
     }
   }
 }

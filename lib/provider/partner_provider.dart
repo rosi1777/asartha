@@ -1,8 +1,7 @@
 import 'package:asartha/data/database/partner_firestroe_helper.dart';
 import 'package:asartha/data/model/partner_profile.dart';
+import 'package:asartha/utils/result_state.dart';
 import 'package:flutter/foundation.dart';
-
-enum ResultState { loading, noData, hasData, error }
 
 class PartnerProfileProvider extends ChangeNotifier {
   PartnerProfileProvider(String id) {

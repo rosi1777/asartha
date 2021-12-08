@@ -3,6 +3,8 @@ import 'package:asartha/provider/user_provider.dart';
 import 'package:asartha/ui/address_page.dart';
 import 'package:asartha/ui/user//edit_profile_page.dart';
 import 'package:asartha/ui/user/sign_in_page.dart';
+import 'package:asartha/utils/result_state.dart';
+import 'package:asartha/widget/logout_bottom_sheet.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -66,7 +68,14 @@ class ProfilePage extends StatelessWidget {
                           ),
                           onPressed: () {
                             Navigator.pushNamed(
-                                context, EditProfilePage.routeName);
+                                    context, EditProfilePage.routeName,
+                                    arguments: provider.userProfile)
+                                .then(
+                              (value) => Provider.of<UserProfileProvider>(
+                                      context,
+                                      listen: false)
+                                  .getUserProfile(provider.userProfile.id),
+                            );
                           },
                           style: OutlinedButton.styleFrom(
                             side: BorderSide(
@@ -237,10 +246,9 @@ class ProfilePage extends StatelessWidget {
                                 Material(
                                   color: white,
                                   child: InkWell(
-                                    onTap: () async {
-                                      await _auth.signOut();
-                                      Navigator.pushReplacementNamed(
-                                          context, SignInPage.routeName);
+                                    onTap: () {
+                                      ShowCustomBottomSheet()
+                                          .logOutBottomSheet(context);
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(16.0),
