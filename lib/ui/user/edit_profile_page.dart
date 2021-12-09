@@ -182,7 +182,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 int.parse(_phoneNumberController.text);
                             await Provider.of<UserProfileProvider>(context,
                                     listen: false)
-                                .updateUserdata(id!, name, email, number);
+                                .updateUserProfile(id!, name, email, number);
                             Navigator.pop(context);
                           },
                           style: ElevatedButton.styleFrom(

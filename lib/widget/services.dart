@@ -1,4 +1,5 @@
 import 'package:asartha/common/style.dart';
+import 'package:asartha/ui/date_picker_page.dart';
 import 'package:asartha/ui/payment_page.dart';
 import 'package:flutter/material.dart';
 
@@ -19,14 +20,16 @@ class Services extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, PaymentPage.routeName);
+            Navigator.pushNamed(context, DatePickerPage.routeName);
           },
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.only(top: 25, bottom: 25),
             margin: const EdgeInsets.only(bottom: 25),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15), color: white),
+              borderRadius: BorderRadius.circular(15),
+              color: white,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

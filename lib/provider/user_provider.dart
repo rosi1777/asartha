@@ -32,7 +32,7 @@ class UserProfileProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> updateUserdata(
+  Future<void> updateUserProfile(
       String id, String name, String email, int number) async {
     try {
       _state = ResultState.loading;
