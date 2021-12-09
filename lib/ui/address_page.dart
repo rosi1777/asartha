@@ -51,7 +51,10 @@ class AddressPage extends StatelessWidget {
                     ),
                     onPressed: () {
                       Navigator.pushNamed(context, AddAddressPage.routeName,
-                          arguments: partner);
+                              arguments: partner)
+                          .then((value) => Provider.of<AddressProvider>(context,
+                                  listen: false)
+                              .getAddress(provider.address.id, partner));
                     },
                     style: ElevatedButton.styleFrom(
                       primary: secondary,
@@ -101,8 +104,12 @@ class AddressPage extends StatelessWidget {
                       ),
                       onPressed: () {
                         Navigator.pushNamed(
-                            context, DetailAddressPage.routeName,
-                            arguments: partner);
+                                context, DetailAddressPage.routeName,
+                                arguments: partner)
+                            .then((value) => Provider.of<AddressProvider>(
+                                    context,
+                                    listen: false)
+                                .getAddress(provider.address.id, partner));
                       },
                       style: ElevatedButton.styleFrom(
                         primary: secondary,

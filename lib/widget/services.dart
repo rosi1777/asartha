@@ -1,6 +1,5 @@
 import 'package:asartha/common/style.dart';
 import 'package:asartha/ui/date_picker_page.dart';
-import 'package:asartha/ui/payment_page.dart';
 import 'package:flutter/material.dart';
 
 class Services extends StatelessWidget {
