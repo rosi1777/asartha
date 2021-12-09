@@ -21,7 +21,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    bool partner = false;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(

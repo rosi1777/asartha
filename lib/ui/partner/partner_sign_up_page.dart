@@ -20,7 +20,6 @@ class _PartnerSignUpPageState extends State<PartnerSignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    bool partner = true;
     Size size = MediaQuery.of(context).size;
     final List<String> role = ['Asisten Rumah Tangga', 'Babysitter'];
     String _currentRole = 'Asisten Rumah Tangga';
@@ -228,8 +227,13 @@ class _PartnerSignUpPageState extends State<PartnerSignUpPage> {
                                 final name = _nameController.text;
                                 final phoneNumber = _phoneNumberController.text;
                                 final role = _currentRole;
-                                AuthHelper().partnerRegister(email, password,
-                                    name, int.parse(phoneNumber), role, context);
+                                AuthHelper().partnerRegister(
+                                    email,
+                                    password,
+                                    name,
+                                    int.parse(phoneNumber),
+                                    role,
+                                    context);
                               } catch (e) {
                                 final snackBar = SnackBar(
                                   content: Text(e.toString()),

@@ -15,6 +15,8 @@ class PartnerProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final _auth = FirebaseAuth.instance;
 
+    const bool partner = true;
+
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -221,7 +223,8 @@ class PartnerProfilePage extends StatelessWidget {
                                   child: InkWell(
                                     onTap: () {
                                       Navigator.pushNamed(
-                                          context, AddressPage.routeName);
+                                          context, AddressPage.routeName,
+                                          arguments: partner);
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(16.0),

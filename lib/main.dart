@@ -1,6 +1,7 @@
 import 'package:asartha/common/navigation.dart';
 import 'package:asartha/common/style.dart';
 import 'package:asartha/data/model/user_profile.dart';
+import 'package:asartha/ui/add_address_page.dart';
 import 'package:asartha/ui/date_picker_page.dart';
 import 'package:asartha/ui/address_page.dart';
 import 'package:asartha/ui/detail_address_page.dart';
@@ -68,8 +69,11 @@ class MyApp extends StatelessWidget {
             user: (ModalRoute.of(context)?.settings.arguments as UserProfile)),
         PaymentPage.routeName: (context) => const PaymentPage(),
         DatePickerPage.routeName: (contex) => const DatePickerPage(),
-        AddressPage.routeName: (context) => const AddressPage(),
+        AddressPage.routeName: (context) => AddressPage(
+            partner: (ModalRoute.of(context)?.settings.arguments as bool)),
         DetailAddressPage.routeName: (context) => const DetailAddressPage(),
+        AddAddressPage.routeName: (context) => AddAddressPage(
+            partner: (ModalRoute.of(context)?.settings.arguments as bool)),
         SuccessPaymentPage.routeName: (context) => const SuccessPaymentPage(),
         ErrorPaymentPage.routeName: (context) => const ErrorPaymentPage(),
         PartnerSignInPage.routeName: (context) => const PartnerSignInPage(),

@@ -2,10 +2,8 @@ import 'package:asartha/common/style.dart';
 import 'package:asartha/provider/user_provider.dart';
 import 'package:asartha/ui/address_page.dart';
 import 'package:asartha/ui/user//edit_profile_page.dart';
-import 'package:asartha/ui/user/sign_in_page.dart';
 import 'package:asartha/utils/result_state.dart';
 import 'package:asartha/widget/logout_bottom_sheet.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,9 +12,8 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _auth = FirebaseAuth.instance;
-
     final width = MediaQuery.of(context).size.width;
+    const bool partner = false;
 
     return Scaffold(
       backgroundColor: snow,
@@ -208,7 +205,8 @@ class ProfilePage extends StatelessWidget {
                                   child: InkWell(
                                     onTap: () {
                                       Navigator.pushNamed(
-                                          context, AddressPage.routeName);
+                                          context, AddressPage.routeName,
+                                          arguments: partner);
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(16.0),
