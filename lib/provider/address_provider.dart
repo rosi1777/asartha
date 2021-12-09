@@ -36,4 +36,30 @@ class AddressProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future<void> updateAddress(
+      String addressOf,
+      String id,
+      String name,
+      String address,
+      String city,
+      int postCode,
+      int phone,
+      bool partner) async {
+    try {
+      _state = ResultState.loading;
+
+      notifyListeners();
+
+      partner
+          ? await PartnerFirestoreHelper().updateAddressData(
+              addressOf, id, name, address, city, postCode, phone)
+          : await UserFirestoreHelper().updateAddressData(
+              addressOf, id, name, address, city, postCode, phone);
+      _state = ResultState.done;
+      notifyListeners();
+    } catch (e) {
+      _state = ResultState.error;
+    }
+  }
 }

@@ -101,7 +101,8 @@ class AddressPage extends StatelessWidget {
                       ),
                       onPressed: () {
                         Navigator.pushNamed(
-                            context, DetailAddressPage.routeName);
+                            context, DetailAddressPage.routeName,
+                            arguments: partner);
                       },
                       style: ElevatedButton.styleFrom(
                         primary: secondary,

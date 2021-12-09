@@ -71,7 +71,8 @@ class MyApp extends StatelessWidget {
         DatePickerPage.routeName: (contex) => const DatePickerPage(),
         AddressPage.routeName: (context) => AddressPage(
             partner: (ModalRoute.of(context)?.settings.arguments as bool)),
-        DetailAddressPage.routeName: (context) => const DetailAddressPage(),
+        DetailAddressPage.routeName: (context) => DetailAddressPage(
+            partner: (ModalRoute.of(context)?.settings.arguments as bool)),
         AddAddressPage.routeName: (context) => AddAddressPage(
             partner: (ModalRoute.of(context)?.settings.arguments as bool)),
         SuccessPaymentPage.routeName: (context) => const SuccessPaymentPage(),
