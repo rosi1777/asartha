@@ -7,17 +7,20 @@ import 'package:flutter/foundation.dart';
 class VacancyProvider extends ChangeNotifier {
   final fireStoreHelper = VacancyFirestoreHelper();
 
-  late ResultState _state;
+  late ResultState _state = ResultState.done;
 
   ResultState get state => _state;
 
-  Future<void> updateUserProfile(String id, DateTime startDate,
-      DateTime endDate, String criteria) async {
+  Future<void> updateUserProfile(
+    String id,
+    DateTime startDate,
+    DateTime endDate,
+    String criteria,
+  ) async {
     try {
       _state = ResultState.loading;
       notifyListeners();
-      await fireStoreHelper.addUserVacancy(
-          id, startDate, endDate, criteria);
+      await fireStoreHelper.addUserVacancy(id, startDate, endDate, criteria);
       _state = ResultState.done;
       notifyListeners();
     } catch (e) {

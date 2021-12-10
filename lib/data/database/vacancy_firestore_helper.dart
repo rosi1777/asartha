@@ -11,6 +11,7 @@ class VacancyFirestoreHelper {
         'start_date': startDate,
         'end_date': endDate,
         'criteria': criteria,
+        'status': 'unaccepted'
       },
     );
   }
