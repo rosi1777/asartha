@@ -5,6 +5,7 @@ import 'package:asartha/ui/partner/partner_edit_profile_page.dart';
 import 'package:asartha/ui/partner/partner_sign_in_page.dart';
 import 'package:asartha/ui/user/edit_profile_page.dart';
 import 'package:asartha/utils/result_state.dart';
+import 'package:asartha/widget/logout_bottom_sheet.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -271,10 +272,9 @@ class PartnerProfilePage extends StatelessWidget {
                                 Material(
                                   color: white,
                                   child: InkWell(
-                                    onTap: () async {
-                                      await _auth.signOut();
-                                      Navigator.pushReplacementNamed(
-                                          context, PartnerSignInPage.routeName);
+                                    onTap: () {
+                                      ShowCustomBottomSheet()
+                                          .logOutBottomSheet(context);
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(16.0),

@@ -14,7 +14,6 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     const bool partner = false;
-
     return Scaffold(
       backgroundColor: snow,
       body: SafeArea(

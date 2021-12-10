@@ -1,3 +1,4 @@
+import 'package:asartha/data/model/vacancy.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class VacancyFirestoreHelper {
@@ -14,5 +15,14 @@ class VacancyFirestoreHelper {
         'status': 'unaccepted'
       },
     );
+  }
+
+  Future<VacancyResult> getUserVacancy(String id) async {
+    var vacancy = await _firestore
+        .collection('vacancy')
+        .where('user', isEqualTo: id)
+        .get();
+
+    return VacancyResult.fromMap(vacancy);
   }
 }

@@ -1,5 +1,6 @@
 import 'package:asartha/data/model/address.dart';
 import 'package:asartha/data/model/user_profile.dart';
+import 'package:asartha/data/model/vacancy.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -14,14 +15,6 @@ class UserFirestoreHelper {
         .where('id', isEqualTo: id)
         .get();
     return UserProfile.fromMap(userProfile);
-  }
-
-  Future<QuerySnapshot<Map<String, dynamic>>> getUserVacancy(String id) async {
-    return await _firestore
-        .collection('users')
-        .doc(id)
-        .collection('vacancy')
-        .get();
   }
 
   Future<void> addUserData(

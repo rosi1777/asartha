@@ -1,5 +1,5 @@
 import 'package:asartha/common/style.dart';
-import 'package:asartha/provider/vacancy_provider.dart';
+import 'package:asartha/provider/set_vacancy_provider.dart';
 import 'package:asartha/utils/result_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
