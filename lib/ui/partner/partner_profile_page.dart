@@ -1,6 +1,7 @@
 import 'package:asartha/common/style.dart';
 import 'package:asartha/provider/partner_provider.dart';
 import 'package:asartha/ui/address_page.dart';
+import 'package:asartha/ui/partner/partner_edit_profile_page.dart';
 import 'package:asartha/ui/partner/partner_sign_in_page.dart';
 import 'package:asartha/ui/user/edit_profile_page.dart';
 import 'package:asartha/utils/result_state.dart';
@@ -69,7 +70,15 @@ class PartnerProfilePage extends StatelessWidget {
                           ),
                           onPressed: () {
                             Navigator.pushNamed(
-                                context, EditProfilePage.routeName);
+                                    context, PartnerEditProfilePage.routeName,
+                                    arguments: provider.partnerProfile)
+                                .then(
+                              (value) => Provider.of<PartnerProfileProvider>(
+                                      context,
+                                      listen: false)
+                                  .getPartnerProfile(
+                                      provider.partnerProfile.id),
+                            );
                           },
                           style: OutlinedButton.styleFrom(
                             side: BorderSide(

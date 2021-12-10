@@ -1,10 +1,12 @@
 import 'package:asartha/common/navigation.dart';
 import 'package:asartha/common/style.dart';
+import 'package:asartha/data/model/partner_profile.dart';
 import 'package:asartha/data/model/user_profile.dart';
 import 'package:asartha/ui/add_address_page.dart';
 import 'package:asartha/ui/date_picker_page.dart';
 import 'package:asartha/ui/address_page.dart';
 import 'package:asartha/ui/detail_address_page.dart';
+import 'package:asartha/ui/partner/partner_edit_profile_page.dart';
 import 'package:asartha/ui/user/edit_profile_page.dart';
 import 'package:asartha/ui/error_payment_page.dart';
 import 'package:asartha/ui/forgot_password_page.dart';
@@ -67,6 +69,9 @@ class MyApp extends StatelessWidget {
             partner: (ModalRoute.of(context)?.settings.arguments as bool)),
         EditProfilePage.routeName: (context) => EditProfilePage(
             user: (ModalRoute.of(context)?.settings.arguments as UserProfile)),
+        PartnerEditProfilePage.routeName: (context) => PartnerEditProfilePage(
+            partner:
+                (ModalRoute.of(context)?.settings.arguments as PartnerProfile)),
         PaymentPage.routeName: (context) => const PaymentPage(),
         DatePickerPage.routeName: (contex) => const DatePickerPage(),
         AddressPage.routeName: (context) => AddressPage(

@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 
 class PartnerProfileProvider extends ChangeNotifier {
   PartnerProfileProvider(String id) {
-    _getPartnerProfile(id);
+    getPartnerProfile(id);
   }
 
   final PartnerFirestoreHelper fireStoreHelper = PartnerFirestoreHelper();
@@ -17,7 +17,7 @@ class PartnerProfileProvider extends ChangeNotifier {
   PartnerProfile get partnerProfile => _partnerProfile;
   ResultState get state => _state;
 
-  Future<dynamic> _getPartnerProfile(String id) async {
+  Future<dynamic> getPartnerProfile(String id) async {
     try {
       _state = ResultState.loading;
       notifyListeners();
@@ -30,6 +30,21 @@ class PartnerProfileProvider extends ChangeNotifier {
       _state = ResultState.error;
       notifyListeners();
       print(e);
+    }
+  }
+
+  Future<void> updatePartnerProfile(
+      String id, String name, String email, int number) async {
+    try {
+      _state = ResultState.loading;
+
+      notifyListeners();
+
+      await fireStoreHelper.updatePartnerData(id, name, email, number);
+      _state = ResultState.done;
+      notifyListeners();
+    } catch (e) {
+      _state = ResultState.error;
     }
   }
 }
