@@ -22,23 +22,24 @@ class Vacancy {
   final DateTime endDate;
   final String criteria;
   final String status;
+  final String role;
 
   Vacancy(
       {required this.user,
       required this.startDate,
       required this.endDate,
       required this.criteria,
-      required this.status});
+      required this.status,
+      required this.role});
 
   factory Vacancy.fromMap(QueryDocumentSnapshot doc) {
     var attribute = doc.data() as Map<String, dynamic>;
     return Vacancy(
-      user: attribute['user'],
-      startDate: attribute['start_date'],
-      endDate: attribute['end_date'],
-      criteria: attribute['criteria'],
-      status: attribute['status'],
-    );
+        user: attribute['user'],
+        startDate: attribute['start_date'].toDate(),
+        endDate: attribute['end_date'].toDate(),
+        criteria: attribute['criteria'],
+        status: attribute['status'],
+        role: attribute['role']);
   }
 }
-

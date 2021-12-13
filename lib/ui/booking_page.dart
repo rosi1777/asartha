@@ -1,15 +1,21 @@
 import 'package:asartha/common/style.dart';
+import 'package:asartha/provider/get_user_vacancy_provider.dart';
 import 'package:asartha/widget/done_booking_page.dart';
 import 'package:asartha/widget/process_boking_page.dart';
 import 'package:asartha/widget/process_job_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BookingPage extends StatelessWidget {
   final bool partner;
-  const BookingPage({Key? key, required this.partner}) : super(key: key);
+  BookingPage({Key? key, required this.partner}) : super(key: key);
+  final _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
+    final id = _auth.currentUser?.uid;
+
     return Scaffold(
       backgroundColor: snow,
       body: SafeArea(
@@ -60,7 +66,9 @@ class BookingPage extends StatelessWidget {
                   children: <Widget>[
                     partner
                         ? const ProcessJobPage()
-                        : const ProcessBookingPage(),
+                        : ChangeNotifierProvider(
+                            create: (_) => GetVacancyProvider(id: id!),
+                            child: const ProcessBookingPage()),
                     const DoneBookingPage(),
                   ],
                 );
