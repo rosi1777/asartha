@@ -84,8 +84,10 @@ class _SignInPageState extends State<SignInPage> {
                     Container(
                       alignment: Alignment.centerLeft,
                       decoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(color: secondary, width: 2))),
+                        border: Border(
+                          bottom: BorderSide(color: secondary, width: 2),
+                        ),
+                      ),
                       height: 60.0,
                       child: TextField(
                         keyboardType: TextInputType.visiblePassword,
@@ -93,7 +95,8 @@ class _SignInPageState extends State<SignInPage> {
                         style: input,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          contentPadding: const EdgeInsets.only(top: 14.0),
+                          contentPadding:
+                              const EdgeInsets.only(top: 14.0, bottom: 8),
                           prefixIcon: Icon(
                             Icons.lock_outline,
                             color: grey,

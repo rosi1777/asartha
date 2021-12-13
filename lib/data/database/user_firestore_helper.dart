@@ -1,6 +1,5 @@
 import 'package:asartha/data/model/address.dart';
 import 'package:asartha/data/model/user_profile.dart';
-import 'package:asartha/data/model/vacancy.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
