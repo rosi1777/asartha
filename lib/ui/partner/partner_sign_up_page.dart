@@ -15,15 +15,15 @@ class _PartnerSignUpPageState extends State<PartnerSignUpPage> {
   final _passwordController = TextEditingController();
   final _nameController = TextEditingController();
   final _phoneNumberController = TextEditingController();
+  final List<String> role = ['Asisten Rumah Tangga', 'Babysitter'];
+  String _currentRole = 'Asisten Rumah Tangga';
 
   bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
+    print(_currentRole);
     Size size = MediaQuery.of(context).size;
-    final List<String> role = ['Asisten Rumah Tangga', 'Babysitter'];
-    String _currentRole = 'Asisten Rumah Tangga';
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(

@@ -1,5 +1,4 @@
 import 'package:asartha/common/style.dart';
-import 'package:asartha/ui/partner/partner_sign_in_page.dart';
 import 'package:asartha/ui/user/sign_in_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';

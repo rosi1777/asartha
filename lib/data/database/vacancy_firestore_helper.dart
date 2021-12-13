@@ -40,4 +40,42 @@ class VacancyFirestoreHelper {
 
     return VacancyResult.fromMap(vacancy);
   }
+
+  Future<VacancyResult> getHouseMaidVacancy() async {
+    var vacancy = await _firestore
+        .collection('vacancy')
+        .where('role', isEqualTo: 'Asisten Rumah Tangga')
+        .get();
+
+    return VacancyResult.fromMap(vacancy);
+  }
+
+  Future<VacancyResult> getBabySitterVacancy() async {
+    var vacancy = await _firestore
+        .collection('vacancy')
+        .where('role', isEqualTo: 'Baby Sitter')
+        .get();
+
+    return VacancyResult.fromMap(vacancy);
+  }
+
+  Future<VacancyResult> getBabySitterVacancyById(String id) async {
+    var vacancy = await _firestore
+        .collection('vacancy')
+        .where('role', isEqualTo: 'Baby Sitter')
+        .where('partnerId', isEqualTo: id)
+        .get();
+
+    return VacancyResult.fromMap(vacancy);
+  }
+
+  Future<VacancyResult> getHouseMaidVacancyById(String id) async {
+    var vacancy = await _firestore
+        .collection('vacancy')
+        .where('role', isEqualTo: 'Asisten Rumah Tangga')
+        .where('partnerID', isEqualTo: id)
+        .get();
+
+    return VacancyResult.fromMap(vacancy);
+  }
 }
