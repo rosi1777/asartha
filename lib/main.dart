@@ -3,6 +3,7 @@ import 'package:asartha/common/style.dart';
 import 'package:asartha/data/model/partner_profile.dart';
 import 'package:asartha/data/model/user_profile.dart';
 import 'package:asartha/ui/add_address_page.dart';
+import 'package:asartha/ui/baby_sitter_date_picker_page.dart';
 import 'package:asartha/ui/date_picker_page.dart';
 import 'package:asartha/ui/address_page.dart';
 import 'package:asartha/ui/detail_address_page.dart';
@@ -73,6 +74,8 @@ class MyApp extends StatelessWidget {
                 (ModalRoute.of(context)?.settings.arguments as PartnerProfile)),
         PaymentPage.routeName: (context) => const PaymentPage(),
         DatePickerPage.routeName: (contex) => const DatePickerPage(),
+        BabySitterDatePickerPage.routeName: (contex) =>
+            const BabySitterDatePickerPage(),
         AddressPage.routeName: (context) => AddressPage(
             partner: (ModalRoute.of(context)?.settings.arguments as bool)),
         DetailAddressPage.routeName: (context) => DetailAddressPage(

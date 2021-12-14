@@ -1,5 +1,4 @@
 import 'package:asartha/common/style.dart';
-import 'package:asartha/data/database/vacancy_firestore_helper.dart';
 import 'package:asartha/data/model/vacancy.dart';
 import 'package:asartha/provider/address_provider.dart';
 import 'package:asartha/provider/get_all_vacancy_provider.dart';

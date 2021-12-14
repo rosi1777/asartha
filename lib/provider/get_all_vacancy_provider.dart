@@ -25,12 +25,11 @@ class GetAllVacancyProvider extends ChangeNotifier {
       _state = ResultState.loading;
       notifyListeners();
       var partner = await partnerFirestoreHelper.getPartnerProfileData(id);
-      _getHouseMaidVacancy();
-      // if (partner.role == 'Asisten Rumah Tangga') {
-      //   _getHouseMaidVacancy();
-      // } else {
-      //   _getBabySitterVacancy();
-      // }
+      if (partner.role == 'Asisten Rumah Tangga') {
+        _getHouseMaidVacancy();
+      } else {
+        _getBabySitterVacancy();
+      }
     } catch (e) {
       _state = ResultState.error;
       notifyListeners();

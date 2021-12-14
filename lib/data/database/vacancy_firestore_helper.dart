@@ -19,12 +19,12 @@ class VacancyFirestoreHelper {
     );
   }
 
-  Future<void> addUserBabySitterVacancy(String userId, String partnerId,
-      DateTime startDate, DateTime endDate, String criteria) async {
+  Future<void> addUserBabySitterVacancy(String userId, DateTime startDate,
+      DateTime endDate, String criteria) async {
     await _firestore.collection('vacancy').doc().set(
       {
         'user': userId,
-        'partner': partnerId,
+        'partnerId': "",
         'start_date': startDate,
         'end_date': endDate,
         'criteria': criteria,
@@ -39,7 +39,7 @@ class VacancyFirestoreHelper {
     await _firestore
         .collection('vacancy')
         .doc(docId)
-        .update({'partnerId': partnerId});
+        .update({'partnerId': partnerId, 'status': 'Diterima'});
   }
 
   Future<VacancyResult> getUserVacancy(String id) async {

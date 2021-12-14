@@ -139,7 +139,7 @@ class _DetailBottomSheetState extends State<DetailBottomSheet> {
                     : const SizedBox(),
                 partner
                     ? Text(
-                        widget.vacancy.partner!,
+                        widget.vacancy.partner,
                         style: Theme.of(context).textTheme.headline3,
                       )
                     : const SizedBox(),

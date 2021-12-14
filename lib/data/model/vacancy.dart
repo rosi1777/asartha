@@ -23,7 +23,7 @@ class Vacancy {
   final String criteria;
   final String status;
   final String role;
-  final String? partner;
+  final String partner;
   final String docId;
 
   Vacancy(
