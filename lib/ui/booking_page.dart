@@ -1,6 +1,7 @@
 import 'package:asartha/common/style.dart';
 import 'package:asartha/provider/get_partner_application_provider.dart';
 import 'package:asartha/provider/get_user_vacancy_provider.dart';
+import 'package:asartha/provider/partner_provider.dart';
 import 'package:asartha/widget/done_booking_page.dart';
 import 'package:asartha/widget/process_boking_page.dart';
 import 'package:asartha/widget/process_job_page.dart';

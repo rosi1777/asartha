@@ -103,7 +103,7 @@ class _DetailBottomSheetState extends State<DetailBottomSheet> {
                   style: Theme.of(context).textTheme.subtitle2,
                 ),
                 Text(
-                  'Asisten Rumah Tangga',
+                  widget.vacancy.role,
                   style: Theme.of(context).textTheme.headline3,
                 ),
                 const SizedBox(
@@ -254,7 +254,7 @@ class _DetailBottomSheetState extends State<DetailBottomSheet> {
                   style: Theme.of(context).textTheme.subtitle2,
                 ),
                 Text(
-                  'Asisten Rumah Tangga',
+                  profileProvider.partnerProfile.role,
                   style: Theme.of(context).textTheme.headline3,
                 ),
                 const SizedBox(
