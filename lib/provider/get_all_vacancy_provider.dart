@@ -8,7 +8,7 @@ class GetAllVacancyProvider extends ChangeNotifier {
   final String id;
 
   GetAllVacancyProvider({required this.id}) {
-    _getRole(id);
+    getRole(id);
   }
 
   final fireStoreHelper = VacancyFirestoreHelper();
@@ -20,7 +20,7 @@ class GetAllVacancyProvider extends ChangeNotifier {
   VacancyResult get vacancy => _vacancy;
   ResultState get state => _state;
 
-  Future<void> _getRole(String id) async {
+  Future<void> getRole(String id) async {
     try {
       _state = ResultState.loading;
       notifyListeners();

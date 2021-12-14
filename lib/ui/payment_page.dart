@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:asartha/common/style.dart';
 import 'package:asartha/ui/success_payment_page.dart';
 import 'package:flutter/material.dart';

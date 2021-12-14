@@ -76,7 +76,7 @@ class ProcessBookingPage extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      'Dikirim',
+                      vacancy.status,
                       style: GoogleFonts.poppins(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,

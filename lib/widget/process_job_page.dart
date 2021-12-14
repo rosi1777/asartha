@@ -1,8 +1,13 @@
 import 'package:asartha/common/style.dart';
 import 'package:asartha/data/model/vacancy.dart';
+import 'package:asartha/provider/address_provider.dart';
 import 'package:asartha/provider/get_partner_application_provider.dart';
+import 'package:asartha/provider/partner_provider.dart';
+import 'package:asartha/provider/user_provider.dart';
 import 'package:asartha/utils/result_state.dart';
+import 'package:asartha/widget/detail_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class ProcessJobPage extends StatelessWidget {
@@ -89,11 +94,15 @@ class ProcessJobPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Asisten Rumah Tangga',
+                        vacancy.role,
                         style: Theme.of(context).textTheme.headline3,
                       ),
                       Text(
-                        '22 Sep 21, 08 : 00 - 14 : 00',
+                        'Mulai : ${DateFormat.yMMMEd().format(vacancy.startDate)}',
+                        style: Theme.of(context).textTheme.subtitle2,
+                      ),
+                      Text(
+                        'Selesai : ${DateFormat.yMMMEd().format(vacancy.endDate)}',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                     ],
@@ -103,6 +112,51 @@ class ProcessJobPage extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline3,
                   ),
                 ],
+              ),
+              const SizedBox(
+                height: 9,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(29),
+                  child: ElevatedButton(
+                    child: Text(
+                      'Detail',
+                      style: Theme.of(context).textTheme.button,
+                    ),
+                    onPressed: () {
+                      showModalBottomSheet(
+                        isScrollControlled: true,
+                        context: context,
+                        builder: (context) {
+                          return MultiProvider(
+                            child: DetailBottomSheet(vacancy: vacancy),
+                            providers: [
+                              ChangeNotifierProvider(
+                                create: (_) =>
+                                    UserProfileProvider(vacancy.user),
+                              ),
+                              ChangeNotifierProvider(
+                                create: (_) =>
+                                    AddressProvider(vacancy.user, false),
+                              ),
+                              ChangeNotifierProvider(
+                                create: (_) =>
+                                    PartnerProfileProvider(vacancy.partner),
+                              )
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: secondary,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 40, vertical: 20),
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 9,
