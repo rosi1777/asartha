@@ -39,7 +39,7 @@ class VacancyFirestoreHelper {
     await _firestore
         .collection('vacancy')
         .doc(docId)
-        .update({'partnerId': partnerId});
+        .update({'partnerId': partnerId, 'status': 'Diterima'});
   }
 
   Future<VacancyResult> getUserVacancy(String id) async {

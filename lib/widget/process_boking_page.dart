@@ -1,6 +1,8 @@
 import 'package:asartha/common/style.dart';
+import 'package:asartha/data/model/partner_profile.dart';
 import 'package:asartha/data/model/vacancy.dart';
 import 'package:asartha/provider/get_user_vacancy_provider.dart';
+import 'package:asartha/provider/partner_provider.dart';
 import 'package:asartha/utils/result_state.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,20 +17,20 @@ class ProcessBookingPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: snow,
       body: Consumer<GetVacancyProvider>(
-        builder: (context, provider, _) {
-          if (provider.state == ResultState.loading) {
+        builder: (context, vacancyProvider, _) {
+          if (vacancyProvider.state == ResultState.loading) {
             return const Align(
               alignment: Alignment.center,
               child: CircularProgressIndicator(),
             );
-          } else if (provider.state == ResultState.noData) {
+          } else if (vacancyProvider.state == ResultState.noData) {
             return Center(
               child: Text(
                 'Belum ada data',
                 style: Theme.of(context).textTheme.headline4,
               ),
             );
-          } else if (provider.state == ResultState.error) {
+          } else if (vacancyProvider.state == ResultState.error) {
             return Center(
               child: Text(
                 'Error Terjadi',
@@ -37,10 +39,16 @@ class ProcessBookingPage extends StatelessWidget {
             );
           } else {
             return ListView.builder(
-              itemCount: provider.vacancy.vacancy.length,
+              itemCount: vacancyProvider.vacancy.vacancy.length,
               itemBuilder: (context, index) {
-                var vacancy = provider.vacancy.vacancy[index];
-                return _buildBookingCard(context, vacancy);
+                var vacancy = vacancyProvider.vacancy.vacancy[index];
+                if (vacancy.status == 'Dikirim') {
+                  return _buildBookingCard(context, vacancy);
+                } else if (vacancy.status == 'Diterima') {
+                  return _buildAcceptedBookingCard(context, vacancy);
+                } else {
+                  return const SizedBox();
+                }
               },
             );
           }
@@ -99,7 +107,14 @@ class ProcessBookingPage extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                DateFormat.yMMMEd().format(vacancy.startDate),
+                'Mulai : ${DateFormat.yMMMEd().format(vacancy.startDate)}',
+                style: Theme.of(context).textTheme.subtitle2,
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Selesai : ${DateFormat.yMMMEd().format(vacancy.endDate)}',
                 style: Theme.of(context).textTheme.subtitle2,
               ),
             ),
@@ -134,90 +149,110 @@ class ProcessBookingPage extends StatelessWidget {
   }
 }
 
-// Container(
-//         margin: const EdgeInsets.only(top: 25, left: 26, right: 26),
-//         padding: const EdgeInsets.only(left: 18, right: 18, top: 14),
-//         decoration: BoxDecoration(
-//           borderRadius: BorderRadius.circular(10),
-//           color: white,
-//         ),
-//         child: Column(
-//           children: [
-//             Container(
-//               padding: const EdgeInsets.all(7),
-//               decoration: BoxDecoration(
-//                 borderRadius: BorderRadius.circular(10),
-//                 color: Colors.blue[100],
-//               ),
-//               child: Center(
-//                 child: Text(
-//                   vacancy.status,
-//                   style: Theme.of(context).textTheme.headline5,
-//                 ),
-//               ),
-//             ),
-//             const SizedBox(
-//               height: 3,
-//             ),
-//             Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               crossAxisAlignment: CrossAxisAlignment.center,
-//               children: [
-//                 Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     Text(
-//                       'Asisten Rumah Tangga',
-//                       style: Theme.of(context).textTheme.headline3,
-//                     ),
-//                     Text(
-//                       '${vacancy.startDate}',
-//                       style: Theme.of(context).textTheme.subtitle2,
-//                     ),
-//                   ],
-//                 ),
-//                 Text(
-//                   'Rp. 177.000',
-//                   style: Theme.of(context).textTheme.headline3,
-//                 ),
-//               ],
-//             ),
-//             const SizedBox(
-//               height: 9,
-//             ),
-//             Divider(
-//               color: grey,
-//             ),
-//             const SizedBox(
-//               height: 9,
-//             ),
-//             Row(
-//               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//               crossAxisAlignment: CrossAxisAlignment.center,
-//               children: [
-//                 Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     Text(
-//                       'Fathorrosi',
-//                       style: Theme.of(context).textTheme.headline3,
-//                     ),
-//                     Text(
-//                       'Asisten Rumah Tangga',
-//                       style: Theme.of(context).textTheme.subtitle2,
-//                     ),
-//                   ],
-//                 ),
-//                 ClipRRect(
-//                   borderRadius: BorderRadius.circular(50),
-//                   child: Image.asset('assets/images/user.jpg',
-//                       width: 35, height: 35, fit: BoxFit.cover),
-//                 ),
-//               ],
-//             ),
-//             const SizedBox(
-//               height: 13,
-//             ),
-//           ],
-//         ),
-//       ),
+Widget _buildAcceptedBookingCard(BuildContext context, Vacancy vacancy) {
+  return Container(
+    margin: const EdgeInsets.only(top: 25, left: 26, right: 26),
+    padding: const EdgeInsets.only(left: 18, right: 18, top: 14),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      color: white,
+    ),
+    child: Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(7),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.blue[100],
+          ),
+          child: Center(
+            child: Text(
+              vacancy.status,
+              style: Theme.of(context).textTheme.headline5,
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 3,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Asisten Rumah Tangga',
+                  style: Theme.of(context).textTheme.headline3,
+                ),
+                Text(
+                  'Mulai : ${DateFormat.yMMMEd().format(vacancy.startDate)}',
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
+                Text(
+                  'Selesai : ${DateFormat.yMMMEd().format(vacancy.endDate)}',
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
+              ],
+            ),
+            Text(
+              'Rp. 177.000',
+              style: Theme.of(context).textTheme.headline3,
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 9,
+        ),
+        Divider(
+          color: grey,
+        ),
+        const SizedBox(
+          height: 9,
+        ),
+        ChangeNotifierProvider(
+          create: (_) => PartnerProfileProvider(vacancy.partnerId!),
+          child: Consumer<PartnerProfileProvider>(
+            builder: (context, provider, _) {
+              if (provider.state == ResultState.loading) {
+                return const Align(
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          provider.partnerProfile.name,
+                          style: Theme.of(context).textTheme.headline3,
+                        ),
+                        Text(
+                          provider.partnerProfile.role,
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                      ],
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: Image.asset('assets/images/user.jpg',
+                          width: 35, height: 35, fit: BoxFit.cover),
+                    ),
+                  ],
+                );
+              }
+            },
+          ),
+        ),
+        const SizedBox(
+          height: 13,
+        ),
+      ],
+    ),
+  );
+}

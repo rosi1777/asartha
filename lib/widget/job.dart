@@ -6,6 +6,7 @@ import 'package:asartha/provider/get_all_vacancy_provider.dart';
 import 'package:asartha/provider/user_provider.dart';
 import 'package:asartha/utils/result_state.dart';
 import 'package:asartha/widget/detail_bottom_sheet.dart';
+import 'package:asartha/widget/dialogs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -159,13 +160,20 @@ class Jobs extends StatelessWidget {
                           style: Theme.of(context).textTheme.button,
                         ),
                         onPressed: () async {
-                          var uid = vacancy.user;
-                          final FirebaseAuth _auth = FirebaseAuth.instance;
-                          final partnerId = _auth.currentUser?.uid;
-                          await Provider.of<GetAllVacancyProvider>(context,
-                                  listen: false)
-                              .updatePartnerApplication(
-                                  partnerId!, uid, vacancy.docId);
+                          const title = "Ambil Lowongan";
+                          const body =
+                              "Apakah anda yakin ingin mengambil lowongan ini ?";
+                          final action = await Dialogs.yesAbortDialog(
+                              context, title, body);
+                          if (action == DialogAction.yes) {
+                            var uid = vacancy.user;
+                            final FirebaseAuth _auth = FirebaseAuth.instance;
+                            final partnerId = _auth.currentUser?.uid;
+                            await Provider.of<GetAllVacancyProvider>(context,
+                                    listen: false)
+                                .updatePartnerApplication(
+                                    partnerId!, uid, vacancy.docId);
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           primary: secondary,

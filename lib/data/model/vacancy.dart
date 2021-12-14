@@ -23,7 +23,7 @@ class Vacancy {
   final String criteria;
   final String status;
   final String role;
-  final String? partner;
+  final String? partnerId;
   final String docId;
 
   Vacancy(
@@ -33,7 +33,7 @@ class Vacancy {
       required this.criteria,
       required this.status,
       required this.role,
-      required this.partner,
+      required this.partnerId,
       required this.docId});
 
   factory Vacancy.fromMap(QueryDocumentSnapshot doc) {
@@ -46,7 +46,7 @@ class Vacancy {
         criteria: attribute['criteria'],
         status: attribute['status'],
         role: attribute['role'],
-        partner: attribute['partnerId'],
+        partnerId: attribute['partnerId'],
         docId: documentId);
   }
 }

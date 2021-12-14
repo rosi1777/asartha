@@ -142,6 +142,10 @@ class ProcessJobPage extends StatelessWidget {
                                 create: (_) =>
                                     AddressProvider(vacancy.user, false),
                               ),
+                              ChangeNotifierProvider(
+                                create: (_) =>
+                                    PartnerProfileProvider(vacancy.partnerId!),
+                              )
                             ],
                           );
                         },
