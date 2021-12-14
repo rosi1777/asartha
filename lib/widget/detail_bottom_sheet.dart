@@ -73,7 +73,6 @@ class _DetailBottomSheetState extends State<DetailBottomSheet> {
                   profile.userProfile.name,
                   style: Theme.of(context).textTheme.headline3,
                 ),
-                
                 const SizedBox(
                   height: 10,
                 ),
@@ -140,7 +139,7 @@ class _DetailBottomSheetState extends State<DetailBottomSheet> {
                     : const SizedBox(),
                 partner
                     ? Text(
-                        widget.vacancy.partner,
+                        widget.vacancy.partner!,
                         style: Theme.of(context).textTheme.headline3,
                       )
                     : const SizedBox(),
@@ -332,6 +331,6 @@ class _DetailBottomSheetState extends State<DetailBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return partner? _consumer3() : _consumer2();
+    return partner ? _consumer3() : _consumer2();
   }
 }

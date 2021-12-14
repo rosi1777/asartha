@@ -23,7 +23,8 @@ class Vacancy {
   final String criteria;
   final String status;
   final String role;
-  final String partner;
+  final String? partner;
+  final String docId;
 
   Vacancy(
       {required this.user,
@@ -32,9 +33,11 @@ class Vacancy {
       required this.criteria,
       required this.status,
       required this.role,
-      required this.partner});
+      required this.partner,
+      required this.docId});
 
   factory Vacancy.fromMap(QueryDocumentSnapshot doc) {
+    var documentId = doc.id;
     var attribute = doc.data() as Map<String, dynamic>;
     return Vacancy(
         user: attribute['user'],
@@ -43,6 +46,7 @@ class Vacancy {
         criteria: attribute['criteria'],
         status: attribute['status'],
         role: attribute['role'],
-        partner: attribute['partner']);
+        partner: attribute['partnerId'],
+        docId: documentId);
   }
 }

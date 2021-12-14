@@ -25,14 +25,14 @@ class GetAllVacancyProvider extends ChangeNotifier {
       _state = ResultState.loading;
       notifyListeners();
       var partner = await partnerFirestoreHelper.getPartnerProfileData(id);
-      if (partner.role == 'Asisten Rumah Tangga') {
-        _getHouseMaidVacancy();
-      } else {
-        _getBabySitterVacancy();
-      }
+      _getHouseMaidVacancy();
+      // if (partner.role == 'Asisten Rumah Tangga') {
+      //   _getHouseMaidVacancy();
+      // } else {
+      //   _getBabySitterVacancy();
+      // }
     } catch (e) {
       _state = ResultState.error;
-      print(e);
       notifyListeners();
     }
   }
@@ -43,7 +43,7 @@ class GetAllVacancyProvider extends ChangeNotifier {
       notifyListeners();
       var vacancys = await fireStoreHelper.getHouseMaidVacancy();
 
-      if (vacancys.vacancy.isEmpty) {
+      if (vacancys.vacancy.length == 0) {
         _state = ResultState.noData;
         notifyListeners();
       } else {
@@ -72,6 +72,23 @@ class GetAllVacancyProvider extends ChangeNotifier {
         notifyListeners();
         return _vacancy = vacancys;
       }
+    } catch (e) {
+      _state = ResultState.error;
+      print(e);
+      notifyListeners();
+    }
+  }
+
+  Future<void> updatePartnerApplication(
+      String partnerId, String uid, String docId) async {
+    try {
+      _state = ResultState.loading;
+      notifyListeners();
+      await fireStoreHelper.updatePartnerVacancy(uid, partnerId, docId);
+
+      _state = ResultState.done;
+      getRole(partnerId);
+      notifyListeners();
     } catch (e) {
       _state = ResultState.error;
       print(e);

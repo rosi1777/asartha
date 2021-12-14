@@ -11,7 +11,6 @@ class VacancyProvider extends ChangeNotifier {
 
   Future<void> addVacancy(
     String userId,
-    String partnerId,
     DateTime startDate,
     DateTime endDate,
     String criteria,
@@ -21,7 +20,6 @@ class VacancyProvider extends ChangeNotifier {
       notifyListeners();
       await fireStoreHelper.addUserHouseMaidVacancy(
         userId,
-        partnerId,
         startDate,
         endDate,
         criteria,

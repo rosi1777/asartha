@@ -33,7 +33,7 @@ class Jobs extends StatelessWidget {
         } else if (provider.state == ResultState.error) {
           return Center(
             child: Text(
-              'Error Terjadi',
+              'Error Terjadi Disini',
               style: Theme.of(context).textTheme.headline4,
             ),
           );
@@ -159,14 +159,13 @@ class Jobs extends StatelessWidget {
                           style: Theme.of(context).textTheme.button,
                         ),
                         onPressed: () async {
-                          final fireStoreHelper = VacancyFirestoreHelper();
-                          var userId = vacancy.user;
+                          var uid = vacancy.user;
                           final FirebaseAuth _auth = FirebaseAuth.instance;
                           final partnerId = _auth.currentUser?.uid;
-                          await fireStoreHelper.updatePartnerVacancy(userId, partnerId!)
-                              .then((value) => Provider.of<GetAllVacancyProvider>(
-                                      context,
-                                      listen: false).getRole(partnerId));
+                          await Provider.of<GetAllVacancyProvider>(context,
+                                  listen: false)
+                              .updatePartnerApplication(
+                                  partnerId!, uid, vacancy.docId);
                         },
                         style: ElevatedButton.styleFrom(
                           primary: secondary,

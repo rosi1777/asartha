@@ -164,13 +164,11 @@ class _DatePickerPageState extends State<DatePickerPage> {
                             ),
                             onPressed: () async {
                               var userId = _auth.currentUser?.uid;
-                              var partnerId = "";
                               var criteria = _criteriaController.text;
                               await Provider.of<VacancyProvider>(ctx,
                                       listen: false)
                                   .addVacancy(
                                 userId!,
-                                partnerId,
                                 selectDateFirst,
                                 selectDateSec,
                                 criteria,
