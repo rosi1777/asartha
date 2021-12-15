@@ -6,7 +6,6 @@ import 'package:asartha/provider/partner_provider.dart';
 import 'package:asartha/provider/user_provider.dart';
 import 'package:asartha/utils/result_state.dart';
 import 'package:asartha/widget/detail_bottom_sheet.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';

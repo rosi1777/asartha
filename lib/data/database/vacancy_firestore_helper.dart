@@ -42,6 +42,10 @@ class VacancyFirestoreHelper {
         .update({'partnerId': partnerId, 'status': 'Diterima'});
   }
 
+  Future<void> deleteVacancy(String docId) async {
+    await _firestore.collection('vacancy').doc(docId).delete();
+  }
+
   Future<VacancyResult> getUserVacancy(String id) async {
     var vacancy = await _firestore
         .collection('vacancy')

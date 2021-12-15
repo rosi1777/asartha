@@ -1,11 +1,11 @@
 import 'package:asartha/common/style.dart';
-import 'package:asartha/data/model/partner_profile.dart';
+import 'package:asartha/data/database/vacancy_firestore_helper.dart';
 import 'package:asartha/data/model/vacancy.dart';
 import 'package:asartha/provider/get_user_vacancy_provider.dart';
 import 'package:asartha/provider/partner_provider.dart';
 import 'package:asartha/utils/result_state.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -185,30 +185,21 @@ class ProcessBookingPage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '#21177',
-                  style: Theme.of(context).textTheme.headline5,
+            Container(
+              padding: const EdgeInsets.all(7),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.green[100],
+              ),
+              child: Center(
+                child: Text(
+                  vacancy.status,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline5
+                      ?.copyWith(color: Colors.green),
                 ),
-                Container(
-                  padding: const EdgeInsets.all(7),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.green[100],
-                  ),
-                  child: Center(
-                    child: Text(
-                      vacancy.status,
-                      style: GoogleFonts.poppins(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.green),
-                    ),
-                  ),
-                )
-              ],
+              ),
             ),
             const SizedBox(
               height: 3,
@@ -246,7 +237,15 @@ class ProcessBookingPage extends StatelessWidget {
                     'Batalkan',
                     style: Theme.of(context).textTheme.button,
                   ),
-                  onPressed: () {},
+                  onPressed: () async {
+                    final fireStoreHelper = VacancyFirestoreHelper();
+                    final FirebaseAuth _auth = FirebaseAuth.instance;
+                    final id = _auth.currentUser?.uid;
+                    await fireStoreHelper.deleteVacancy(vacancy.docId).then(
+                        (value) => Provider.of<GetVacancyProvider>(context,
+                                listen: false)
+                            .getUserVacancy(id!));
+                  },
                   style: ElevatedButton.styleFrom(
                     primary: red,
                     padding: const EdgeInsets.symmetric(
