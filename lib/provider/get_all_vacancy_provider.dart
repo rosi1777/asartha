@@ -94,4 +94,19 @@ class GetAllVacancyProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  // Future<void> updateStatusApplication(String uid, String docId) async {
+  //   try {
+  //     _state = ResultState.loading;
+  //     notifyListeners();
+  //     await fireStoreHelper.updateStatusVacancy(uid, docId);
+
+  //     _state = ResultState.done;
+  //     notifyListeners();
+  //   } catch (e) {
+  //     _state = ResultState.error;
+  //     print(e);
+  //     notifyListeners();
+  //   }
+  // }
 }

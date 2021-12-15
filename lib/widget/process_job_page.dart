@@ -43,7 +43,11 @@ class ProcessJobPage extends StatelessWidget {
               itemCount: provider.vacancy.vacancy.length,
               itemBuilder: (context, index) {
                 var vacancy = provider.vacancy.vacancy[index];
-                return _buildPartnerJobsPage(context, vacancy);
+                if (vacancy.status != 'Selesai') {
+                  return _buildPartnerJobsPage(context, vacancy);
+                } else {
+                  return const SizedBox();
+                }
               },
             );
           }
@@ -62,26 +66,17 @@ class ProcessJobPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(10), color: white),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    '#21177',
+              Container(
+                padding: const EdgeInsets.all(7),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.blue[100]),
+                child: Center(
+                  child: Text(
+                    'Diterima',
                     style: Theme.of(context).textTheme.headline5,
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(7),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.blue[100]),
-                    child: Center(
-                      child: Text(
-                        'Diterima',
-                        style: Theme.of(context).textTheme.headline5,
-                      ),
-                    ),
-                  )
-                ],
+                ),
               ),
               const SizedBox(
                 height: 3,
@@ -160,24 +155,6 @@ class ProcessJobPage extends StatelessWidget {
               ),
               const SizedBox(
                 height: 9,
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(29),
-                  child: ElevatedButton(
-                    child: Text(
-                      'Batalkan',
-                      style: Theme.of(context).textTheme.button,
-                    ),
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      primary: red,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 20),
-                    ),
-                  ),
-                ),
               ),
               const SizedBox(
                 height: 13,

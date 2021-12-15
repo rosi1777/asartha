@@ -75,7 +75,19 @@ class BookingPage extends StatelessWidget {
                             create: (_) => GetVacancyProvider(id: id!),
                             child: const ProcessBookingPage(),
                           ),
-                    const DoneBookingPage(),
+                    partner
+                        ? ChangeNotifierProvider(
+                            create: (_) => GetPartnerVacancyProvider(id: id!),
+                            child: DoneBookingPage(
+                              partner: partner,
+                            ),
+                          )
+                        : ChangeNotifierProvider(
+                            create: (_) => GetVacancyProvider(id: id!),
+                            child: DoneBookingPage(
+                              partner: partner,
+                            ),
+                          ),
                   ],
                 );
               },

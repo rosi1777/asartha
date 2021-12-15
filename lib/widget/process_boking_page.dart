@@ -126,6 +126,35 @@ class ProcessBookingPage extends StatelessWidget {
           const SizedBox(
             height: 13,
           ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(29),
+              child: ElevatedButton(
+                child: Text(
+                  'Selesai',
+                  style: Theme.of(context).textTheme.button,
+                ),
+                onPressed: () async {
+                  final fireStoreHelper = VacancyFirestoreHelper();
+                  final FirebaseAuth _auth = FirebaseAuth.instance;
+                  final id = _auth.currentUser?.uid;
+                  await fireStoreHelper.updateStatusVacancy(vacancy.docId).then(
+                      (value) => Provider.of<GetVacancyProvider>(context,
+                              listen: false)
+                          .getUserVacancy(id!));
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: secondary,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 17,
+          )
         ],
       ),
     );
