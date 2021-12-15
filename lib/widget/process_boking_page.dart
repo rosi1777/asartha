@@ -4,6 +4,7 @@ import 'package:asartha/data/model/vacancy.dart';
 import 'package:asartha/provider/get_user_vacancy_provider.dart';
 import 'package:asartha/provider/partner_provider.dart';
 import 'package:asartha/utils/result_state.dart';
+import 'package:asartha/widget/detail_profile_bottom_sheet.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -146,13 +147,28 @@ class ProcessBookingPage extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    provider.partnerProfile.name,
-                    style: Theme.of(context).textTheme.headline3,
+                  TextButton(
+                    child: Text(
+                      provider.partnerProfile.name,
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
+                    onPressed: () {
+                      showModalBottomSheet(
+                        isScrollControlled: true,
+                        context: context,
+                        builder: (context) {
+                          return DetailProfileBottomSheet(
+                              partner: provider.partnerProfile);
+                        },
+                      );
+                    },
                   ),
-                  Text(
-                    provider.partnerProfile.role,
-                    style: Theme.of(context).textTheme.subtitle2,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text(
+                      provider.partnerProfile.role,
+                      style: Theme.of(context).textTheme.subtitle2,
+                    ),
                   ),
                 ],
               ),

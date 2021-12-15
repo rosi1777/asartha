@@ -1,4 +1,5 @@
 import 'package:asartha/common/style.dart';
+import 'package:asartha/provider/chat_provider.dart';
 import 'package:asartha/provider/partner_provider.dart';
 import 'package:asartha/provider/user_provider.dart';
 import 'package:asartha/ui/booking_page.dart';
@@ -67,7 +68,10 @@ class _FloatingNavigationBarState extends State<FloatingNavigationBar> {
           FloatingNavBarItem(
             iconData: Icons.message,
             title: 'Chat',
-            page: const ChatPage(),
+            page: ChangeNotifierProvider(
+              create: (_) => ChatProvider(id: _id),
+              child: const ChatPage(),
+            ),
           ),
           FloatingNavBarItem(
             iconData: Icons.person,
