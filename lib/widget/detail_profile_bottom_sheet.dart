@@ -94,7 +94,8 @@ class DetailProfileBottomSheet extends StatelessWidget {
                         style: Theme.of(context).textTheme.button,
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, UserConversationPage.routeName,
+                        Navigator.pushNamed(
+                            context, UserConversationPage.routeName,
                             arguments: partner);
                         ChatFirestoreHelper().checkRoomChat(
                             userId: userId!, partnerId: partner.id);

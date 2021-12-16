@@ -93,8 +93,7 @@ class MyApp extends StatelessWidget {
             partner:
                 (ModalRoute.of(context)?.settings.arguments as PartnerProfile)),
         PartnerConversationPage.routeName: (context) => PartnerConversationPage(
-            user:
-                (ModalRoute.of(context)?.settings.arguments as UserProfile)),
+            user: (ModalRoute.of(context)?.settings.arguments as UserProfile)),
       },
     );
   }

@@ -4,11 +4,13 @@ class UserProfile {
   final String id;
   final String name;
   final String email;
+  final String imageUrl;
   final String phoneNumber;
   UserProfile(
       {required this.id,
       required this.name,
       required this.email,
+      required this.imageUrl,
       required this.phoneNumber});
 
   factory UserProfile.fromMap(QuerySnapshot collection) {
@@ -18,6 +20,7 @@ class UserProfile {
       id: data['id'],
       name: data['name'],
       email: data['email'],
+      imageUrl: data['imageUrl'],
       phoneNumber: data['phone_number'].toString(),
     );
   }

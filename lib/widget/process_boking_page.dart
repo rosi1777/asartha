@@ -203,7 +203,7 @@ class ProcessBookingPage extends StatelessWidget {
               ),
               ClipRRect(
                 borderRadius: BorderRadius.circular(50),
-                child: Image.asset('assets/images/user.jpg',
+                child: Image.network(provider.partnerProfile.imageUrl,
                     width: 35, height: 35, fit: BoxFit.cover),
               ),
             ],
