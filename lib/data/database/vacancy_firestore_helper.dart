@@ -14,7 +14,8 @@ class VacancyFirestoreHelper {
         'end_date': endDate,
         'criteria': criteria,
         'status': 'Dikirim',
-        'role': 'Asisten Rumah Tangga'
+        'role': 'Asisten Rumah Tangga',
+        'review': ''
       },
     );
   }
@@ -29,7 +30,8 @@ class VacancyFirestoreHelper {
         'end_date': endDate,
         'criteria': criteria,
         'status': 'Dikirim',
-        'role': 'Baby Sitter'
+        'role': 'Baby Sitter',
+        'review': ''
       },
     );
   }
@@ -47,6 +49,13 @@ class VacancyFirestoreHelper {
         .collection('vacancy')
         .doc(docId)
         .update({'status': 'Selesai'});
+  }
+
+  Future<void> updateRevviewVacancy(String docId, String review) async {
+    await _firestore
+        .collection('vacancy')
+        .doc(docId)
+        .update({'review': review});
   }
 
   Future<void> deleteVacancy(String docId) async {

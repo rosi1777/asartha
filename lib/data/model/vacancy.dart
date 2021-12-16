@@ -24,6 +24,7 @@ class Vacancy {
   final String status;
   final String role;
   final String partner;
+  final String review;
   final String docId;
 
   Vacancy(
@@ -34,6 +35,7 @@ class Vacancy {
       required this.status,
       required this.role,
       required this.partner,
+      required this.review,
       required this.docId});
 
   factory Vacancy.fromMap(QueryDocumentSnapshot doc) {
@@ -47,6 +49,7 @@ class Vacancy {
         status: attribute['status'],
         role: attribute['role'],
         partner: attribute['partnerId'],
+        review: attribute['review'],
         docId: documentId);
   }
 }
