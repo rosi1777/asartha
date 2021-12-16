@@ -30,21 +30,17 @@ class ChatDoc {
   }
 }
 
-class ChatResult {
-  final List<Chat> chat;
+// class ChatResult {
+//   final Stream<List<Chat>> chat;
 
-  ChatResult({required this.chat});
+//   ChatResult({required this.chat});
 
-  factory ChatResult.fromMap(QuerySnapshot<Map<String, dynamic>> data) {
-    return ChatResult(
-      chat: List<Chat>.from(
-        data.docs.map(
-          (e) => Chat.fromMap(e),
-        ),
-      ),
-    );
-  }
-}
+//   factory ChatResult.fromMap(Stream<QuerySnapshot<Map<String, dynamic>>> data) {
+//     return ChatResult(
+//       chat: data.map((snapshot) => snapshot.docs.map((e) => Chat.fromMap(e)).toList())
+//     );
+//   }
+// }
 
 class Chat {
   final String sendBy;
@@ -56,9 +52,9 @@ class Chat {
   factory Chat.fromMap(QueryDocumentSnapshot doc) {
     var attribute = doc.data() as Map<String, dynamic>;
     return Chat(
-      sendBy: attribute['sendBy'],
-      message: attribute['message'],
-      time: attribute['time'].toDate(),
+      sendBy: attribute['sender'],
+      message: attribute['text'],
+      time: attribute['dateCreated'].toDate(),
     );
   }
 }

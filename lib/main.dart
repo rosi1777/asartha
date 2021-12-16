@@ -4,7 +4,7 @@ import 'package:asartha/data/model/partner_profile.dart';
 import 'package:asartha/data/model/user_profile.dart';
 import 'package:asartha/ui/add_address_page.dart';
 import 'package:asartha/ui/baby_sitter_date_picker_page.dart';
-import 'package:asartha/ui/conversation_page.dart';
+import 'package:asartha/ui/user_conversation_page.dart';
 import 'package:asartha/ui/date_picker_page.dart';
 import 'package:asartha/ui/address_page.dart';
 import 'package:asartha/ui/detail_address_page.dart';
@@ -23,6 +23,8 @@ import 'package:asartha/widget/floating_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+import 'ui/partner_conversation_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -87,9 +89,12 @@ class MyApp extends StatelessWidget {
         ErrorPaymentPage.routeName: (context) => const ErrorPaymentPage(),
         PartnerSignInPage.routeName: (context) => const PartnerSignInPage(),
         PartnerSignUpPage.routeName: (context) => const PartnerSignUpPage(),
-        ConversationPage.routeName: (context) => ConversationPage(
+        UserConversationPage.routeName: (context) => UserConversationPage(
             partner:
                 (ModalRoute.of(context)?.settings.arguments as PartnerProfile)),
+        PartnerConversationPage.routeName: (context) => PartnerConversationPage(
+            user:
+                (ModalRoute.of(context)?.settings.arguments as UserProfile)),
       },
     );
   }

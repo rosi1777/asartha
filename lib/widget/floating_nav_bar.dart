@@ -69,8 +69,8 @@ class _FloatingNavigationBarState extends State<FloatingNavigationBar> {
             iconData: Icons.message,
             title: 'Chat',
             page: ChangeNotifierProvider(
-              create: (_) => ChatProvider(id: _id),
-              child: const ChatPage(),
+              create: (_) => ChatProvider(id: _id, partner: widget.partner),
+              child: ChatPage(isPartner: widget.partner),
             ),
           ),
           FloatingNavBarItem(

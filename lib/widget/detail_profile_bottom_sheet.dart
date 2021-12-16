@@ -1,7 +1,7 @@
 import 'package:asartha/common/style.dart';
 import 'package:asartha/data/database/chat_firestore_helper.dart';
 import 'package:asartha/data/model/partner_profile.dart';
-import 'package:asartha/ui/conversation_page.dart';
+import 'package:asartha/ui/user_conversation_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -94,7 +94,7 @@ class DetailProfileBottomSheet extends StatelessWidget {
                         style: Theme.of(context).textTheme.button,
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, ConversationPage.routeName,
+                        Navigator.pushNamed(context, UserConversationPage.routeName,
                             arguments: partner);
                         ChatFirestoreHelper().checkRoomChat(
                             userId: userId!, partnerId: partner.id);
