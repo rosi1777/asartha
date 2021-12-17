@@ -353,8 +353,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                               const Text(
                                                 'Logout',
                                                 style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
                                             ],
                                           ),

@@ -65,79 +65,76 @@ class ChatPage extends StatelessWidget {
     );
   }
 
-  Widget _userChatPage(ChatDoc chat) {
-    return ChangeNotifierProvider(
-      create: (_) => PartnerProfileProvider(
-        chat.partner,
-      ),
-      child: Consumer<PartnerProfileProvider>(
-        builder: (context, partnerProvider, _) {
-          if (partnerProvider.state == ResultState.loading) {
-            return const SizedBox();
-          } else if (partnerProvider.state == ResultState.noData) {
-            return const Center(child: Text('no data'));
-          } else if (partnerProvider.state == ResultState.error) {
-            return const Center(child: Text('error'));
-          } else {
-            return Column(
-              children: [
-                InkWell(
-                  child: ListTile(
-                    leading: ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Image.network(
-                          partnerProvider.partnerProfile.imageUrl),
+  Widget _userChatPage(ChatDoc chat) => ChangeNotifierProvider(
+        create: (_) => PartnerProfileProvider(
+          chat.partner,
+        ),
+        child: Consumer<PartnerProfileProvider>(
+          builder: (context, partnerProvider, _) {
+            if (partnerProvider.state == ResultState.loading) {
+              return const SizedBox();
+            } else if (partnerProvider.state == ResultState.noData) {
+              return const Center(child: Text('no data'));
+            } else if (partnerProvider.state == ResultState.error) {
+              return const Center(child: Text('error'));
+            } else {
+              return Column(
+                children: [
+                  InkWell(
+                    child: ListTile(
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Image.network(
+                            partnerProvider.partnerProfile.imageUrl),
+                      ),
+                      title: Text(partnerProvider.partnerProfile.name),
                     ),
-                    title: Text(partnerProvider.partnerProfile.name),
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, UserConversationPage.routeName,
+                          arguments: partnerProvider.partnerProfile);
+                    },
                   ),
-                  onTap: () {
-                    Navigator.pushNamed(context, UserConversationPage.routeName,
-                        arguments: partnerProvider.partnerProfile);
-                  },
-                ),
-              ],
-            );
-          }
-        },
-      ),
-    );
-  }
+                ],
+              );
+            }
+          },
+        ),
+      );
 
-  Widget _partnerChatPage(ChatDoc chat) {
-    return ChangeNotifierProvider(
-      create: (_) => UserProfileProvider(
-        chat.user,
-      ),
-      child: Consumer<UserProfileProvider>(
-        builder: (context, userProvider, _) {
-          if (userProvider.state == ResultState.loading) {
-            return const SizedBox();
-          } else if (userProvider.state == ResultState.noData) {
-            return const Center(child: Text('no data'));
-          } else if (userProvider.state == ResultState.error) {
-            return const Center(child: Text('error'));
-          } else {
-            return Column(
-              children: [
-                InkWell(
-                  child: ListTile(
-                    leading: ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Image.network(userProvider.userProfile.imageUrl),
+  Widget _partnerChatPage(ChatDoc chat) => ChangeNotifierProvider(
+        create: (_) => UserProfileProvider(
+          chat.user,
+        ),
+        child: Consumer<UserProfileProvider>(
+          builder: (context, userProvider, _) {
+            if (userProvider.state == ResultState.loading) {
+              return const SizedBox();
+            } else if (userProvider.state == ResultState.noData) {
+              return const Center(child: Text('no data'));
+            } else if (userProvider.state == ResultState.error) {
+              return const Center(child: Text('error'));
+            } else {
+              return Column(
+                children: [
+                  InkWell(
+                    child: ListTile(
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Image.network(userProvider.userProfile.imageUrl),
+                      ),
+                      title: Text(userProvider.userProfile.name),
                     ),
-                    title: Text(userProvider.userProfile.name),
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, PartnerConversationPage.routeName,
+                          arguments: userProvider.userProfile);
+                    },
                   ),
-                  onTap: () {
-                    Navigator.pushNamed(
-                        context, PartnerConversationPage.routeName,
-                        arguments: userProvider.userProfile);
-                  },
-                ),
-              ],
-            );
-          }
-        },
-      ),
-    );
-  }
+                ],
+              );
+            }
+          },
+        ),
+      );
 }

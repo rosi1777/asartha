@@ -18,7 +18,7 @@ class Dialogs {
           ),
           title: Text(title),
           content: Text(body),
-          actions: <Widget>[
+          actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(DialogAction.abort),
               child: const Text('Tidak'),

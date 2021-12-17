@@ -5,6 +5,7 @@ import 'package:asartha/provider/get_user_vacancy_provider.dart';
 import 'package:asartha/provider/partner_provider.dart';
 import 'package:asartha/utils/result_state.dart';
 import 'package:asartha/widget/detail_profile_bottom_sheet.dart';
+import 'package:asartha/widget/dialogs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -126,32 +127,43 @@ class ProcessBookingPage extends StatelessWidget {
           const SizedBox(
             height: 13,
           ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(29),
-              child: ElevatedButton(
-                child: Text(
-                  'Selesai',
-                  style: Theme.of(context).textTheme.button,
-                ),
-                onPressed: () async {
-                  final fireStoreHelper = VacancyFirestoreHelper();
-                  final FirebaseAuth _auth = FirebaseAuth.instance;
-                  final id = _auth.currentUser?.uid;
-                  await fireStoreHelper.updateStatusVacancy(vacancy.docId).then(
-                      (value) => Provider.of<GetVacancyProvider>(context,
-                              listen: false)
-                          .getUserVacancy(id!));
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: secondary,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                ),
-              ),
-            ),
-          ),
+          vacancy.endDate
+                  .isBefore(DateTime.now().subtract(const Duration(days: 1)))
+              ? SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(29),
+                    child: ElevatedButton(
+                      child: Text(
+                        'Selesai',
+                        style: Theme.of(context).textTheme.button,
+                      ),
+                      onPressed: () async {
+                        final dialogs = await Dialogs.yesAbortDialog(
+                            context,
+                            'Selesaikan',
+                            'Apakah Anda Yakin Ingin Menyelesaikan Pesanan ? ');
+                        if (dialogs == DialogAction.yes) {
+                          final fireStoreHelper = VacancyFirestoreHelper();
+                          final FirebaseAuth _auth = FirebaseAuth.instance;
+                          final id = _auth.currentUser?.uid;
+                          await fireStoreHelper
+                              .updateStatusVacancy(vacancy.docId)
+                              .then((value) => Provider.of<GetVacancyProvider>(
+                                      context,
+                                      listen: false)
+                                  .getUserVacancy(id!));
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: secondary,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40, vertical: 20),
+                      ),
+                    ),
+                  ),
+                )
+              : const SizedBox(),
           const SizedBox(
             height: 17,
           )
@@ -283,13 +295,19 @@ class ProcessBookingPage extends StatelessWidget {
                     style: Theme.of(context).textTheme.button,
                   ),
                   onPressed: () async {
-                    final fireStoreHelper = VacancyFirestoreHelper();
-                    final FirebaseAuth _auth = FirebaseAuth.instance;
-                    final id = _auth.currentUser?.uid;
-                    await fireStoreHelper.deleteVacancy(vacancy.docId).then(
-                        (value) => Provider.of<GetVacancyProvider>(context,
-                                listen: false)
-                            .getUserVacancy(id!));
+                    final dialogs = await Dialogs.yesAbortDialog(
+                        context,
+                        'Batalkan Pesanan',
+                        'Apakah Anda Yakin Ingin Membatalkan Pesanan ? ');
+                    if (dialogs == DialogAction.yes) {
+                      final fireStoreHelper = VacancyFirestoreHelper();
+                      final FirebaseAuth _auth = FirebaseAuth.instance;
+                      final id = _auth.currentUser?.uid;
+                      await fireStoreHelper.deleteVacancy(vacancy.docId).then(
+                          (value) => Provider.of<GetVacancyProvider>(context,
+                                  listen: false)
+                              .getUserVacancy(id!));
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     primary: red,
