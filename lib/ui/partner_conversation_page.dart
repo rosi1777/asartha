@@ -80,6 +80,7 @@ class _PartnerConversationPageState extends State<PartnerConversationPage> {
                         text: chat.message,
                         isMyChat: chat.sendBy == _activeUser.uid,
                         time: chat.time,
+                        imageurl: widget.user.imageUrl,
                       );
                     },
                   ),

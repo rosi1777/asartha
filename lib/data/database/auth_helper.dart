@@ -70,6 +70,7 @@ class AuthHelper {
               Navigator.pushReplacementNamed(
                   context, FloatingNavigationBar.routeName,
                   arguments: partner);
+              
             }
           });
         } catch (e) {

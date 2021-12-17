@@ -78,6 +78,7 @@ class _UserConversationPageState extends State<UserConversationPage> {
                         text: chat.message,
                         isMyChat: chat.sendBy == _activeUser.uid,
                         time: chat.time,
+                        imageurl: widget.partner.imageUrl,
                       );
                     },
                   ),

@@ -30,6 +30,7 @@ class ChatPage extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline4,
                 ),
               ),
+              const SizedBox(height: 20),
               Consumer<ChatProvider>(
                 builder: (context, provider, _) {
                   if (provider.state == ResultState.loading) {
@@ -82,6 +83,11 @@ class ChatPage extends StatelessWidget {
               children: [
                 InkWell(
                   child: ListTile(
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.network(
+                          partnerProvider.partnerProfile.imageUrl),
+                    ),
                     title: Text(partnerProvider.partnerProfile.name),
                   ),
                   onTap: () {
@@ -115,6 +121,10 @@ class ChatPage extends StatelessWidget {
               children: [
                 InkWell(
                   child: ListTile(
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.network(userProvider.userProfile.imageUrl),
+                    ),
                     title: Text(userProvider.userProfile.name),
                   ),
                   onTap: () {

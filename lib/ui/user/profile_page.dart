@@ -119,18 +119,18 @@ class _ProfilePageState extends State<ProfilePage> {
                               borderRadius: BorderRadius.circular(100),
                               child: Image.network(
                                 provider.userProfile.imageUrl,
-                                width: 177,
-                                height: 177,
+                                scale: 5,
                               ),
                             ),
                             Container(
                               transform:
-                                  Matrix4.translationValues(100.0, 135.0, 0.0),
+                                  Matrix4.translationValues(90.0, 100.0, 0.0),
                               width: 50,
                               height: 50,
                               decoration: BoxDecoration(
-                                  color: white,
-                                  borderRadius: BorderRadius.circular(100)),
+                                color: white,
+                                borderRadius: BorderRadius.circular(100),
+                              ),
                               child: IconButton(
                                 icon: Icon(
                                   Icons.camera_alt,
