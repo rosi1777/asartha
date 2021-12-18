@@ -115,21 +115,24 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         Stack(
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(100),
-                              child: Image.network(
-                                provider.userProfile.imageUrl,
-                                width: 177,
-                                height: 177,
+                            SizedBox(
+                              width: 150,
+                              height: 150,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: Image.network(
+                                  provider.userProfile.imageUrl,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                             Container(
                               transform:
-                                  Matrix4.translationValues(100.0, 135.0, 0.0),
+                                  Matrix4.translationValues(100.0, 117.0, 0.0),
                               width: 50,
                               height: 50,
                               decoration: BoxDecoration(
-                                  color: white,
+                                  color: secondary,
                                   borderRadius: BorderRadius.circular(100)),
                               child: IconButton(
                                 icon: Icon(
@@ -143,7 +146,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             )
                           ],
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 21),
                         OutlinedButton(
                           child: Text(
                             'Edit Profile',

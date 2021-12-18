@@ -119,12 +119,15 @@ class _PartnerProfilePageState extends State<PartnerProfilePage> {
                       children: [
                         Stack(
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(100),
-                              child: Image.network(
-                                provider.partnerProfile.imageUrl,
-                                width: 177,
-                                height: 177,
+                            SizedBox(
+                              width: 150,
+                              height: 150,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: Image.network(
+                                  provider.partnerProfile.imageUrl,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                             Container(

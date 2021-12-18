@@ -7,6 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+enum SingingCharacter { link, dana, tunai }
+
 class DatePickerPage extends StatefulWidget {
   const DatePickerPage({
     Key? key,
@@ -74,6 +76,8 @@ class _DatePickerPageState extends State<DatePickerPage> {
     return (to.difference(from).inHours / 24).round();
   }
 
+  SingingCharacter? _character = SingingCharacter.link;
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -108,72 +112,114 @@ class _DatePickerPageState extends State<DatePickerPage> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 32, vertical: 16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Pilih Tanggal dan Waktu Memulai',
-                              style: Theme.of(context).textTheme.bodyText1,
-                            ),
-                            IconButton(
-                              onPressed: () =>
-                                  _datePickerFirst(selectDateFirst),
-                              icon: const Icon(Icons.date_range_outlined),
-                              color: secondary,
-                            ),
-                          ],
-                        ),
-                        Text(
-                          "Tanggal : ${DateFormat.yMMMMEEEEd().format(selectDateFirst)}",
-                          style: Theme.of(context).textTheme.bodyText2,
-                        ),
-                        const SizedBox(height: 25),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Pilih Tanggal dan Waktu Berhenti',
-                              style: Theme.of(context).textTheme.bodyText1,
-                            ),
-                            IconButton(
-                              onPressed: () => _datePickerSec(selectDateSec),
-                              icon: const Icon(Icons.date_range_outlined),
-                              color: secondary,
-                            ),
-                          ],
-                        ),
-                        Text(
-                          "Tanggal : ${DateFormat.yMMMMEEEEd().format(selectDateSec)}",
-                          style: Theme.of(context).textTheme.bodyText2,
-                        ),
-                        const SizedBox(height: 18),
-                        Text(
-                          'Tambahkan Kriteria',
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        const SizedBox(height: 8),
-                        TextField(
-                          controller: _criteriaController,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.0),
+                        horizontal: 16, vertical: 16),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                          color: white,
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Pilih Tanggal dan Waktu Memulai',
+                                style: Theme.of(context).textTheme.bodyText1,
                               ),
-                              filled: true,
-                              hintStyle: TextStyle(color: hintText),
-                              hintText: "Bersih-bersih, memasak, dll.",
-                              fillColor: Colors.white70),
-                        ),
-                        const SizedBox(height: 25),
-                      ],
+                              IconButton(
+                                onPressed: () =>
+                                    _datePickerFirst(selectDateFirst),
+                                icon: const Icon(Icons.date_range_outlined),
+                                color: secondary,
+                              ),
+                            ],
+                          ),
+                          Text(
+                            "Tanggal : ${DateFormat.yMMMMEEEEd().format(selectDateFirst)}",
+                            style: Theme.of(context).textTheme.bodyText2,
+                          ),
+                          const SizedBox(height: 25),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Pilih Tanggal dan Waktu Berhenti',
+                                style: Theme.of(context).textTheme.bodyText1,
+                              ),
+                              IconButton(
+                                onPressed: () => _datePickerSec(selectDateSec),
+                                icon: const Icon(Icons.date_range_outlined),
+                                color: secondary,
+                              ),
+                            ],
+                          ),
+                          Text(
+                            "Tanggal : ${DateFormat.yMMMMEEEEd().format(selectDateSec)}",
+                            style: Theme.of(context).textTheme.bodyText2,
+                          ),
+                          const SizedBox(height: 18),
+                          Text(
+                            'Tambahkan Kriteria',
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                          const SizedBox(height: 8),
+                          TextField(
+                            controller: _criteriaController,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                filled: true,
+                                hintStyle: TextStyle(color: hintText),
+                                hintText: "Bersih-bersih, memasak, dll.",
+                                fillColor: Colors.white70),
+                          ),
+                          const SizedBox(height: 17),
+                          Text(
+                            'Metode Pembayaran',
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                          const SizedBox(height: 17),
+                          Container(
+                            padding: const EdgeInsets.only(
+                                left: 26, right: 26, top: 12, bottom: 12),
+                            decoration: BoxDecoration(
+                              color: white,
+                              border: Border.all(color: secondary, width: 1),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Image.asset('assets/images/dollar.png'),
+                                Text(
+                                  'Tunai',
+                                  style: Theme.of(context).textTheme.headline4,
+                                ),
+                                Radio<SingingCharacter>(
+                                  value: SingingCharacter.link,
+                                  groupValue: _character,
+                                  onChanged: (SingingCharacter? value) {
+                                    setState(
+                                      () {
+                                        _character = value;
+                                      },
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 25),
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(
-                    height: 157,
+                    height: 25,
                   ),
                   Container(
                     padding: const EdgeInsets.only(
