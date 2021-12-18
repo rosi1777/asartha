@@ -24,6 +24,7 @@ class Vacancy {
   final String status;
   final String role;
   final String partner;
+  final int price;
   final String review;
   final String docId;
 
@@ -35,6 +36,7 @@ class Vacancy {
       required this.status,
       required this.role,
       required this.partner,
+      required this.price,
       required this.review,
       required this.docId});
 
@@ -49,6 +51,7 @@ class Vacancy {
         status: attribute['status'],
         role: attribute['role'],
         partner: attribute['partnerId'],
+        price: attribute['price'],
         review: attribute['review'],
         docId: documentId);
   }

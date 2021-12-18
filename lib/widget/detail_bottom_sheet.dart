@@ -1,6 +1,7 @@
 import 'package:asartha/common/style.dart';
 import 'package:asartha/data/model/vacancy.dart';
 import 'package:asartha/provider/address_provider.dart';
+import 'package:asartha/provider/get_user_vacancy_provider.dart';
 import 'package:asartha/provider/partner_provider.dart';
 import 'package:asartha/provider/user_provider.dart';
 import 'package:asartha/utils/result_state.dart';
@@ -126,6 +127,17 @@ class _DetailBottomSheetState extends State<DetailBottomSheet> {
                 ),
                 Text(
                   DateFormat.yMMMEd().format(widget.vacancy.endDate),
+                  style: Theme.of(context).textTheme.headline3,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Biaya',
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
+                Text(
+                  '${widget.vacancy.price}',
                   style: Theme.of(context).textTheme.headline3,
                 ),
                 const SizedBox(
@@ -277,6 +289,17 @@ class _DetailBottomSheetState extends State<DetailBottomSheet> {
                 ),
                 Text(
                   DateFormat.yMMMEd().format(widget.vacancy.endDate),
+                  style: Theme.of(context).textTheme.headline3,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Biaya',
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
+                Text(
+                  '${widget.vacancy.price}',
                   style: Theme.of(context).textTheme.headline3,
                 ),
                 const SizedBox(

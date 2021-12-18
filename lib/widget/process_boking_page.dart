@@ -107,7 +107,7 @@ class ProcessBookingPage extends StatelessWidget {
                 ],
               ),
               Text(
-                'Rp. 177.000',
+                '${vacancy.price}',
                 style: Theme.of(context).textTheme.headline3,
               ),
             ],

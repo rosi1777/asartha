@@ -11,8 +11,7 @@ class PreferenceHelperFunctions {
   }
 
   //------Save Partner Preferences----
-  static Future<void> savePartnerImageSharedPreference(
-      String imageUrl) async {
+  static Future<void> savePartnerImageSharedPreference(String imageUrl) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(sharedPreferencePartnerImageKey, imageUrl);
   }

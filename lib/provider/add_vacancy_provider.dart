@@ -10,7 +10,7 @@ class VacancyProvider extends ChangeNotifier {
   ResultState get state => _state;
 
   Future<void> addVacancy(String userId, DateTime startDate, DateTime endDate,
-      String criteria, bool babySitter) async {
+      String criteria, int price, bool babySitter) async {
     try {
       _state = ResultState.loading;
       notifyListeners();
@@ -20,12 +20,14 @@ class VacancyProvider extends ChangeNotifier {
               startDate,
               endDate,
               criteria,
+              price,
             )
           : await fireStoreHelper.addUserHouseMaidVacancy(
               userId,
               startDate,
               endDate,
               criteria,
+              price,
             );
       _state = ResultState.done;
       notifyListeners();

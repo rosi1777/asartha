@@ -5,13 +5,14 @@ class VacancyFirestoreHelper {
   final _firestore = FirebaseFirestore.instance;
 
   Future<void> addUserHouseMaidVacancy(String userId, DateTime startDate,
-      DateTime endDate, String criteria) async {
+      DateTime endDate, String criteria, int price) async {
     await _firestore.collection('vacancy').doc().set(
       {
         'user': userId,
         'partnerId': '',
         'start_date': startDate,
         'end_date': endDate,
+        'price': price,
         'criteria': criteria,
         'status': 'Dikirim',
         'role': 'Asisten Rumah Tangga',
@@ -21,13 +22,14 @@ class VacancyFirestoreHelper {
   }
 
   Future<void> addUserBabySitterVacancy(String userId, DateTime startDate,
-      DateTime endDate, String criteria) async {
+      DateTime endDate, String criteria, int price) async {
     await _firestore.collection('vacancy').doc().set(
       {
         'user': userId,
         'partnerId': "",
         'start_date': startDate,
         'end_date': endDate,
+        'price': price,
         'criteria': criteria,
         'status': 'Dikirim',
         'role': 'Baby Sitter',
