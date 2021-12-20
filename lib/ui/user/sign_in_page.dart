@@ -102,6 +102,7 @@ class _SignInPageState extends State<SignInPage> {
                           bottom: BorderSide(color: secondary, width: 2))),
                   height: 60.0,
                   child: TextField(
+                    key: const ValueKey('UserEmailInputField'),
                     keyboardType: TextInputType.emailAddress,
                     style: input,
                     decoration: InputDecoration(
@@ -130,6 +131,7 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   height: 60.0,
                   child: TextField(
+                    key: const ValueKey('UserPasswordInputField'),
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: _obscureText,
                     style: input,
@@ -183,6 +185,7 @@ class _SignInPageState extends State<SignInPage> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(29),
                     child: ElevatedButton(
+                      key: const ValueKey('UserSignInButton'),
                       child: Text(
                         'Sign In',
                         style: Theme.of(context).textTheme.button,
@@ -231,6 +234,7 @@ class _SignInPageState extends State<SignInPage> {
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
                     TextButton(
+                      key: const ValueKey('SignInAsPartner'),
                       onPressed: () {
                         Navigator.pushNamed(
                             context, PartnerSignInPage.routeName);

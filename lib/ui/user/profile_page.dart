@@ -334,6 +334,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Material(
                                   color: white,
                                   child: InkWell(
+                                    key: const ValueKey('ProfileLogoutButton'),
                                     onTap: () {
                                       ShowCustomBottomSheet()
                                           .logOutBottomSheet(context);

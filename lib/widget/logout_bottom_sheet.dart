@@ -32,6 +32,7 @@ class ShowCustomBottomSheet {
                   width: width - 64,
                   height: 55,
                   child: ElevatedButton(
+                    key: ValueKey('LogoutButton'),
                     onPressed: () async {
                       await _auth.signOut();
 

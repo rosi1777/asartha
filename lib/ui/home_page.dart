@@ -30,11 +30,11 @@ class HomePage extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(50),
-                    child: Image.network(
-                        partner ? Constant.partnerImage : Constant.userImage,
-                        width: 38,
-                        height: 38,
-                        fit: BoxFit.cover),
+                    child: partner
+                        ? Image.network(Constant.partnerImage,
+                            width: 38, height: 38, fit: BoxFit.cover)
+                        : Image.network(Constant.userImage,
+                            width: 38, height: 38, fit: BoxFit.cover),
                   ),
                   Text(
                     'Dashboard',

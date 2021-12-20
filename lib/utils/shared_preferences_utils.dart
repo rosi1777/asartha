@@ -19,12 +19,14 @@ class PreferenceHelperFunctions {
   //------ Get User Shared Preferences
   static Future<String> getUserImageSharedPreference() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(sharedPreferenceUserImageKey) ?? '';
+    return prefs.getString(sharedPreferenceUserImageKey) ??
+        'https://firebasestorage.googleapis.com/v0/b/asartha-285a1.appspot.com/o/PngItem_1503945.png?alt=media&token=6f598ef5-2fd1-40b7-aa2a-963e8ea76784';
   }
 
   //------ Get Partner Shared Preferences
   static Future<String> getPartnerImageSharedPreference() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(sharedPreferencePartnerImageKey) ?? '';
+    return prefs.getString(sharedPreferencePartnerImageKey) ??
+        'https://firebasestorage.googleapis.com/v0/b/asartha-285a1.appspot.com/o/PngItem_1503945.png?alt=media&token=6f598ef5-2fd1-40b7-aa2a-963e8ea76784';
   }
 }
