@@ -258,17 +258,31 @@ class _DatePickerPageState extends State<DatePickerPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              'Total',
-                              style: Theme.of(context).textTheme.headline3,
-                            ),
-                            Text(
-                              'Rp. $total',
-                              style: GoogleFonts.poppins(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
-                                  color: black),
-                            )
+                            if (total == 0) ...[
+                              Text(
+                                'Total',
+                                style: Theme.of(context).textTheme.headline3,
+                              ),
+                              Text(
+                                'Rp. $price',
+                                style: GoogleFonts.poppins(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    color: black),
+                              )
+                            ] else ...[
+                              Text(
+                                'Total',
+                                style: Theme.of(context).textTheme.headline3,
+                              ),
+                              Text(
+                                'Rp. $total',
+                                style: GoogleFonts.poppins(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    color: black),
+                              )
+                            ]
                           ],
                         ),
                         const SizedBox(
@@ -285,6 +299,10 @@ class _DatePickerPageState extends State<DatePickerPage> {
                                   style: Theme.of(context).textTheme.button,
                                 ),
                                 onPressed: () async {
+                                  if (total == 0) {
+                                    total = price;
+                                  }
+
                                   bool babySitter = false;
                                   var userId = _auth.currentUser?.uid;
                                   var criteria = _criteriaController.text;
