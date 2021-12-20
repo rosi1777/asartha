@@ -1,9 +1,17 @@
 import 'package:asartha/common/style.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class ForgotPasswordPage extends StatelessWidget {
+class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);
   static const routeName = '/forgot_password_page';
+
+  @override
+  State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
+}
+
+class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+  final _emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +80,7 @@ class ForgotPasswordPage extends StatelessWidget {
                           hintText: 'Alamat Email',
                           hintStyle: textHint,
                         ),
+                        controller: _emailController,
                       ),
                     )
                   ],
@@ -84,8 +93,18 @@ class ForgotPasswordPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.arrow_forward),
         backgroundColor: secondary,
-        onPressed: () {},
+        onPressed: () async {
+          await FirebaseAuth.instance
+              .sendPasswordResetEmail(email: _emailController.text)
+              .then((value) => Navigator.pop(context));
+        },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
   }
 }
