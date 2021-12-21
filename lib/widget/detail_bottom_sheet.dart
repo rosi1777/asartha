@@ -1,7 +1,6 @@
 import 'package:asartha/common/style.dart';
 import 'package:asartha/data/model/vacancy.dart';
 import 'package:asartha/provider/address_provider.dart';
-import 'package:asartha/provider/get_user_vacancy_provider.dart';
 import 'package:asartha/provider/partner_provider.dart';
 import 'package:asartha/provider/user_provider.dart';
 import 'package:asartha/utils/result_state.dart';

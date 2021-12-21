@@ -1,7 +1,6 @@
 import 'package:asartha/common/style.dart';
 import 'package:asartha/data/database/chat_firestore_helper.dart';
 import 'package:asartha/data/model/chat.dart';
-import 'package:asartha/data/model/partner_profile.dart';
 import 'package:asartha/data/model/user_profile.dart';
 import 'package:asartha/widget/message_bubble.dart';
 import 'package:firebase_auth/firebase_auth.dart';

@@ -12,7 +12,6 @@ class UserProfileProvider extends ChangeNotifier {
 
   late UserProfile _userProfile;
   late ResultState _state;
-  // String _message = '';
 
   UserProfile get userProfile => _userProfile;
   ResultState get state => _state;

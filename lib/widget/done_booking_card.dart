@@ -337,21 +337,6 @@ class DoneBookingCard extends StatelessWidget {
                     context: context,
                     builder: (context) {
                       return ReviewBottomSheet(vacancy: vacancy);
-                      // return MultiProvider(
-                      //   child: DetailBottomSheet(vacancy: vacancy),
-                      //   providers: [
-                      //     ChangeNotifierProvider(
-                      //       create: (_) => UserProfileProvider(vacancy.user),
-                      //     ),
-                      //     ChangeNotifierProvider(
-                      //       create: (_) => AddressProvider(vacancy.user, false),
-                      //     ),
-                      //     ChangeNotifierProvider(
-                      //       create: (_) =>
-                      //           PartnerProfileProvider(vacancy.partner),
-                      //     ),
-                      //   ],
-                      // );
                     },
                   );
                 },

@@ -1,5 +1,4 @@
 import 'package:asartha/common/style.dart';
-import 'package:asartha/data/database/auth_helper.dart';
 import 'package:asartha/provider/auth_provider.dart';
 import 'package:asartha/utils/result_state.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +19,6 @@ class _SignUpPageState extends State<SignUpPage> {
   final _phoneNumberController = TextEditingController();
 
   bool _isLoading = false;
-  // bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {

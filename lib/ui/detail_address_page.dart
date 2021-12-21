@@ -322,58 +322,6 @@ class _DetailAddressPageState extends State<DetailAddressPage> {
                         ),
                       );
                     }),
-                // SizedBox(
-                //   width: MediaQuery.of(context).size.width,
-                //   child: ClipRRect(
-                //     borderRadius: BorderRadius.circular(29),
-                //     child: ElevatedButton(
-                //       child: Text(
-                //         'Simpan',
-                //         style: Theme.of(context).textTheme.button,
-                //       ),
-                //       onPressed: () async {
-                //         try {
-                //           final addressOf = _addressOf.text;
-                //           final id = _id;
-                //           final name = _name.text;
-                //           final address = _address.text;
-                //           final city = _city.text;
-                //           final postCode = _postCode.text;
-                //           final phone = _phone.text;
-
-                //           widget.partner
-                //               ? await PartnerFirestoreHelper().updateAddressData(
-                //                   addressOf,
-                //                   id!,
-                //                   name,
-                //                   address,
-                //                   city,
-                //                   int.parse(postCode),
-                //                   int.parse(phone))
-                //               : await UserFirestoreHelper().updateAddressData(
-                //                   addressOf,
-                //                   id!,
-                //                   name,
-                //                   address,
-                //                   city,
-                //                   int.parse(postCode),
-                //                   int.parse(phone));
-                //           Navigator.pop(context);
-                //         } catch (e) {
-                //           final snackBar = SnackBar(
-                //             content: Text(e.toString()),
-                //           );
-                //           ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                //         }
-                //       },
-                //       style: ElevatedButton.styleFrom(
-                //         primary: secondary,
-                //         padding: const EdgeInsets.symmetric(
-                //             horizontal: 40, vertical: 20),
-                //       ),
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),

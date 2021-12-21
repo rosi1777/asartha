@@ -30,18 +30,6 @@ class ChatDoc {
   }
 }
 
-// class ChatResult {
-//   final Stream<List<Chat>> chat;
-
-//   ChatResult({required this.chat});
-
-//   factory ChatResult.fromMap(Stream<QuerySnapshot<Map<String, dynamic>>> data) {
-//     return ChatResult(
-//       chat: data.map((snapshot) => snapshot.docs.map((e) => Chat.fromMap(e)).toList())
-//     );
-//   }
-// }
-
 class Chat {
   final String sendBy;
   final String message;
