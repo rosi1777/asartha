@@ -51,7 +51,6 @@ class _FloatingNavigationBarState extends State<FloatingNavigationBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FloatingNavBar(
-        key: const ValueKey('FloatingNavBar'),
         color: white,
         items: [
           FloatingNavBarItem(
@@ -79,7 +78,6 @@ class _FloatingNavigationBarState extends State<FloatingNavigationBar> {
             title: 'Profile',
             page: widget.partner
                 ? ChangeNotifierProvider(
-                    key: const ValueKey('ProfileNotifier'),
                     create: (_) => PartnerProfileProvider(_id),
                     child: const PartnerProfilePage(),
                   )

@@ -69,7 +69,7 @@ class AuthHelper {
               .then((value) async {
             var role = value.docs[0]['role'];
             if (role == "User") {
-              PreferenceHelperFunctions.saveUserImageSharedPreference(
+              await PreferenceHelperFunctions.saveUserImageSharedPreference(
                   value.docs[0]['imageUrl']);
               Constant.userImage = await PreferenceHelperFunctions
                   .getUserImageSharedPreference();
@@ -127,7 +127,7 @@ class AuthHelper {
               .then((value) async {
             var role = value.docs[0]['role'];
             if (role != "User") {
-              PreferenceHelperFunctions.savePartnerImageSharedPreference(
+              await PreferenceHelperFunctions.savePartnerImageSharedPreference(
                   value.docs[0]['imageUrl']);
               Constant.partnerImage = await PreferenceHelperFunctions
                   .getPartnerImageSharedPreference();

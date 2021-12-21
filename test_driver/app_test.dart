@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter_driver/flutter_driver.dart';
 // import 'package:flutter_test/flutter_test.dart' as test;
 import 'package:test/test.dart';
@@ -10,13 +8,9 @@ void main() {
   final userSignInButton = find.byValueKey('UserSignInButton');
   final signInAsPartner = find.byValueKey('SignInAsPartner');
 
-  //nav bar
-  final navigationBar = find.byValueKey('FloatingNavBar');
-  final profileNotifier = find.byValueKey('ProfileNotifier');
-
   //LogOut
-  final profileLogoutButton = find.byValueKey('ProfileLogoutButton');
-  final logoutButton = find.byValueKey('logoutButton');
+  final userProfileLogoutButton = find.byValueKey('ProfileLogoutButton');
+  final userLogoutButton = find.byValueKey('LogoutButton');
 
   //user sign up
   final partnerEmailField = find.byValueKey('PartnerEmailInputField');
@@ -34,7 +28,7 @@ void main() {
     }
   });
 
-  test('User Sign In Test', () async {
+  test('User Sign In', () async {
     await driver.tap(userEmailField);
     await driver.enterText('bhisma@gmail.com');
 
@@ -43,13 +37,24 @@ void main() {
 
     await driver.tap(userSignInButton);
     await driver.waitFor(find.text('Dashboard'));
+  });
+  
+  test('Log Out Test', () async {
+    await driver.scrollUntilVisible(
+        find.text('Dashboard'), find.text('Pemesanan'),
+        dxScroll: -300);
+    await driver.scrollUntilVisible(find.text('Pemesanan'), find.text('Pesan'),
+        dxScroll: -400);
+    await driver.scrollUntilVisible(find.text('Pesan'), userProfileLogoutButton,
+        dxScroll: -400);
 
-    // TODO: Adding integration to go from home to profile navigation bar
-    // TODO: Adding tap logiot text
-    // TODO: Adding tap confirm logout
+    await driver.tap(userProfileLogoutButton);
+
+    await driver.tap(userLogoutButton);
+    await driver.waitFor(find.text('Sign In'));
   });
 
-  test('Partner Sign In Test', () async {
+  test('Partner Sign In and Log Out Test', () async {
     await driver.tap(signInAsPartner);
     await driver.waitFor(find.text('Sign in sebagai Partner'));
 
@@ -61,5 +66,18 @@ void main() {
 
     await driver.tap(partnerSignInButton);
     await driver.waitFor(find.text('Dashboard'));
+
+    await driver.scrollUntilVisible(
+        find.text('Dashboard'), find.text('Pekerjaan'),
+        dxScroll: -300);
+    await driver.scrollUntilVisible(find.text('Pekerjaan'), find.text('Pesan'),
+        dxScroll: -400);
+    await driver.scrollUntilVisible(find.text('Pesan'), find.text('Logout'),
+        dxScroll: -400);
+
+    await driver.tap(find.text('Logout'));
+
+    await driver.tap(find.text('Ya, Keluar'));
+    await driver.waitFor(find.text('Sign In'));
   });
 }
