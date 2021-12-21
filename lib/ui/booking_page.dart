@@ -1,4 +1,5 @@
 import 'package:asartha/common/style.dart';
+import 'package:asartha/provider/get_partner_application_provider.dart';
 import 'package:asartha/provider/get_user_vacancy_provider.dart';
 import 'package:asartha/widget/done_booking_page.dart';
 import 'package:asartha/widget/process_boking_page.dart';
@@ -14,6 +15,7 @@ class BookingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(partner);
     final id = _auth.currentUser?.uid;
 
     return Scaffold(
@@ -65,11 +67,27 @@ class BookingPage extends StatelessWidget {
                 return TabBarView(
                   children: <Widget>[
                     partner
-                        ? const ProcessJobPage()
+                        ? ChangeNotifierProvider(
+                            create: (_) => GetPartnerVacancyProvider(id: id!),
+                            child: const ProcessJobPage(),
+                          )
                         : ChangeNotifierProvider(
                             create: (_) => GetVacancyProvider(id: id!),
-                            child: const ProcessBookingPage()),
-                    const DoneBookingPage(),
+                            child: const ProcessBookingPage(),
+                          ),
+                    partner
+                        ? ChangeNotifierProvider(
+                            create: (_) => GetPartnerVacancyProvider(id: id!),
+                            child: DoneBookingPage(
+                              partner: partner,
+                            ),
+                          )
+                        : ChangeNotifierProvider(
+                            create: (_) => GetVacancyProvider(id: id!),
+                            child: DoneBookingPage(
+                              partner: partner,
+                            ),
+                          ),
                   ],
                 );
               },

@@ -9,21 +9,26 @@ class VacancyProvider extends ChangeNotifier {
 
   ResultState get state => _state;
 
-  Future<void> updateUserProfile(
-    String id,
-    DateTime startDate,
-    DateTime endDate,
-    String criteria,
-  ) async {
+  Future<void> addVacancy(String userId, DateTime startDate, DateTime endDate,
+      String criteria, int price, bool babySitter) async {
     try {
       _state = ResultState.loading;
       notifyListeners();
-      await fireStoreHelper.addUserHouseMaidVacancy(
-        id,
-        startDate,
-        endDate,
-        criteria,
-      );
+      babySitter
+          ? await fireStoreHelper.addUserBabySitterVacancy(
+              userId,
+              startDate,
+              endDate,
+              criteria,
+              price,
+            )
+          : await fireStoreHelper.addUserHouseMaidVacancy(
+              userId,
+              startDate,
+              endDate,
+              criteria,
+              price,
+            );
       _state = ResultState.done;
       notifyListeners();
     } catch (e) {

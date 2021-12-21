@@ -3,12 +3,13 @@ import 'package:asartha/data/model/vacancy.dart';
 import 'package:asartha/utils/result_state.dart';
 import 'package:flutter/foundation.dart';
 
-class GetVacancyProvider extends ChangeNotifier {
+class GetPartnerVacancyProvider extends ChangeNotifier {
   final String id;
 
-  GetVacancyProvider({required this.id}) {
-    getUserVacancy(id);
+  GetPartnerVacancyProvider({required this.id}) {
+    _getPartnerVacancy(id);
   }
+
   final fireStoreHelper = VacancyFirestoreHelper();
 
   late ResultState _state;
@@ -17,19 +18,19 @@ class GetVacancyProvider extends ChangeNotifier {
   VacancyResult get vacancy => _vacancy;
   ResultState get state => _state;
 
-  Future<dynamic> getUserVacancy(String id) async {
+  Future<dynamic> _getPartnerVacancy(String id) async {
     try {
       _state = ResultState.loading;
       notifyListeners();
-      var userVacancy = await fireStoreHelper.getUserVacancy(id);
+      var vacancys = await fireStoreHelper.getPartnerVacancy(id);
 
-      if (userVacancy.vacancy.isEmpty) {
+      if (vacancys.vacancy.isEmpty) {
         _state = ResultState.noData;
         notifyListeners();
       } else {
         _state = ResultState.hasData;
         notifyListeners();
-        return _vacancy = userVacancy;
+        return _vacancy = vacancys;
       }
     } catch (e) {
       _state = ResultState.error;

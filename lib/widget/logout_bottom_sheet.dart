@@ -1,8 +1,6 @@
 import 'package:asartha/common/style.dart';
-import 'package:asartha/ui/partner/partner_sign_in_page.dart';
 import 'package:asartha/ui/user/sign_in_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -34,6 +32,7 @@ class ShowCustomBottomSheet {
                   width: width - 64,
                   height: 55,
                   child: ElevatedButton(
+                    key: const ValueKey('LogoutButton'),
                     onPressed: () async {
                       await _auth.signOut();
 

@@ -9,17 +9,16 @@ import 'package:provider/provider.dart';
 
 enum SingingCharacter { link, dana, tunai }
 
-class DatePickerPage extends StatefulWidget {
-  const DatePickerPage({
-    Key? key,
-  }) : super(key: key);
-  static const routeName = '/date_picker_page';
+class BabySitterDatePickerPage extends StatefulWidget {
+  const BabySitterDatePickerPage({Key? key}) : super(key: key);
+  static const routeName = '/baby_sitter_date_picker_page';
 
   @override
-  State<DatePickerPage> createState() => _DatePickerPageState();
+  _BabySitterDatePickerPageState createState() =>
+      _BabySitterDatePickerPageState();
 }
 
-class _DatePickerPageState extends State<DatePickerPage> {
+class _BabySitterDatePickerPageState extends State<BabySitterDatePickerPage> {
   var selectDateFirst = DateTime.now();
   DateTime selectDateSec = DateTime.now();
   final _auth = FirebaseAuth.instance;
@@ -160,23 +159,6 @@ class _DatePickerPageState extends State<DatePickerPage> {
                             "Tanggal : ${DateFormat.yMMMMEEEEd().format(selectDateSec)}",
                             style: Theme.of(context).textTheme.bodyText2,
                           ),
-                          const SizedBox(height: 18),
-                          Text(
-                            'Tambahkan Kriteria',
-                            style: Theme.of(context).textTheme.bodyText1,
-                          ),
-                          const SizedBox(height: 8),
-                          TextField(
-                            controller: _criteriaController,
-                            decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                filled: true,
-                                hintStyle: TextStyle(color: hintText),
-                                hintText: "Bersih-bersih, memasak, dll.",
-                                fillColor: Colors.white70),
-                          ),
                           const SizedBox(height: 17),
                           Text(
                             'Metode Pembayaran',
@@ -219,7 +201,7 @@ class _DatePickerPageState extends State<DatePickerPage> {
                     ),
                   ),
                   const SizedBox(
-                    height: 25,
+                    height: 127,
                   ),
                   Container(
                     padding: const EdgeInsets.only(
@@ -247,7 +229,7 @@ class _DatePickerPageState extends State<DatePickerPage> {
                               style: Theme.of(context).textTheme.headline3,
                             ),
                             Text(
-                              'Asisten Rumah Tangga',
+                              'Babysitter',
                               style: Theme.of(context).textTheme.headline2,
                             )
                           ],
@@ -303,7 +285,7 @@ class _DatePickerPageState extends State<DatePickerPage> {
                                     total = price;
                                   }
 
-                                  bool babySitter = false;
+                                  bool babySitter = true;
                                   var userId = _auth.currentUser?.uid;
                                   var criteria = _criteriaController.text;
                                   await Provider.of<VacancyProvider>(ctx,

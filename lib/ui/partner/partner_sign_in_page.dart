@@ -78,6 +78,7 @@ class _PartnerSignInPageState extends State<PartnerSignInPage> {
                               bottom: BorderSide(color: secondary, width: 2))),
                       height: 60.0,
                       child: TextField(
+                        key: const ValueKey('PartnerEmailInputField'),
                         keyboardType: TextInputType.emailAddress,
                         style: input,
                         decoration: InputDecoration(
@@ -104,6 +105,7 @@ class _PartnerSignInPageState extends State<PartnerSignInPage> {
                               bottom: BorderSide(color: secondary, width: 2))),
                       height: 60.0,
                       child: TextField(
+                        key: const ValueKey('PartnerPasswordInputField'),
                         keyboardType: TextInputType.visiblePassword,
                         obscureText: true,
                         style: input,
@@ -156,6 +158,7 @@ class _PartnerSignInPageState extends State<PartnerSignInPage> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(29),
                         child: ElevatedButton(
+                          key: const ValueKey('PartnerSignInButton'),
                           child: Text(
                             'Sign In',
                             style: Theme.of(context).textTheme.button,

@@ -1,5 +1,7 @@
 import 'package:asartha/data/database/partner_firestroe_helper.dart';
 import 'package:asartha/data/database/user_firestore_helper.dart';
+import 'package:asartha/utils/constant.dart';
+import 'package:asartha/utils/shared_preferences_utils.dart';
 import 'package:asartha/widget/custom_snackbar.dart';
 import 'package:asartha/widget/floating_nav_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -64,9 +66,14 @@ class AuthHelper {
               .doc(firebaseUser?.uid)
               .collection('profile')
               .get()
-              .then((value) {
+              .then((value) async {
             var role = value.docs[0]['role'];
             if (role == "User") {
+              await PreferenceHelperFunctions.saveUserImageSharedPreference(
+                  value.docs[0]['imageUrl']);
+              Constant.userImage = await PreferenceHelperFunctions
+                  .getUserImageSharedPreference();
+
               Navigator.pushReplacementNamed(
                   context, FloatingNavigationBar.routeName,
                   arguments: partner);
@@ -117,9 +124,13 @@ class AuthHelper {
               .doc(firebaseUser?.uid)
               .collection('profile')
               .get()
-              .then((value) {
+              .then((value) async {
             var role = value.docs[0]['role'];
             if (role != "User") {
+              await PreferenceHelperFunctions.savePartnerImageSharedPreference(
+                  value.docs[0]['imageUrl']);
+              Constant.partnerImage = await PreferenceHelperFunctions
+                  .getPartnerImageSharedPreference();
               Navigator.pushReplacementNamed(
                   context, FloatingNavigationBar.routeName,
                   arguments: partner);

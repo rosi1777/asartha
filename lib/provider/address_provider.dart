@@ -15,7 +15,6 @@ class AddressProvider extends ChangeNotifier {
 
   late Address _address;
   late ResultState _state;
-  // String _message = '';
 
   Address get address => _address;
   ResultState get state => _state;
@@ -55,6 +54,32 @@ class AddressProvider extends ChangeNotifier {
           ? await PartnerFirestoreHelper().updateAddressData(
               addressOf, id, name, address, city, postCode, phone)
           : await UserFirestoreHelper().updateAddressData(
+              addressOf, id, name, address, city, postCode, phone);
+      _state = ResultState.done;
+      notifyListeners();
+    } catch (e) {
+      _state = ResultState.error;
+    }
+  }
+
+  Future<void> addAddress(
+      String addressOf,
+      String id,
+      String name,
+      String address,
+      String city,
+      int postCode,
+      int phone,
+      bool partner) async {
+    try {
+      _state = ResultState.loading;
+
+      notifyListeners();
+
+      partner
+          ? await PartnerFirestoreHelper().addAddressData(
+              addressOf, id, name, address, city, postCode, phone)
+          : await UserFirestoreHelper().addAddressData(
               addressOf, id, name, address, city, postCode, phone);
       _state = ResultState.done;
       notifyListeners();

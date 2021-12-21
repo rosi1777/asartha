@@ -3,25 +3,25 @@ import 'package:asartha/common/style.dart';
 import 'package:asartha/data/model/partner_profile.dart';
 import 'package:asartha/data/model/user_profile.dart';
 import 'package:asartha/ui/add_address_page.dart';
+import 'package:asartha/ui/baby_sitter_date_picker_page.dart';
+import 'package:asartha/ui/user_conversation_page.dart';
 import 'package:asartha/ui/date_picker_page.dart';
 import 'package:asartha/ui/address_page.dart';
 import 'package:asartha/ui/detail_address_page.dart';
 import 'package:asartha/ui/partner/partner_edit_profile_page.dart';
 import 'package:asartha/ui/user/edit_profile_page.dart';
-import 'package:asartha/ui/error_payment_page.dart';
 import 'package:asartha/ui/forgot_password_page.dart';
 import 'package:asartha/ui/home_page.dart';
 import 'package:asartha/ui/partner/partner_sign_in_page.dart';
 import 'package:asartha/ui/partner/partner_sign_up_page.dart';
-import 'package:asartha/ui/payment_page.dart';
 import 'package:asartha/ui/user/sign_in_page.dart';
 import 'package:asartha/ui/user/sign_up_page.dart';
-import 'package:asartha/ui/success_payment_page.dart';
 import 'package:asartha/widget/floating_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+import 'ui/partner_conversation_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -72,18 +72,22 @@ class MyApp extends StatelessWidget {
         PartnerEditProfilePage.routeName: (context) => PartnerEditProfilePage(
             partner:
                 (ModalRoute.of(context)?.settings.arguments as PartnerProfile)),
-        PaymentPage.routeName: (context) => const PaymentPage(),
         DatePickerPage.routeName: (contex) => const DatePickerPage(),
+        BabySitterDatePickerPage.routeName: (contex) =>
+            const BabySitterDatePickerPage(),
         AddressPage.routeName: (context) => AddressPage(
             partner: (ModalRoute.of(context)?.settings.arguments as bool)),
         DetailAddressPage.routeName: (context) => DetailAddressPage(
             partner: (ModalRoute.of(context)?.settings.arguments as bool)),
         AddAddressPage.routeName: (context) => AddAddressPage(
             partner: (ModalRoute.of(context)?.settings.arguments as bool)),
-        SuccessPaymentPage.routeName: (context) => const SuccessPaymentPage(),
-        ErrorPaymentPage.routeName: (context) => const ErrorPaymentPage(),
         PartnerSignInPage.routeName: (context) => const PartnerSignInPage(),
-        PartnerSignUpPage.routeName: (context) => const PartnerSignUpPage()
+        PartnerSignUpPage.routeName: (context) => const PartnerSignUpPage(),
+        UserConversationPage.routeName: (context) => UserConversationPage(
+            partner:
+                (ModalRoute.of(context)?.settings.arguments as PartnerProfile)),
+        PartnerConversationPage.routeName: (context) => PartnerConversationPage(
+            user: (ModalRoute.of(context)?.settings.arguments as UserProfile)),
       },
     );
   }

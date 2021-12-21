@@ -1,9 +1,9 @@
 import 'package:asartha/common/style.dart';
-import 'package:asartha/data/database/partner_firestroe_helper.dart';
-import 'package:asartha/data/database/user_firestore_helper.dart';
+import 'package:asartha/provider/address_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class AddAddressPage extends StatefulWidget {
   final bool partner;
@@ -232,58 +232,50 @@ class _AddAddressPageState extends State<AddAddressPage> {
                 const SizedBox(
                   height: 25,
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(29),
-                    child: ElevatedButton(
-                      child: Text(
-                        'Tambah',
-                        style: Theme.of(context).textTheme.button,
-                      ),
-                      onPressed: () async {
-                        try {
-                          final addressOf = _addressOf.text;
-                          final id = _id;
-                          final name = _name.text;
-                          final address = _address.text;
-                          final city = _city.text;
-                          final postCode = _postCode.text;
-                          final phone = _phone.text;
+                ChangeNotifierProvider(
+                    create: (_) => AddressProvider(_id!, widget.partner),
+                    builder: (context, _) {
+                      return SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(29),
+                          child: ElevatedButton(
+                            child: Text(
+                              'Tambah',
+                              style: Theme.of(context).textTheme.button,
+                            ),
+                            onPressed: () async {
+                              try {
+                                final addressOf = _addressOf.text;
+                                final id = _id;
+                                final name = _name.text;
+                                final address = _address.text;
+                                final city = _city.text;
+                                final postCode = int.parse(_postCode.text);
+                                final phone = int.parse(_phone.text);
 
-                          widget.partner
-                              ? await PartnerFirestoreHelper().addAddressData(
-                                  addressOf,
-                                  id!,
-                                  name,
-                                  address,
-                                  city,
-                                  int.parse(postCode),
-                                  int.parse(phone))
-                              : await UserFirestoreHelper().addAddressData(
-                                  addressOf,
-                                  id!,
-                                  name,
-                                  address,
-                                  city,
-                                  int.parse(postCode),
-                                  int.parse(phone));
-                          Navigator.pop(context);
-                        } catch (e) {
-                          final snackBar = SnackBar(
-                            content: Text(e.toString()),
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: secondary,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 40, vertical: 20),
-                      ),
-                    ),
-                  ),
-                ),
+                                await Provider.of<AddressProvider>(context,
+                                        listen: false)
+                                    .addAddress(addressOf, id!, name, address,
+                                        city, postCode, phone, widget.partner);
+                                Navigator.pop(context);
+                              } catch (e) {
+                                final snackBar = SnackBar(
+                                  content: Text(e.toString()),
+                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: secondary,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 40, vertical: 20),
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
               ],
             ),
           ),

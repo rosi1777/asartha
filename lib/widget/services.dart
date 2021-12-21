@@ -1,4 +1,5 @@
 import 'package:asartha/common/style.dart';
+import 'package:asartha/ui/baby_sitter_date_picker_page.dart';
 import 'package:asartha/ui/date_picker_page.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class Services extends StatelessWidget {
         const SizedBox(
           height: 25,
         ),
-        GestureDetector(
+        InkWell(
           onTap: () {
             Navigator.pushNamed(context, DatePickerPage.routeName);
           },
@@ -41,8 +42,10 @@ class Services extends StatelessWidget {
             ),
           ),
         ),
-        GestureDetector(
-          onTap: () {},
+        InkWell(
+          onTap: () {
+            Navigator.pushNamed(context, BabySitterDatePickerPage.routeName);
+          },
           child: Container(
             width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.only(top: 25, bottom: 25),
