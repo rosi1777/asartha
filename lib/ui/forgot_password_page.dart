@@ -1,4 +1,5 @@
 import 'package:asartha/common/style.dart';
+import 'package:asartha/ui/user/sign_in_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -96,7 +97,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         onPressed: () async {
           await FirebaseAuth.instance
               .sendPasswordResetEmail(email: _emailController.text)
-              .then((value) => Navigator.pop(context));
+              .then((value) => _showMyDialog());
         },
       ),
     );
@@ -106,5 +107,35 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   void dispose() {
     _emailController.dispose();
     super.dispose();
+  }
+
+  Future<void> _showMyDialog() async {
+    String email = _emailController.text;
+
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Verifikasi Email'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Email verifikasi telah dikirim ke $email'),
+                const Text('Silahkan verifikasi email untuk mengubah password'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Ok'),
+              onPressed: () {
+                Navigator.pushNamed(context, SignInPage.routeName);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
