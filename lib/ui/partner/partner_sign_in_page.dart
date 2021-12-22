@@ -2,7 +2,6 @@ import 'package:asartha/common/style.dart';
 import 'package:asartha/data/database/auth_helper.dart';
 import 'package:asartha/ui/forgot_password_page.dart';
 import 'package:asartha/ui/partner/partner_sign_up_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PartnerSignInPage extends StatefulWidget {
@@ -14,8 +13,6 @@ class PartnerSignInPage extends StatefulWidget {
 }
 
 class _PartnerSignInPageState extends State<PartnerSignInPage> {
-  final _auth = FirebaseAuth.instance;
-
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:asartha/common/style.dart';
@@ -56,7 +57,6 @@ class _ProfilePageState extends State<ProfilePage> {
         .get()
         .then((value) async {
       var docs = value.docs[0].id;
-      print(docs);
       try {
         await firestore
             .collection('users')
@@ -67,7 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 Provider.of<UserProfileProvider>(context, listen: false)
                     .getUserProfile(id!));
       } catch (e) {
-        print(e);
+        log(e.toString());
       }
     });
   }

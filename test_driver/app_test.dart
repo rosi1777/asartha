@@ -23,9 +23,7 @@ void main() {
   });
 
   tearDownAll(() async {
-    if (driver != null) {
-      driver.close();
-    }
+    driver.close();
   });
 
   test('User Sign In', () async {
@@ -38,7 +36,7 @@ void main() {
     await driver.tap(userSignInButton);
     await driver.waitFor(find.text('Dashboard'));
   });
-  
+
   test('Log Out Test', () async {
     await driver.scrollUntilVisible(
         find.text('Dashboard'), find.text('Pemesanan'),

@@ -42,7 +42,7 @@ class GetAllVacancyProvider extends ChangeNotifier {
       notifyListeners();
       var vacancys = await fireStoreHelper.getHouseMaidVacancy();
 
-      if (vacancys.vacancy.length == 0) {
+      if (vacancys.vacancy.isEmpty) {
         _state = ResultState.noData;
         notifyListeners();
       } else {
@@ -52,7 +52,6 @@ class GetAllVacancyProvider extends ChangeNotifier {
       }
     } catch (e) {
       _state = ResultState.error;
-      print(e);
       notifyListeners();
     }
   }
@@ -73,7 +72,6 @@ class GetAllVacancyProvider extends ChangeNotifier {
       }
     } catch (e) {
       _state = ResultState.error;
-      print(e);
       notifyListeners();
     }
   }
@@ -90,7 +88,6 @@ class GetAllVacancyProvider extends ChangeNotifier {
       notifyListeners();
     } catch (e) {
       _state = ResultState.error;
-      print(e);
       notifyListeners();
     }
   }

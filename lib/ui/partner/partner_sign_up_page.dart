@@ -18,11 +18,8 @@ class _PartnerSignUpPageState extends State<PartnerSignUpPage> {
   final List<String> role = ['Asisten Rumah Tangga', 'Babysitter'];
   String _currentRole = 'Asisten Rumah Tangga';
 
-  bool _isLoading = false;
-
   @override
   Widget build(BuildContext context) {
-    print(_currentRole);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
@@ -218,9 +215,6 @@ class _PartnerSignUpPageState extends State<PartnerSignUpPage> {
                               style: Theme.of(context).textTheme.button,
                             ),
                             onPressed: () async {
-                              setState(() {
-                                _isLoading = true;
-                              });
                               try {
                                 final email = _emailController.text;
                                 final password = _passwordController.text;
@@ -240,14 +234,7 @@ class _PartnerSignUpPageState extends State<PartnerSignUpPage> {
                                 );
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar);
-                              } finally {
-                                setState(() {
-                                  _isLoading = false;
-                                });
                               }
-                              // Navigator.pushNamed(
-                              //     context, FloatingNavigationBar.routeName,
-                              //     arguments: partner);
                             },
                             style: ElevatedButton.styleFrom(
                                 primary: secondary,

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:asartha/data/model/address.dart';
 import 'package:asartha/data/model/user_profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -34,7 +36,7 @@ class UserFirestoreHelper {
         'role': 'User'
       });
     } catch (e) {
-      print(e);
+      log(e.toString());
     }
   }
 
@@ -51,7 +53,6 @@ class UserFirestoreHelper {
           .get()
           .then((value) async {
         var docs = value.docs[0].id;
-        print(docs);
         try {
           await _firestore
               .collection('users')
@@ -62,11 +63,11 @@ class UserFirestoreHelper {
 
           await user?.updateEmail(email);
         } catch (e) {
-          print(e);
+          log(e.toString());
         }
       });
     } catch (e) {
-      print(e);
+      log(e.toString());
     }
   }
 
@@ -88,7 +89,7 @@ class UserFirestoreHelper {
         'phone': phone,
       });
     } catch (e) {
-      print(e);
+      log(e.toString());
     }
   }
 
@@ -119,11 +120,11 @@ class UserFirestoreHelper {
             'phone': phone,
           });
         } catch (e) {
-          print(e);
+          log(e.toString());
         }
       });
     } catch (e) {
-      print(e);
+      log(e.toString());
     }
   }
 

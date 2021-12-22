@@ -29,7 +29,6 @@ class PartnerProfileProvider extends ChangeNotifier {
     } catch (e) {
       _state = ResultState.error;
       notifyListeners();
-      print(e);
     }
   }
 

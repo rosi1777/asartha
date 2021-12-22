@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:asartha/common/style.dart';
@@ -56,7 +57,6 @@ class _PartnerProfilePageState extends State<PartnerProfilePage> {
         .get()
         .then((value) async {
       var docs = value.docs[0].id;
-      print(docs);
       try {
         await firestore
             .collection('partners')
@@ -67,17 +67,14 @@ class _PartnerProfilePageState extends State<PartnerProfilePage> {
                 Provider.of<PartnerProfileProvider>(context, listen: false)
                     .getPartnerProfile(id!));
       } catch (e) {
-        print(e);
+        log(e.toString());
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final _auth = FirebaseAuth.instance;
-
     const bool partner = true;
-
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
