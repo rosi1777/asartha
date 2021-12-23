@@ -24,7 +24,6 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     bool partner = false;
-    Size size = MediaQuery.of(context).size;
     return ChangeNotifierProvider<AuthProvider>(
       create: (_) => AuthProvider(),
       child: Scaffold(
@@ -46,15 +45,19 @@ class _SignInPageState extends State<SignInPage> {
                             Rect.fromLTRB(0, 0, rect.width, rect.height));
                       },
                       blendMode: BlendMode.dstIn,
-                      child: _signInPage(context, size, partner),
+                      child: _signInPage(context, partner),
                     ),
                   ],
                 ),
               );
             } else if (auth.state == ResultState.error) {
-              return _signInPage(context, size, partner);
+              return SafeArea(
+                child: _signInPage(context, partner),
+              );
             } else {
-              return _signInPage(context, size, partner);
+              return SafeArea(
+                child: _signInPage(context, partner),
+              );
             }
           },
         ),
@@ -62,8 +65,9 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  SingleChildScrollView _signInPage(
-      BuildContext context, Size size, bool partner) {
+  Widget _signInPage(BuildContext context, bool partner) {
+    Size size = MediaQuery.of(context).size;
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
