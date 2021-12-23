@@ -81,10 +81,26 @@ class DoneBookingCard extends StatelessWidget {
                   itemCount: vacancyProvider.vacancy.vacancy.length,
                   itemBuilder: (context, index) {
                     var vacancy = vacancyProvider.vacancy.vacancy[index];
+                    var isLength =
+                        vacancyProvider.vacancy.vacancy.length == index + 1;
                     if (vacancy.status == 'Selesai' && vacancy.review == '') {
-                      return _buildReviewBookingCard(context, vacancy);
+                      return isLength
+                          ? Column(
+                              children: [
+                                _buildReviewBookingCard(context, vacancy),
+                                const SizedBox(height: 100),
+                              ],
+                            )
+                          : _buildReviewBookingCard(context, vacancy);
                     } else if (vacancy.status == 'Selesai') {
-                      return _buildAcceptedBookingCard(context, vacancy);
+                      return isLength
+                          ? Column(
+                              children: [
+                                _buildAcceptedBookingCard(context, vacancy),
+                                const SizedBox(height: 100),
+                              ],
+                            )
+                          : _buildAcceptedBookingCard(context, vacancy);
                     } else {
                       return const SizedBox();
                     }

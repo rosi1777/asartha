@@ -125,7 +125,7 @@ class ChatPage extends StatelessWidget {
                   InkWell(
                     child: ListTile(
                       leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
+                        borderRadius: const BorderRadius.all( Radius.circular(100)),
                         child: Image.network(userProvider.userProfile.imageUrl),
                       ),
                       title: Text(userProvider.userProfile.name),

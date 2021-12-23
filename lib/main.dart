@@ -64,30 +64,39 @@ class MyApp extends StatelessWidget {
         SignUpPage.routeName: (context) => const SignUpPage(),
         ForgotPasswordPage.routeName: (context) => const ForgotPasswordPage(),
         HomePage.routeName: (context) => HomePage(
-            partner: (ModalRoute.of(context)?.settings.arguments as bool)),
+              partner: (ModalRoute.of(context)?.settings.arguments as bool),
+            ),
         FloatingNavigationBar.routeName: (context) => FloatingNavigationBar(
-            partner: (ModalRoute.of(context)?.settings.arguments as bool)),
+              partner: (ModalRoute.of(context)?.settings.arguments as bool),
+            ),
         EditProfilePage.routeName: (context) => EditProfilePage(
-            user: (ModalRoute.of(context)?.settings.arguments as UserProfile)),
+              user: (ModalRoute.of(context)?.settings.arguments as UserProfile),
+            ),
         PartnerEditProfilePage.routeName: (context) => PartnerEditProfilePage(
-            partner:
-                (ModalRoute.of(context)?.settings.arguments as PartnerProfile)),
+              partner: (ModalRoute.of(context)?.settings.arguments
+                  as PartnerProfile),
+            ),
         DatePickerPage.routeName: (contex) => const DatePickerPage(),
         BabySitterDatePickerPage.routeName: (contex) =>
             const BabySitterDatePickerPage(),
         AddressPage.routeName: (context) => AddressPage(
-            partner: (ModalRoute.of(context)?.settings.arguments as bool)),
+              partner: (ModalRoute.of(context)?.settings.arguments as bool),
+            ),
         DetailAddressPage.routeName: (context) => DetailAddressPage(
-            partner: (ModalRoute.of(context)?.settings.arguments as bool)),
+              partner: (ModalRoute.of(context)?.settings.arguments as bool),
+            ),
         AddAddressPage.routeName: (context) => AddAddressPage(
-            partner: (ModalRoute.of(context)?.settings.arguments as bool)),
+              partner: (ModalRoute.of(context)?.settings.arguments as bool),
+            ),
         PartnerSignInPage.routeName: (context) => const PartnerSignInPage(),
         PartnerSignUpPage.routeName: (context) => const PartnerSignUpPage(),
         UserConversationPage.routeName: (context) => UserConversationPage(
-            partner:
-                (ModalRoute.of(context)?.settings.arguments as PartnerProfile)),
+              partner: (ModalRoute.of(context)?.settings.arguments
+                  as PartnerProfile),
+            ),
         PartnerConversationPage.routeName: (context) => PartnerConversationPage(
-            user: (ModalRoute.of(context)?.settings.arguments as UserProfile)),
+              user: (ModalRoute.of(context)?.settings.arguments as UserProfile),
+            ),
       },
     );
   }
