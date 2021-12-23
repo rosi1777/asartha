@@ -104,11 +104,14 @@ class _PartnerSignInPageState extends State<PartnerSignInPage> {
                       child: TextField(
                         key: const ValueKey('PartnerPasswordInputField'),
                         keyboardType: TextInputType.visiblePassword,
-                        obscureText: true,
+                        obscureText: _obscureText,
                         style: input,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          contentPadding: const EdgeInsets.only(top: 14.0),
+                          contentPadding: const EdgeInsets.only(
+                            top: 14.0,
+                            bottom: 8,
+                          ),
                           prefixIcon: Icon(
                             Icons.lock_outline,
                             color: grey,
