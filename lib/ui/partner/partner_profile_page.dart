@@ -319,8 +319,13 @@ class _PartnerProfilePageState extends State<PartnerProfilePage> {
                                   child: InkWell(
                                     onTap: () {
                                       Navigator.pushNamed(
-                                          context, AddressPage.routeName,
-                                          arguments: partner);
+                                        context,
+                                        AddressPage.routeName,
+                                        arguments: [
+                                          provider.partnerProfile.id,
+                                          partner
+                                        ],
+                                      );
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(16.0),
@@ -340,8 +345,8 @@ class _PartnerProfilePageState extends State<PartnerProfilePage> {
                                               const Text(
                                                 'Alamat',
                                                 style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
                                             ],
                                           ),

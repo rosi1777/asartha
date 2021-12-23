@@ -100,7 +100,7 @@ class Jobs extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  'Rp. 177.000',
+                  'Rp.${vacancy.price.toString()}',
                   style: Theme.of(context).textTheme.headline3,
                 ),
               ],

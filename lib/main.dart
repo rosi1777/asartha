@@ -79,12 +79,16 @@ class MyApp extends StatelessWidget {
         DatePickerPage.routeName: (contex) => const DatePickerPage(),
         BabySitterDatePickerPage.routeName: (contex) =>
             const BabySitterDatePickerPage(),
-        AddressPage.routeName: (context) => AddressPage(
-              partner: (ModalRoute.of(context)?.settings.arguments as bool),
-            ),
-        DetailAddressPage.routeName: (context) => DetailAddressPage(
-              partner: (ModalRoute.of(context)?.settings.arguments as bool),
-            ),
+        AddressPage.routeName: (context) {
+          List<dynamic> args =
+              ModalRoute.of(context)?.settings.arguments as List<dynamic>;
+          return AddressPage(partner: args[1], id: args[0]);
+        },
+        DetailAddressPage.routeName: (context) {
+          List<dynamic> args =
+              ModalRoute.of(context)?.settings.arguments as List<dynamic>;
+          return DetailAddressPage(partner: args[1], address: args[0]);
+        },
         AddAddressPage.routeName: (context) => AddAddressPage(
               partner: (ModalRoute.of(context)?.settings.arguments as bool),
             ),

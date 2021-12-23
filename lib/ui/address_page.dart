@@ -9,8 +9,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class AddressPage extends StatelessWidget {
+  final String id;
   final bool partner;
-  const AddressPage({Key? key, required this.partner}) : super(key: key);
+  const AddressPage({Key? key, required this.partner, required this.id})
+      : super(key: key);
   static const routeName = '/address_page';
 
   Widget _buildAddress() {
@@ -52,9 +54,11 @@ class AddressPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushNamed(context, AddAddressPage.routeName,
                               arguments: partner)
-                          .then((value) => Provider.of<AddressProvider>(context,
-                                  listen: false)
-                              .getAddress(provider.address.id, partner));
+                          .then(
+                        (value) =>
+                            Provider.of<AddressProvider>(context, listen: false)
+                                .getAddress(id, partner),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       primary: secondary,
@@ -104,12 +108,14 @@ class AddressPage extends StatelessWidget {
                       ),
                       onPressed: () {
                         Navigator.pushNamed(
-                                context, DetailAddressPage.routeName,
-                                arguments: partner)
-                            .then((value) => Provider.of<AddressProvider>(
-                                    context,
-                                    listen: false)
-                                .getAddress(provider.address.id, partner));
+                          context,
+                          DetailAddressPage.routeName,
+                          arguments: [provider.address, partner],
+                        ).then(
+                          (value) => Provider.of<AddressProvider>(context,
+                                  listen: false)
+                              .getAddress(id, partner),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         primary: secondary,

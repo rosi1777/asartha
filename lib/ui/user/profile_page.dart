@@ -295,8 +295,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                   child: InkWell(
                                     onTap: () {
                                       Navigator.pushNamed(
-                                          context, AddressPage.routeName,
-                                          arguments: partner);
+                                        context,
+                                        AddressPage.routeName,
+                                        arguments: [
+                                          provider.userProfile.id,
+                                          partner
+                                        ],
+                                      );
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(16.0),

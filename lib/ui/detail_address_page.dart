@@ -1,6 +1,6 @@
 import 'package:asartha/common/style.dart';
+import 'package:asartha/data/model/address.dart';
 import 'package:asartha/provider/address_provider.dart';
-import 'package:asartha/utils/result_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,7 +8,10 @@ import 'package:provider/provider.dart';
 
 class DetailAddressPage extends StatefulWidget {
   final bool partner;
-  const DetailAddressPage({Key? key, required this.partner}) : super(key: key);
+  final Address address;
+  const DetailAddressPage(
+      {Key? key, required this.partner, required this.address})
+      : super(key: key);
   static const routeName = '/detail_address_page';
 
   @override
@@ -23,206 +26,199 @@ class _DetailAddressPageState extends State<DetailAddressPage> {
   final _postCode = TextEditingController();
   final _phone = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+    _addressOf.text = widget.address.addressOf;
+    _name.text = widget.address.name;
+    _address.text = widget.address.address;
+    _city.text = widget.address.city;
+    _postCode.text = widget.address.postCode;
+    _phone.text = widget.address.phone;
+  }
+
   Widget _buildAddress() {
-    return Consumer<AddressProvider>(
-      builder: (context, provider, _) {
-        if (provider.state == ResultState.loading) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const CircularProgressIndicator(),
-              const SizedBox(height: 25),
-              Text(
-                'Memuat Alamat...',
-                style: Theme.of(context).textTheme.subtitle1,
-              ),
-            ],
-          );
-        } else {
-          return Column(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(21),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10), color: white),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text(
+                'Simpan alamat sebagai (contoh: alamat rumah)',
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
               Container(
-                padding: const EdgeInsets.all(21),
+                alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10), color: white),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Simpan alamat sebagai (contoh: alamat rumah)',
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(color: secondary, width: 2),
-                        ),
-                      ),
-                      height: 40.0,
-                      child: TextField(
-                        keyboardType: TextInputType.text,
-                        style: input,
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: provider.address.addressOf,
-                            hintStyle: textHint),
-                        controller: _addressOf,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'Nama Penerima',
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(color: secondary, width: 2),
-                        ),
-                      ),
-                      height: 40.0,
-                      child: TextField(
-                        keyboardType: TextInputType.text,
-                        style: input,
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: provider.address.name,
-                            hintStyle: textHint),
-                        controller: _name,
-                      ),
-                    ),
-                  ],
+                  border: Border(
+                    bottom: BorderSide(color: secondary, width: 2),
+                  ),
+                ),
+                height: 40.0,
+                child: TextField(
+                  keyboardType: TextInputType.text,
+                  style: input,
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'rumah',
+                      hintStyle: textHint),
+                  controller: _addressOf,
                 ),
               ),
               const SizedBox(
-                height: 25,
+                height: 10,
+              ),
+              Text(
+                'Nama Penerima',
+                style: Theme.of(context).textTheme.bodyText2,
               ),
               Container(
-                padding: const EdgeInsets.all(21),
+                alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10), color: white),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Alamat',
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(color: secondary, width: 2),
-                        ),
-                      ),
-                      height: 40.0,
-                      child: TextField(
-                        keyboardType: TextInputType.text,
-                        style: input,
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: provider.address.address,
-                            hintStyle: textHint),
-                        controller: _address,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'Kota atau Kecamatan',
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(color: secondary, width: 2),
-                        ),
-                      ),
-                      height: 40.0,
-                      child: TextField(
-                        keyboardType: TextInputType.text,
-                        style: input,
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: provider.address.city,
-                            hintStyle: textHint),
-                        controller: _city,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'Kode Pos',
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(color: secondary, width: 2),
-                        ),
-                      ),
-                      height: 40.0,
-                      child: TextField(
-                        keyboardType: TextInputType.text,
-                        style: input,
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: provider.address.postCode,
-                            hintStyle: textHint),
-                        controller: _postCode,
-                      ),
-                    ),
-                  ],
+                  border: Border(
+                    bottom: BorderSide(color: secondary, width: 2),
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-              Container(
-                padding: const EdgeInsets.all(21),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10), color: white),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Nomer Telepon Penerima',
-                      style: Theme.of(context).textTheme.bodyText2,
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(color: secondary, width: 2),
-                        ),
-                      ),
-                      height: 40.0,
-                      child: TextField(
-                        keyboardType: TextInputType.text,
-                        style: input,
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: provider.address.phone,
-                            hintStyle: textHint),
-                        controller: _phone,
-                      ),
-                    ),
-                  ],
+                height: 40.0,
+                child: TextField(
+                  keyboardType: TextInputType.text,
+                  style: input,
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'nama',
+                      hintStyle: textHint),
+                  controller: _name,
                 ),
               ),
             ],
-          );
-        }
-      },
+          ),
+        ),
+        const SizedBox(
+          height: 25,
+        ),
+        Container(
+          padding: const EdgeInsets.all(21),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10), color: white),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Alamat',
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+              Container(
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: secondary, width: 2),
+                  ),
+                ),
+                height: 40.0,
+                child: TextField(
+                  keyboardType: TextInputType.text,
+                  style: input,
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Jl.Bungkarno no 5',
+                      hintStyle: textHint),
+                  controller: _address,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Kota atau Kecamatan',
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+              Container(
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: secondary, width: 2),
+                  ),
+                ),
+                height: 40.0,
+                child: TextField(
+                  keyboardType: TextInputType.text,
+                  style: input,
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Mataram',
+                      hintStyle: textHint),
+                  controller: _city,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Kode Pos',
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+              Container(
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: secondary, width: 2),
+                  ),
+                ),
+                height: 40.0,
+                child: TextField(
+                  keyboardType: TextInputType.text,
+                  style: input,
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: '81111',
+                      hintStyle: textHint),
+                  controller: _postCode,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 25,
+        ),
+        Container(
+          padding: const EdgeInsets.all(21),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10), color: white),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Nomer Telepon Penerima',
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+              Container(
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: secondary, width: 2),
+                  ),
+                ),
+                height: 40.0,
+                child: TextField(
+                  keyboardType: TextInputType.text,
+                  style: input,
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: '081921827162',
+                      hintStyle: textHint),
+                  controller: _phone,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -264,10 +260,7 @@ class _DetailAddressPageState extends State<DetailAddressPage> {
                 const SizedBox(
                   height: 25,
                 ),
-                ChangeNotifierProvider(
-                  create: (_) => AddressProvider(_id!, widget.partner),
-                  child: _buildAddress(),
-                ),
+                _buildAddress(),
                 const SizedBox(
                   height: 25,
                 ),
