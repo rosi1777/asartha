@@ -33,7 +33,6 @@ class GetVacancyProvider extends ChangeNotifier {
       }
     } catch (e) {
       _state = ResultState.error;
-      print(e);
       notifyListeners();
     }
   }

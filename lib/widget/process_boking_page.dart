@@ -44,10 +44,26 @@ class ProcessBookingPage extends StatelessWidget {
               itemCount: vacancyProvider.vacancy.vacancy.length,
               itemBuilder: (context, index) {
                 var vacancy = vacancyProvider.vacancy.vacancy[index];
+                var length =
+                    vacancyProvider.vacancy.vacancy.length == index + 1;
                 if (vacancy.status == 'Dikirim') {
-                  return _buildBookingCard(context, vacancy);
+                  return length
+                      ? Column(
+                          children: [
+                            _buildBookingCard(context, vacancy),
+                            const SizedBox(height: 100),
+                          ],
+                        )
+                      : _buildBookingCard(context, vacancy);
                 } else if (vacancy.status == 'Diterima') {
-                  return _buildAcceptedBookingCard(context, vacancy);
+                  return length
+                      ? Column(
+                          children: [
+                            _buildAcceptedBookingCard(context, vacancy),
+                            const SizedBox(height: 100),
+                          ],
+                        )
+                      : _buildAcceptedBookingCard(context, vacancy);
                 } else {
                   return const SizedBox();
                 }

@@ -103,7 +103,7 @@ class ProcessJobPage extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    'Rp. 177.000',
+                    'Rp.${vacancy.price.toString()}',
                     style: Theme.of(context).textTheme.headline3,
                   ),
                 ],
@@ -148,7 +148,9 @@ class ProcessJobPage extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       primary: secondary,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 40, vertical: 20),
+                        horizontal: 40,
+                        vertical: 20,
+                      ),
                     ),
                   ),
                 ),

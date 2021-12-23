@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:asartha/common/style.dart';
 import 'package:asartha/data/database/chat_firestore_helper.dart';
 import 'package:asartha/data/model/chat.dart';
@@ -38,7 +40,7 @@ class _UserConversationPageState extends State<UserConversationPage> {
         _activeUser = currentUser;
       }
     } catch (e) {
-      print(e);
+      log(e.toString());
     }
   }
 

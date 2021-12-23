@@ -34,7 +34,6 @@ class GetPartnerVacancyProvider extends ChangeNotifier {
       }
     } catch (e) {
       _state = ResultState.error;
-      print(e);
       notifyListeners();
     }
   }

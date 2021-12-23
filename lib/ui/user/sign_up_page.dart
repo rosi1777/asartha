@@ -18,8 +18,6 @@ class _SignUpPageState extends State<SignUpPage> {
   final _nameController = TextEditingController();
   final _phoneNumberController = TextEditingController();
 
-  bool _isLoading = false;
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(

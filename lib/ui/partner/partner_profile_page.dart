@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:asartha/common/style.dart';
@@ -56,7 +57,6 @@ class _PartnerProfilePageState extends State<PartnerProfilePage> {
         .get()
         .then((value) async {
       var docs = value.docs[0].id;
-      print(docs);
       try {
         await firestore
             .collection('partners')
@@ -67,17 +67,14 @@ class _PartnerProfilePageState extends State<PartnerProfilePage> {
                 Provider.of<PartnerProfileProvider>(context, listen: false)
                     .getPartnerProfile(id!));
       } catch (e) {
-        print(e);
+        log(e.toString());
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final _auth = FirebaseAuth.instance;
-
     const bool partner = true;
-
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -132,12 +129,13 @@ class _PartnerProfilePageState extends State<PartnerProfilePage> {
                             ),
                             Container(
                               transform:
-                                  Matrix4.translationValues(100.0, 135.0, 0.0),
+                                  Matrix4.translationValues(100.0, 117.0, 0.0),
                               width: 50,
                               height: 50,
                               decoration: BoxDecoration(
-                                  color: white,
-                                  borderRadius: BorderRadius.circular(100)),
+                                color: secondary,
+                                borderRadius: BorderRadius.circular(100),
+                              ),
                               child: IconButton(
                                 icon: Icon(
                                   Icons.camera_alt,
@@ -321,8 +319,13 @@ class _PartnerProfilePageState extends State<PartnerProfilePage> {
                                   child: InkWell(
                                     onTap: () {
                                       Navigator.pushNamed(
-                                          context, AddressPage.routeName,
-                                          arguments: partner);
+                                        context,
+                                        AddressPage.routeName,
+                                        arguments: [
+                                          provider.partnerProfile.id,
+                                          partner
+                                        ],
+                                      );
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(16.0),
@@ -342,8 +345,8 @@ class _PartnerProfilePageState extends State<PartnerProfilePage> {
                                               const Text(
                                                 'Alamat',
                                                 style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
                                             ],
                                           ),

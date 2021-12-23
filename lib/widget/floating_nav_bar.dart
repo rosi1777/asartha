@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:asartha/common/style.dart';
 import 'package:asartha/provider/chat_provider.dart';
 import 'package:asartha/provider/partner_provider.dart';
@@ -26,6 +27,7 @@ class FloatingNavigationBar extends StatefulWidget {
 
 class _FloatingNavigationBarState extends State<FloatingNavigationBar> {
   final _auth = FirebaseAuth.instance;
+  // ignore: unused_field
   late User _activeUser;
   late String _id;
 
@@ -37,7 +39,8 @@ class _FloatingNavigationBarState extends State<FloatingNavigationBar> {
         _activeUser = currentUser;
       }
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
+      log(e.toString());
     }
   }
 

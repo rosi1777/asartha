@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:asartha/data/model/address.dart';
 import 'package:asartha/data/model/partner_profile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -42,8 +44,8 @@ class PartnerFirestoreHelper {
         'phone_number': number,
         'role': role
       });
-    } catch (e) {
-      print(e);
+    } on FirebaseException catch (e) {
+      log(e.toString());
     }
   }
 
@@ -60,7 +62,6 @@ class PartnerFirestoreHelper {
           .get()
           .then((value) async {
         var docs = value.docs[0].id;
-        print(docs);
         try {
           await _firestore
               .collection('partners')
@@ -71,11 +72,11 @@ class PartnerFirestoreHelper {
 
           await user?.updateEmail(email);
         } catch (e) {
-          print(e);
+          log(e.toString());
         }
       });
     } catch (e) {
-      print(e);
+      log(e.toString());
     }
   }
 
@@ -97,7 +98,7 @@ class PartnerFirestoreHelper {
         'phone': phone,
       });
     } catch (e) {
-      print(e);
+      log(e.toString());
     }
   }
 
@@ -128,11 +129,11 @@ class PartnerFirestoreHelper {
             'phone': phone,
           });
         } catch (e) {
-          print(e);
+          log(e.toString());
         }
       });
     } catch (e) {
-      print(e);
+      log(e.toString());
     }
   }
 

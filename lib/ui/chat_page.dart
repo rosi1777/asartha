@@ -41,7 +41,12 @@ class ChatPage extends StatelessWidget {
                       ),
                     );
                   } else if (provider.state == ResultState.noData) {
-                    return const Center(child: Text('no data'));
+                    return Center(
+                      child: Text(
+                        'Belum ada data',
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                    );
                   } else if (provider.state == ResultState.error) {
                     return const Center(child: Text('error'));
                   } else {
@@ -120,7 +125,9 @@ class ChatPage extends StatelessWidget {
                   InkWell(
                     child: ListTile(
                       leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(100),
+                        ),
                         child: Image.network(userProvider.userProfile.imageUrl),
                       ),
                       title: Text(userProvider.userProfile.name),

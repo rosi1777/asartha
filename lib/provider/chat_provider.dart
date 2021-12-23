@@ -42,7 +42,6 @@ class ChatProvider extends ChangeNotifier {
       }
     } catch (e) {
       _state = ResultState.error;
-      print(e);
       notifyListeners();
     }
   }
@@ -63,7 +62,6 @@ class ChatProvider extends ChangeNotifier {
       }
     } catch (e) {
       _state = ResultState.error;
-      print(e);
       notifyListeners();
     }
   }

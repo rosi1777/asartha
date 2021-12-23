@@ -15,7 +15,6 @@ class BookingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(partner);
     final id = _auth.currentUser?.uid;
 
     return Scaffold(

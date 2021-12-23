@@ -28,7 +28,6 @@ class ConversationProvider extends ChangeNotifier {
       return _conversation = conversations;
     } catch (e) {
       _state = ResultState.error;
-      print(e);
       notifyListeners();
     }
   }

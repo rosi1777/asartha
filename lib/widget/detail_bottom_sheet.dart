@@ -206,148 +206,154 @@ class _DetailBottomSheetState extends State<DetailBottomSheet> {
           );
         } else if (address.state == ResultState.error ||
             profile.state == ResultState.error) {
-          return Center(
-            child: Text(
-              'Error',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          );
+          return _partnerDetailJobs(context, profile, '', '', profileProvider);
         } else {
-          return Container(
-            padding: const EdgeInsets.only(left: 26, right: 26, top: 35),
-            height: 562,
-            width: MediaQuery.of(context).size.width,
-            color: white,
-            child: ListView(
-              children: [
-                Text(
-                  'Detail',
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                const SizedBox(
-                  height: 37,
-                ),
-                Text(
-                  'Customer',
-                  style: Theme.of(context).textTheme.subtitle2,
-                ),
-                Text(
-                  profile.userProfile.name,
-                  style: Theme.of(context).textTheme.headline3,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'No Telepon',
-                  style: Theme.of(context).textTheme.subtitle2,
-                ),
-                Text(
-                  address.address.phone,
-                  style: Theme.of(context).textTheme.headline3,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Alamat',
-                  style: Theme.of(context).textTheme.subtitle2,
-                ),
-                Text(
-                  '${address.address.address}, ${address.address.city}',
-                  style: Theme.of(context).textTheme.headline3,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Layanan',
-                  style: Theme.of(context).textTheme.subtitle2,
-                ),
-                Text(
-                  profileProvider.partnerProfile.role,
-                  style: Theme.of(context).textTheme.headline3,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Tanggal Mulai',
-                  style: Theme.of(context).textTheme.subtitle2,
-                ),
-                Text(
-                  DateFormat.yMMMEd().format(widget.vacancy.startDate),
-                  style: Theme.of(context).textTheme.headline3,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Tanggal Selesai',
-                  style: Theme.of(context).textTheme.subtitle2,
-                ),
-                Text(
-                  DateFormat.yMMMEd().format(widget.vacancy.endDate),
-                  style: Theme.of(context).textTheme.headline3,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Biaya',
-                  style: Theme.of(context).textTheme.subtitle2,
-                ),
-                Text(
-                  '${widget.vacancy.price}',
-                  style: Theme.of(context).textTheme.headline3,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                partner
-                    ? Text(
-                        'Petugas',
-                        style: Theme.of(context).textTheme.subtitle2,
-                      )
-                    : const SizedBox(),
-                partner
-                    ? Text(
-                        profileProvider.partnerProfile.name,
-                        style: Theme.of(context).textTheme.headline3,
-                      )
-                    : const SizedBox(),
-                const SizedBox(
-                  height: 10,
-                ),
-                const SizedBox(
-                  height: 21,
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
-                    child: ElevatedButton(
-                      child: Text(
-                        'Close',
-                        style: Theme.of(context).textTheme.button,
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: red,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 40, vertical: 20),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 18),
-              ],
-            ),
-          );
+          var userAddress = address.address;
+          return _partnerDetailJobs(context, profile, userAddress.address,
+              userAddress.city, profileProvider);
         }
       },
+    );
+  }
+
+  Container _partnerDetailJobs(
+      BuildContext context,
+      UserProfileProvider profile,
+      String address,
+      String city,
+      PartnerProfileProvider profileProvider) {
+    return Container(
+      padding: const EdgeInsets.only(left: 26, right: 26, top: 35),
+      height: 562,
+      width: MediaQuery.of(context).size.width,
+      color: white,
+      child: ListView(
+        children: [
+          Text(
+            'Detail',
+            style: Theme.of(context).textTheme.headline6,
+          ),
+          const SizedBox(
+            height: 37,
+          ),
+          Text(
+            'Customer',
+            style: Theme.of(context).textTheme.subtitle2,
+          ),
+          Text(
+            profile.userProfile.name,
+            style: Theme.of(context).textTheme.headline3,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            'No Telepon',
+            style: Theme.of(context).textTheme.subtitle2,
+          ),
+          Text(
+            profile.userProfile.phoneNumber,
+            style: Theme.of(context).textTheme.headline3,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            'Alamat',
+            style: Theme.of(context).textTheme.subtitle2,
+          ),
+          Text(
+            '$address,$city',
+            style: Theme.of(context).textTheme.headline3,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            'Layanan',
+            style: Theme.of(context).textTheme.subtitle2,
+          ),
+          Text(
+            profileProvider.partnerProfile.role,
+            style: Theme.of(context).textTheme.headline3,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            'Tanggal Mulai',
+            style: Theme.of(context).textTheme.subtitle2,
+          ),
+          Text(
+            DateFormat.yMMMEd().format(widget.vacancy.startDate),
+            style: Theme.of(context).textTheme.headline3,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            'Tanggal Selesai',
+            style: Theme.of(context).textTheme.subtitle2,
+          ),
+          Text(
+            DateFormat.yMMMEd().format(widget.vacancy.endDate),
+            style: Theme.of(context).textTheme.headline3,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            'Biaya',
+            style: Theme.of(context).textTheme.subtitle2,
+          ),
+          Text(
+            'Rp.${widget.vacancy.price}',
+            style: Theme.of(context).textTheme.headline3,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          partner
+              ? Text(
+                  'Petugas',
+                  style: Theme.of(context).textTheme.subtitle2,
+                )
+              : const SizedBox(),
+          partner
+              ? Text(
+                  profileProvider.partnerProfile.name,
+                  style: Theme.of(context).textTheme.headline3,
+                )
+              : const SizedBox(),
+          const SizedBox(
+            height: 10,
+          ),
+          const SizedBox(
+            height: 21,
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: ElevatedButton(
+                child: Text(
+                  'Close',
+                  style: Theme.of(context).textTheme.button,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: red,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 18),
+        ],
+      ),
     );
   }
 
