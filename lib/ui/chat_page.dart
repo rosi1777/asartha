@@ -100,6 +100,7 @@ class ChatPage extends StatelessWidget {
                           arguments: partnerProvider.partnerProfile);
                     },
                   ),
+                  const SizedBox(height: 10),
                 ],
               );
             }
@@ -138,6 +139,7 @@ class ChatPage extends StatelessWidget {
                           arguments: userProvider.userProfile);
                     },
                   ),
+                  const SizedBox(height: 10),
                 ],
               );
             }
