@@ -120,8 +120,8 @@ class Jobs extends StatelessWidget {
                           'Detail',
                           style: Theme.of(context).textTheme.button,
                         ),
-                        onPressed: () {
-                          showModalBottomSheet(
+                        onPressed: () async {
+                          await showModalBottomSheet(
                             isScrollControlled: true,
                             context: context,
                             builder: (context) {

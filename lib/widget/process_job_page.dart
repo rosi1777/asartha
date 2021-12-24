@@ -43,8 +43,18 @@ class ProcessJobPage extends StatelessWidget {
               itemCount: provider.vacancy.vacancy.length,
               itemBuilder: (context, index) {
                 var vacancy = provider.vacancy.vacancy[index];
+                var length = provider.vacancy.vacancy.length == index + 1;
                 if (vacancy.status != 'Selesai') {
-                  return _buildPartnerJobsPage(context, vacancy);
+                  return length
+                      ? Column(
+                          children: [
+                            _buildPartnerJobsPage(context, vacancy),
+                            const SizedBox(
+                              height: 100,
+                            )
+                          ],
+                        )
+                      : _buildPartnerJobsPage(context, vacancy);
                 } else {
                   return const SizedBox();
                 }
@@ -120,8 +130,8 @@ class ProcessJobPage extends StatelessWidget {
                       'Detail',
                       style: Theme.of(context).textTheme.button,
                     ),
-                    onPressed: () {
-                      showModalBottomSheet(
+                    onPressed: () async {
+                      await showModalBottomSheet(
                         isScrollControlled: true,
                         context: context,
                         builder: (context) {
