@@ -54,7 +54,12 @@ class ProcessBookingPage extends StatelessWidget {
                             const SizedBox(height: 100),
                           ],
                         )
-                      : _buildBookingCard(context, vacancy);
+                      : Column(
+                          children: [
+                            _buildBookingCard(context, vacancy),
+                            const SizedBox(height: 100),
+                          ],
+                        );
                 } else if (vacancy.status == 'Diterima') {
                   return length
                       ? Column(
